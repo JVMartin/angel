@@ -6,7 +6,8 @@ Angel is a CMS built on top of Laravel.
 Angel uses:
 * [Laravel 5.2](https://laravel.com/docs/5.2) as its foundation.
 * [Foundation for Sites 6.2.3](http://foundation.zurb.com/sites/docs/) as the
-  admin panel SASS framework and as the default front-end SASS framework.
+  admin panel [Sass](http://sass-lang.com/) framework and as the default
+  front-end Sass framework (compiled separately).
 
 ## License
 
