@@ -1,3 +1,5 @@
+// Please don't notify me!
+process.env.DISABLE_NOTIFIER = true;
 var elixir = require('laravel-elixir');
 
 /*

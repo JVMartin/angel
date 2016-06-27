@@ -9,6 +9,13 @@ Angel uses:
   admin panel [Sass](http://sass-lang.com/) framework and as the default
   front-end Sass framework (compiled separately).
 
+By default, desktop notifications for gulp compilations are disabled (I find
+them annoying and useless).  To enable desktop notifications, edit
+`gulpfile.js` and comment out this line or set it to false:
+```javascript
+process.env.DISABLE_NOTIFIER = true;
+```
+
 ## License
 
 Just like the Laravel framework itself, Angel is open-sourced software licensed
