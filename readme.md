@@ -1,4 +1,5 @@
 # Angel CMS
+Copyright (c) 2016 Jacob Martin
 
 Angel is a CMS built on top of Laravel.
 
