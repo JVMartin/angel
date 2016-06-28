@@ -24,6 +24,14 @@ elixir(function(mix) {
 			]
 		}
 	);
-	// mix.sass('admin/main.scss', './public/css/admin.css');
-	// mix.sass('app/main.scss', './public/css/app.css');
+	mix.sass(
+		'app/main.scss',
+		'public/css/app.css',
+		{
+			includePaths: [
+				'resources/assets/bower/foundation-sites/scss',
+				'resources/assets/bower/motion-ui/src',
+			]
+		}
+	);
 });
