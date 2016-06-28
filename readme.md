@@ -25,7 +25,7 @@ npm install         # Install Laravel Elixir and Gulp.
 gulp                # Compile the Sass files into public/css.
 ```
 
-Note that all files in `public/css` are ignored, as they are compiled CSS files.
+Note that all files in `public/css` are gitignored, as they are compiled CSS files.
 
 For production CSS minification use:
 ```bash
