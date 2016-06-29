@@ -39,18 +39,7 @@ elixir(function(mix) {
 	mix.scripts(
 		[
 			'bower/jquery/dist/jquery.js',
-			'bower/what-input/what-input.js',
-			'bower/foundation-sites/js/foundation.core.js',
-			'bower/foundation-sites/js/foundation.offcanvas.js',
-			'bower/foundation-sites/js/foundation.drilldown.js',
-			'bower/foundation-sites/js/foundation.equalizer.js',
-			'bower/foundation-sites/js/foundation.accordion.js',
-			'bower/foundation-sites/js/foundation.util.mediaQuery.js',
-			'bower/foundation-sites/js/foundation.util.triggers.js',
-			'bower/foundation-sites/js/foundation.util.keyboard.js',
-			'bower/foundation-sites/js/foundation.util.motion.js',
-			'bower/foundation-sites/js/foundation.util.nest.js',
-			'bower/foundation-sites/js/foundation.util.timerAndImageLoader.js',
+			'bower/foundation-sites/dist/foundation.js',
 			'js/global.js'
 		],
 		'public/js/app.js',
