@@ -8,6 +8,8 @@ Angel uses:
 * [Foundation for Sites 6.2.3](http://foundation.zurb.com/sites/docs/) as the
   admin panel [Sass](http://sass-lang.com/) framework and as the default
   front-end Sass framework (each compiled separately).
+* [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar), an excellent debugging
+  tool by barryvdh.
 
 By default, desktop notifications for gulp compilations are disabled (I find
 them annoying and useless).  To enable desktop notifications, edit
