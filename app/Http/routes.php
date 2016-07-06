@@ -3,7 +3,7 @@
 //---------------------
 // Admin
 //---------------------
-require_once('routes-admin.php');
+require('routes-admin.php');
 
 //---------------------
 // Front-end

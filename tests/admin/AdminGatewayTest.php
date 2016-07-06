@@ -19,4 +19,13 @@ class AdminGatewayTest extends TestCase
 			->see('Please sign in.');
 	}
 
+	public function testAdminSignedInAsUser()
+	{
+		$user = factory(App\User::class, 'user')->create();
+
+		$this->actingAs($user)
+			->visit('admin')
+			->see('You must be signed in as an administrator');
+	}
+
 }
