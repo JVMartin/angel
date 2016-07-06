@@ -40,11 +40,26 @@ elixir(function(mix) {
 		[
 			'bower/jquery/dist/jquery.js',
 			'bower/foundation-sites/dist/foundation.js',
-			'js/global.js'
+			'js/admin/global.js'
+		],
+		'public/js/admin.js',
+		'resources/assets'
+	);
+
+	mix.scripts(
+		[
+			'bower/jquery/dist/jquery.js',
+			'bower/foundation-sites/dist/foundation.js',
+			'js/app/global.js'
 		],
 		'public/js/app.js',
 		'resources/assets'
 	);
 
-	mix.version(["public/css/app.css", "public/js/app.js"]);
+	mix.version([
+		'public/css/admin.css',
+		'public/css/app.css',
+		'public/js/admin.js',
+		'public/js/app.js'
+	]);
 });

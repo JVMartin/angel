@@ -8,6 +8,6 @@ require('routes-admin.php');
 //---------------------
 // Front-end
 //---------------------
-Route::group(['namespace' => 'FrontEnd'], function() {
+Route::group(['namespace' => 'App\FrontEnd'], function() {
 	Route::get('/', 'PageController@home');
 });
