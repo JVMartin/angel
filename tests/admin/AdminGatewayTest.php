@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class AdminTest extends TestCase
+class AdminGatewayTest extends TestCase
 {
 	use DatabaseMigrations;
 
@@ -13,14 +13,10 @@ class AdminTest extends TestCase
 	 *
 	 * @return void
 	 */
-	public function test1()
+	public function testAdminRouteNotSignedIn()
 	{
-		echo "In test 1.\n";
-		//$this->visit('admin')
-		//	->see('Sign in');
+		$this->visit('admin')
+			->see('Please sign in.');
 	}
-	public function test2()
-	{
-		echo "In test 2.\n";
-	}
+
 }
