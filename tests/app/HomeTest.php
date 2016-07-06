@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class FrontEndTest extends TestCase
+class HomeTest extends TestCase
 {
 	/**
 	 * Ensure the home page displays.
