@@ -14,7 +14,7 @@ class AdminGatewayTest extends TestCase
 	public function testAdminRouteNotSignedIn()
 	{
 		$this->visit('admin')
-			->see('Please sign in.');
+			->see('Please sign in');
 	}
 
 	/**
@@ -34,9 +34,9 @@ class AdminGatewayTest extends TestCase
 	 */
 	public function testAdminSignedInAsAdmin()
 	{
-		$user = factory(App\User::class, 'admin')->create();
+		$admin = factory(App\User::class, 'admin')->create();
 
-		$this->actingAs($user)
+		$this->actingAs($admin)
 			->visit('admin')
 			->see('Angel Admin Panel');
 	}
@@ -46,11 +46,10 @@ class AdminGatewayTest extends TestCase
 	 */
 	public function testAdminSignedInAsSuperAdmin()
 	{
-		$user = factory(App\User::class, 'superadmin')->create();
+		$superAdmin = factory(App\User::class, 'superadmin')->create();
 
-		$this->actingAs($user)
+		$this->actingAs($superAdmin)
 			->visit('admin')
 			->see('Angel Admin Panel');
 	}
-
 }

@@ -11,11 +11,13 @@ $factory->defineAs(App\User::class, 'user', function (Faker\Generator $faker) {
 });
 
 $factory->defineAs(App\User::class, 'admin', function (Faker\Generator $faker) use ($factory) {
-	$user = $factory->raw(App\User::class);
-	return array_merge($user, ['role' => 'admin']);
+	return $factory->raw(App\User::class, [
+		'role' => 'admin'
+	], 'user');
 });
 
 $factory->defineAs(App\User::class, 'superadmin', function (Faker\Generator $faker) use ($factory) {
-	$user = $factory->raw(App\User::class);
-	return array_merge($user, ['role' => 'superadmin']);
+	return $factory->raw(App\User::class, [
+		'role' => 'superadmin'
+	], 'user');
 });

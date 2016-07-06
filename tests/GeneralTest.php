@@ -14,5 +14,4 @@ class GeneralTest extends TestCase
 		$this->visit('/')
 			->dontSee('debugbar');
 	}
-
 }
