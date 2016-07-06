@@ -28,4 +28,22 @@ class AdminGatewayTest extends TestCase
 			->see('You must be signed in as an administrator');
 	}
 
+	public function testAdminSignedInAsAdmin()
+	{
+		$user = factory(App\User::class, 'admin')->create();
+
+		$this->actingAs($user)
+			->visit('admin')
+			->see('Angel Admin Panel');
+	}
+
+	public function testAdminSignedInAsSuperAdmin()
+	{
+		$user = factory(App\User::class, 'superadmin')->create();
+
+		$this->actingAs($user)
+			->visit('admin')
+			->see('Angel Admin Panel');
+	}
+
 }
