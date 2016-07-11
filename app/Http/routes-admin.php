@@ -6,6 +6,7 @@
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 	Route::get('/', 'AdminAuthController@gateway');
+	Route::post('sign-in', 'AdminAuthController@postSignIn');
 
 	/*Route::group(['middleware' => 'admin'], function() {
 		// @TODO:

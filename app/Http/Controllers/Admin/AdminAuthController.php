@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Gate;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -21,5 +22,10 @@ class AdminAuthController extends Controller
 			return view('admin.pages.sign-in', $this->data);
 		}
 		return 'Angel Admin Dashboard';
+	}
+
+	public function postSignIn(Request $request)
+	{
+		dd($request->all());
 	}
 }
