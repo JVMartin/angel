@@ -27,7 +27,7 @@ class AdminGatewayTest extends TestCase
 
 		$this->actingAs($user)
 			->visit('admin')
-			->see('You must be signed in as an administrator');
+			->see('You must be signed in as an administrator.');
 	}
 
 	/**
@@ -39,7 +39,7 @@ class AdminGatewayTest extends TestCase
 
 		$this->actingAs($admin)
 			->visit('admin')
-			->see('Angel Admin Panel');
+			->see('Angel Admin Dashboard');
 	}
 
 	/**
@@ -51,6 +51,6 @@ class AdminGatewayTest extends TestCase
 
 		$this->actingAs($superAdmin)
 			->visit('admin')
-			->see('Angel Admin Panel');
+			->see('Angel Admin Dashboard');
 	}
 }
