@@ -12,7 +12,7 @@ class AdminAuthController extends AdminController
 	public function gateway()
 	{
 		if ( ! Auth::check()) {
-			return 'Please sign in.';
+			return view('admin.pages.sign-in');
 		}
 		if ( ! Auth::user()->isAdmin()) {
 			return 'You must be signed in as an administrator';
