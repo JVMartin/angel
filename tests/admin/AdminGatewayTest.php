@@ -14,7 +14,8 @@ class AdminGatewayTest extends TestCase
 	public function testAdminRouteNotSignedIn()
 	{
 		$this->visit('admin')
-			->see('Please sign in');
+			->see('Sign In')
+			->dontSee('Sign Out');
 	}
 
 	/**
