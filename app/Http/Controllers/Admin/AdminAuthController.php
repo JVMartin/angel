@@ -1,11 +1,7 @@
 <?php
 /**
  * @copyright (c) 2016 Jacob Martin
- * @license MIT
- * @license https://opensource.org/licenses/MIT
- *
- * The AdminAuthController displays the dashboard for the administrative panel or allows the user
- * to sign in.
+ * @license MIT https://opensource.org/licenses/MIT
  */
 
 namespace App\Http\Controllers\Admin;
@@ -15,6 +11,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+/**
+ * The AdminAuthController displays the dashboard for the administrative panel or allows the user
+ * to sign in.
+ *
+ * @package App\Http\Controllers\Admin
+ */
 class AdminAuthController extends Controller
 {
 	use AuthenticatesUsers;
