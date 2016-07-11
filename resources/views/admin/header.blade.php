@@ -4,7 +4,7 @@
 			<li class="menu-text">
 				Angel Admin
 			</li>
-			@if (Auth::check() && Auth::user()->isAdmin())
+			@if (Gate::allows('admin'))
 				<li{!! Request::is('admin/pages*') ? ' class="active"' : '' !!}>
 					<a href="{{ url('admin/pages') }}">
 						Pages

@@ -14,7 +14,7 @@ class AdminAuthController extends AdminController
 		if ( ! Auth::check()) {
 			return view('admin.pages.sign-in');
 		}
-		if ( ! Auth::user()->isAdmin()) {
+		if ( ! Gate::allows('admin')) {
 			return 'You must be signed in as an administrator';
 		}
 		return 'Angel Admin Panel';
