@@ -12,6 +12,17 @@
 			<h1>
 				Sign In
 			</h1>
+			@if (isset($errors))
+				@foreach ($errors->get('email') as $error)
+					<div class="row">
+						<div class="columns small-12">
+							<div class="callout alert">
+								{{ $error }}
+							</div>
+						</div>
+					</div>
+				@endforeach
+			@endif
 			<form method="POST" action="/admin/sign-in">
 				{!! csrf_field() !!}
 				<div class="row">

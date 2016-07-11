@@ -34,6 +34,9 @@ class AdminAuthController extends Controller
 	 */
 	public function gateway()
 	{
+		if ($this->data['errors']->count()) {
+			//dd($this->data);
+		}
 		if ( ! Auth::check()) {
 			return view('admin.pages.sign-in', $this->data);
 		}
