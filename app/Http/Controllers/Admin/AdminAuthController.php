@@ -14,7 +14,6 @@ class AdminAuthController extends Controller
 	public function gateway()
 	{
 		if ( ! Auth::check()) {
-			$this->addErrorMessage('Heyo.');
 			return view('admin.pages.sign-in', $this->data);
 		}
 		if ( ! Gate::allows('admin')) {
