@@ -1,23 +1,21 @@
 <section id="messages">
 	@if (isset($errors))
-		@foreach ($errors->all() as $error)
+		@foreach ($errors->get('messages') as $error)
 			<div class="row">
 				<div class="columns small-12">
-					<div data-alert class="alert-box alert">
+					<div class="callout alert">
 						{{ $error }}
-						<button tabindex="0" class="close" aria-label="Close Alert">&times;</button>
 					</div>
 				</div>
 			</div>
 		@endforeach
 	@endif
 	@if (isset($successes))
-		@foreach ($successes as $success)
+		@foreach ($successes->get('messages') as $success)
 			<div class="row">
 				<div class="columns small-12">
-					<div data-alert class="alert-box success">
+					<div class="callout success">
 						{{ $success }}
-						<button tabindex="0" class="close" aria-label="Close Alert">&times;</button>
 					</div>
 				</div>
 			</div>
