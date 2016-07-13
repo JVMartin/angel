@@ -17,8 +17,8 @@
 					</a>
 				</li>
 				--}}
-				<li{!! Request::is('admin/users*') ? ' class="active"' : '' !!}>
-					<a href="{{ url('admin/users') }}">
+				<li{!! Request::is('/admin/users*') ? ' class="active"' : '' !!}>
+					<a href="{{ url('/admin/users') }}">
 						Users
 					</a>
 				</li>
@@ -29,7 +29,7 @@
 		<div class="top-bar-right">
 			<ul class="menu">
 				<li>
-					<a href="{{ url('admin/logout') }}">
+					<a href="{{ url('/sign-out') }}">
 						Sign Out
 					</a>
 				</li>

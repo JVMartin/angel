@@ -41,7 +41,7 @@ class AdminAuthController extends Controller
 			return view('admin.pages.sign-in', $this->data);
 		}
 		if ( ! Gate::allows('admin')) {
-			$this->addErrorMessage('You must be signed in as an administrator.');
+			$this->viewErrorMessage('You must be signed in as an administrator.');
 			return view('admin.pages.sign-in', $this->data);
 		}
 		return view('admin.pages.dashboard', $this->data);

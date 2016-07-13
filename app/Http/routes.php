@@ -14,4 +14,8 @@ require('routes-admin.php');
 //---------------------
 Route::group(['namespace' => 'App'], function() {
 	Route::get('/', 'PageController@home');
+
+	Route::group(['namespace' => 'Auth'], function() {
+		Route::get('/sign-out', 'AuthController@logout');
+	});
 });

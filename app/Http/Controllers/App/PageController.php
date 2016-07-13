@@ -12,6 +12,6 @@ class PageController extends Controller
 {
 	public function home()
 	{
-		return 'You are home.';
+		return view('app.pages.home', $this->data);
 	}
 }

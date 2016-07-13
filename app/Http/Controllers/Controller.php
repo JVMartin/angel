@@ -23,10 +23,23 @@ class Controller extends BaseController
 	 */
 	protected $data = [];
 
+	/**
+	 * @var A MessageBag of success messages to be passed using:
+	 *      ->with('successes', $this->successes)
+	 *      when redirecting.
+	 */
+	protected $successes;
+
 	public function __construct()
 	{
+		$this->successes = new MessageBag();
 		$this->data['successes'] = session('successes', new MessageBag());
 		$this->data['errors'] = session('errors', new ViewErrorBag())->getBag('default');
+	}
+
+	protected function redirectSuccessMessage($message)
+	{
+		$this->successes->add('messages', $message);
 	}
 
 	/**
@@ -34,7 +47,7 @@ class Controller extends BaseController
 	 *
 	 * @param $message The message to add.
 	 */
-	protected function addSuccessMessage($message)
+	protected function viewSuccessMessage($message)
 	{
 		$this->data['successes']->add('messages', $message);
 	}
@@ -44,7 +57,7 @@ class Controller extends BaseController
 	 *
 	 * @param $message The message to add.
 	 */
-	protected function addErrorMessage($message)
+	protected function viewErrorMessage($message)
 	{
 		$this->data['errors']->add('messages', $message);
 	}

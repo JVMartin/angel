@@ -1,6 +1,6 @@
-@extends('admin.template')
+@extends('app.template')
 
-@section('title', 'Dashboard')
+@section('title', 'Home')
 
 @section('meta')
 @endsection
@@ -9,9 +9,9 @@
 <section id="pagesDashboard">
 	<div class="row">
 		<div class="small-12 columns">
-			<h1>
-				Angel Dashboard
-			</h1>
+			<p>
+				You are home.
+			</p>
 		</div>
 	</div>
 </section>
