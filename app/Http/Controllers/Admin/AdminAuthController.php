@@ -32,7 +32,7 @@ class AdminAuthController extends Controller
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function gateway()
+	public function dashboardOrSignIn()
 	{
 		if ($this->data['errors']->count()) {
 			//dd($this->data);

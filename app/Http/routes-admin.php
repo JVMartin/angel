@@ -9,7 +9,7 @@
 //---------------------
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
-	Route::get('/', 'AdminAuthController@gateway');
+	Route::get('/', 'AdminAuthController@dashboardOrSignIn');
 	Route::post('sign-in', 'AdminAuthController@login');
 
 	/*Route::group(['middleware' => 'admin'], function() {
