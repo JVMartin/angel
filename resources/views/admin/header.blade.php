@@ -5,6 +5,7 @@
 				Angel Admin
 			</li>
 			@if (Gate::allows('admin'))
+				{{--
 				<li{!! Request::is('admin/pages*') ? ' class="active"' : '' !!}>
 					<a href="{{ url('admin/pages') }}">
 						Pages
@@ -15,6 +16,7 @@
 						Blogs
 					</a>
 				</li>
+				--}}
 				<li{!! Request::is('admin/users*') ? ' class="active"' : '' !!}>
 					<a href="{{ url('admin/users') }}">
 						Users

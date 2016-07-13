@@ -44,6 +44,6 @@ class AdminAuthController extends Controller
 			$this->addErrorMessage('You must be signed in as an administrator.');
 			return view('admin.pages.sign-in', $this->data);
 		}
-		return 'Angel Admin Dashboard';
+		return view('admin.pages.dashboard', $this->data);
 	}
 }
