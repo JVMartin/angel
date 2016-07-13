@@ -1,5 +1,9 @@
 # Angel CMS for Laravel 5
-Copyright (c) 2016 Jacob Martin
+Copyright &copy; 2016 Jacob Martin
+
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/JVMartin/angel5.svg?branch=master)](https://travis-ci.org/JVMartin/angel5)
+
 
 Angel is a simple, highly customizable CMS for custom web applications built on top of Laravel using
 test-driven development and all of the best practices.
