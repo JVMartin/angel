@@ -12,6 +12,8 @@ class AdminGatewayTest extends TestCase
 {
 	use DatabaseMigrations;
 
+	private $dashboardString = 'Angel Dashboard';
+
 	/**
 	 * Before signing in, the admin panel should not be visible.
 	 */
@@ -19,7 +21,8 @@ class AdminGatewayTest extends TestCase
 	{
 		$this->visit('/admin')
 			->see('Sign In')
-			->dontSee('Sign Out');
+			->dontSee('Sign Out')
+			->dontSee($this->dashboardString);
 	}
 
 	/**
@@ -31,7 +34,8 @@ class AdminGatewayTest extends TestCase
 
 		$this->actingAs($user)
 			->visit('/admin')
-			->see('You must be signed in as an administrator.');
+			->see('You must be signed in as an administrator.')
+			->dontSee($this->dashboardString);
 	}
 
 	/**
@@ -43,7 +47,7 @@ class AdminGatewayTest extends TestCase
 
 		$this->actingAs($admin)
 			->visit('/admin')
-			->see('Angel Admin Dashboard');
+			->see($this->dashboardString);
 	}
 
 	/**
@@ -55,6 +59,6 @@ class AdminGatewayTest extends TestCase
 
 		$this->actingAs($superAdmin)
 			->visit('/admin')
-			->see('Angel Admin Dashboard');
+			->see($this->dashboardString);
 	}
 }
