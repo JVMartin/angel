@@ -1,7 +1,8 @@
-# Angel CMS
+# Angel CMS for Laravel 5
 Copyright (c) 2016 Jacob Martin
 
-Angel is a simple, highly customizable CMS built on top of Laravel.
+Angel is a simple, highly customizable CMS for custom web applications built on top of Laravel using
+test-driven development and all of the best practices.
 
 Angel uses:
 * [Laravel 5.2](https://laravel.com/docs/5.2) as its foundation.
@@ -11,27 +12,37 @@ Angel uses:
 * [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar), an excellent debugging
   tool by barryvdh.
 
-By default, desktop notifications for gulp compilations are disabled (I find
-them annoying and useless).  To enable desktop notifications, edit
-`gulpfile.js` and comment out this line or set it to false:
-```javascript
-process.env.DISABLE_NOTIFIER = true;
-```
-
 ## Installation
 Simply fork or clone this repository and:
 ```bash
 composer install    # Install the Laravel framework.
 bower install       # Install Foundation.
 npm install         # Install Laravel Elixir and Gulp.
-gulp                # Compile the Sass files into public/css.
+gulp                # Compile and version all of the CSS and JS.
+./fix.sh            # Fix the permissions, giving www-data write access to necessary folders.
 ```
 
-Note that all files in `public/css` are gitignored, as they are compiled CSS files.
+Serve the `/public` folder from Apache.
 
-For production CSS minification use:
+For production CSS and JS minification, instead use:
 ```bash
 gulp --production
+```
+
+Note that all files in the following folders are gitignored, as they are compiled files:
+```bash
+/public/css
+/public/js
+/public/build
+```
+
+## Other Notes
+
+By default, desktop notifications for gulp compilations are disabled (I find
+them annoying and useless).  To enable desktop notifications, edit
+`gulpfile.js` and comment out this line or set it to false:
+```javascript
+process.env.DISABLE_NOTIFIER = true;
 ```
 
 ## License
