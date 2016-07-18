@@ -1,4 +1,8 @@
 <?php
+/**
+ * @copyright (c) 2016 Jacob Martin
+ * @license MIT https://opensource.org/licenses/MIT
+ */
 
 $factory->defineAs(App\Models\User::class, 'user', function (Faker\Generator $faker) {
 	return [
