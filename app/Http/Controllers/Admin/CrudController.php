@@ -8,6 +8,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\Admin\CrudRepository;
+use App\Exceptions\Admin\InvalidRepositoryException;
 
 abstract class CrudController extends Controller
 {
@@ -19,6 +21,11 @@ abstract class CrudController extends Controller
 	public function __construct()
 	{
 		$this->setRepository();
+
+		if ( ! $this->repository instanceof CrudRepository) {
+			throw new InvalidRepositoryException;
+		}
+
 		parent::__construct();
 	}
 
