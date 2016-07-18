@@ -52,7 +52,7 @@
 				<div class="row signInWrap">
 					<div class="small-12 medium-6 column">
 						<button type="submit" class="button">
-							SIGN IN
+							Sign In
 						</button>
 					</div>
 					{{--

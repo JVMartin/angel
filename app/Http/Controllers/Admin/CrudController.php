@@ -14,7 +14,7 @@ use App\Exceptions\Admin\InvalidRepositoryException;
 abstract class CrudController extends Controller
 {
 	/**
-	 * @var The AdminRepository for this model.
+	 * @var The appropriate CrudRepository; filled using setRepository.
 	 */
 	protected $repository;
 

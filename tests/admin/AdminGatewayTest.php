@@ -61,4 +61,38 @@ class AdminGatewayTest extends TestCase
 			->visit('/admin')
 			->see($this->dashboardString);
 	}
+
+	/**
+	 * Test the usage of the sign-in form.
+	 */
+	public function testSignInForm()
+	{
+		$userPass  = str_random(10);
+		$adminPass = str_random(10);
+
+		$user = factory(App\Models\User::class, 'user')->create([
+			'email' => 'user@test',
+			'password' => bcrypt($userPass)
+		]);
+		$admin = factory(App\Models\User::class, 'admin')->create([
+			'email' => 'admin@test',
+			'password' => bcrypt($adminPass)
+		]);
+
+		// Users can't get in.
+		$this->visit('/admin')
+			->type('user@test', 'email')
+			->type($userPass, 'password')
+			->press('Sign In')
+			->seePageIs('/admin')
+			->see('You must be signed in as an administrator.');
+
+		// But administrators can.
+		$this->visit('/admin')
+			->type('admin@test', 'email')
+			->type($adminPass, 'password')
+			->press('Sign In')
+			->seePageIs('/admin')
+			->see($this->dashboardString);
+	}
 }
