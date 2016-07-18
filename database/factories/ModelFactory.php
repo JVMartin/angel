@@ -1,6 +1,6 @@
 <?php
 
-$factory->defineAs(App\User::class, 'user', function (Faker\Generator $faker) {
+$factory->defineAs(App\Models\User::class, 'user', function (Faker\Generator $faker) {
 	return [
 		'role' => 'user',
 		'name' => $faker->name,
@@ -10,14 +10,14 @@ $factory->defineAs(App\User::class, 'user', function (Faker\Generator $faker) {
 	];
 });
 
-$factory->defineAs(App\User::class, 'admin', function (Faker\Generator $faker) use ($factory) {
-	return $factory->raw(App\User::class, [
+$factory->defineAs(App\Models\User::class, 'admin', function (Faker\Generator $faker) use ($factory) {
+	return $factory->raw(App\Models\User::class, [
 		'role' => 'admin'
 	], 'user');
 });
 
-$factory->defineAs(App\User::class, 'superadmin', function (Faker\Generator $faker) use ($factory) {
-	return $factory->raw(App\User::class, [
+$factory->defineAs(App\Models\User::class, 'superadmin', function (Faker\Generator $faker) use ($factory) {
+	return $factory->raw(App\Models\User::class, [
 		'role' => 'superadmin'
 	], 'user');
 });

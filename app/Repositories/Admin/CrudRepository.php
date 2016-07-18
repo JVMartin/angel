@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 abstract class CrudRepository
 {
 	/**
-	 * @var The model's fully namespaced class name, e.g. '\App\User'.
+	 * @var The model's fully namespaced class name, e.g. '\App\Models\User'.
 	 */
 	protected $Model;
 

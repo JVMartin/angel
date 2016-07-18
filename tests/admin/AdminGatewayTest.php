@@ -30,7 +30,7 @@ class AdminGatewayTest extends TestCase
 	 */
 	public function testAdminSignedInAsUser()
 	{
-		$user = factory(App\User::class, 'user')->create();
+		$user = factory(App\Models\User::class, 'user')->create();
 
 		$this->actingAs($user)
 			->visit('/admin')
@@ -43,7 +43,7 @@ class AdminGatewayTest extends TestCase
 	 */
 	public function testAdminSignedInAsAdmin()
 	{
-		$admin = factory(App\User::class, 'admin')->create();
+		$admin = factory(App\Models\User::class, 'admin')->create();
 
 		$this->actingAs($admin)
 			->visit('/admin')
@@ -55,7 +55,7 @@ class AdminGatewayTest extends TestCase
 	 */
 	public function testAdminSignedInAsSuperAdmin()
 	{
-		$superAdmin = factory(App\User::class, 'superadmin')->create();
+		$superAdmin = factory(App\Models\User::class, 'superadmin')->create();
 
 		$this->actingAs($superAdmin)
 			->visit('/admin')
