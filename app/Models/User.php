@@ -4,10 +4,13 @@
  * @license MIT https://opensource.org/licenses/MIT
  */
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * Represents a user in the system.
+ */
 class User extends Authenticatable
 {
 	/**

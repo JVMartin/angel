@@ -4,9 +4,9 @@ namespace App\Repositories\Admin;
 
 use Auth;
 use Carbon;
+use App\Change;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
-use App\Change;
 
 /**
  * CrudController uses a repository for each panel to perform common functions.
