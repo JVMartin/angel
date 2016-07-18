@@ -70,11 +70,11 @@ class AdminAuthTest extends TestCase
 		$userPass  = str_random(10);
 		$adminPass = str_random(10);
 
-		$user = factory(App\Models\User::class, 'user')->create([
+		factory(App\Models\User::class, 'user')->create([
 			'email' => 'user@test',
 			'password' => bcrypt($userPass)
 		]);
-		$admin = factory(App\Models\User::class, 'admin')->create([
+		factory(App\Models\User::class, 'admin')->create([
 			'email' => 'admin@test',
 			'password' => bcrypt($adminPass)
 		]);
@@ -94,5 +94,33 @@ class AdminAuthTest extends TestCase
 			->press('Sign In')
 			->seePageIs('/admin')
 			->see($this->dashboardString);
+	}
+
+	/**
+	 * Test that entering the wrong password forbids access to the admin panel.
+	 */
+	public function testSignInFormWrongPass()
+	{
+		factory(App\Models\User::class, 'user')->create([
+			'email' => 'user@test'
+		]);
+		factory(App\Models\User::class, 'admin')->create([
+			'email' => 'admin@test'
+		]);
+
+		$this->visit('/admin')
+			->type('user@test', 'email')
+			->type('abc123', 'password')
+			->press('Sign In')
+			->seePageIs('/admin')
+			->see('These credentials do not match our records.');
+
+		// But administrators can.
+		$this->visit('/admin')
+			->type('admin@test', 'email')
+			->type('abc123', 'password')
+			->press('Sign In')
+			->seePageIs('/admin')
+			->see('These credentials do not match our records.');
 	}
 }
