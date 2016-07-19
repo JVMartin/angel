@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 /**
- * The AdminAuthController displays the dashboard for the administrative panel or allows the user
+ * The AuthController displays the dashboard for the administrative panel or allows the user
  * to sign in.
  *
  * @package App\Http\Controllers\Admin
  */
-class AdminAuthController extends Controller
+class AuthController extends Controller
 {
 	use AuthenticatesUsers;
 

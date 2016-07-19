@@ -9,8 +9,8 @@
 //---------------------
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
-	Route::get('/', 'AdminAuthController@dashboardOrSignIn');
-	Route::post('/sign-in', 'AdminAuthController@login');
+	Route::get('/', 'AuthController@dashboardOrSignIn');
+	Route::post('/sign-in', 'AuthController@login');
 
 	/*Route::group(['middleware' => 'admin'], function() {
 		// @TODO:
