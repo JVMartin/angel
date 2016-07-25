@@ -19,25 +19,43 @@ abstract class CrudRepository
 	protected $Model;
 
 	/**
-	 * @var The singular noun of the model, e.g. 'user'.
+	 * @var The singular noun of the model, e.g. 'User'.
 	 */
 	protected $singular;
 
 	/**
-	 * @var The plural noun of the model, e.g. 'users'.
+	 * @var The plural noun of the model, e.g. 'Users'.
 	 */
 	protected $plural;
+
+	/**
+	 * @var The handle of the model, e.g. 'users'.
+	 *      Must be all lowercase letters and dashes.
+	 */
+	protected $handle;
+
+	protected $indexOrder;
+	protected $indexCols;
+	protected $searchCols;
 
 	public function __construct()
 	{
 		$this->setModel();
 		$this->setSingular();
 		$this->setPlural();
+		$this->setHandle();
+		$this->setIndexOrder();
+		$this->setIndexCols();
+		$this->setSearchCols();
 	}
 
 	abstract protected function setModel();
 	abstract protected function setSingular();
 	abstract protected function setPlural();
+	abstract protected function setHandle();
+	abstract protected function setIndexOrder();
+	abstract protected function setIndexCols();
+	abstract protected function setSearchCols();
 
 	public function getModel()
 	{
@@ -52,6 +70,21 @@ abstract class CrudRepository
 	public function getPlural()
 	{
 		return $this->plural;
+	}
+
+	public function getHandle()
+	{
+		return $this->handle;
+	}
+
+	public function getIndexURL()
+	{
+		return url('admin/' . $this->handle);
+	}
+
+	public function getAddURL()
+	{
+		return url('admin/' . $this->handle . '/add');
 	}
 
 	public function find($id)
@@ -83,8 +116,8 @@ abstract class CrudRepository
 
 		// If not, put the default in the session.
 		if (empty($order)) {
-			$order = $this->meta->indexOrder;
-			session(['admin.' . $this->meta->plural . '.order' => $order]);
+			$order = $this->indexOrder;
+			session(['admin.' . $this->plural . '.order' => $order]);
 		}
 
 		// Order by it.
@@ -99,7 +132,7 @@ abstract class CrudRepository
 		$search = session('admin.' . $this->plural . '.search');
 		if (empty($search)) return $query;
 
-		$cols  = $this->meta->searchCols;
+		$cols  = $this->searchCols;
 		$terms = explode(' ', $search);
 		$query->where(function($query) use ($cols, $terms) {
 			foreach ($cols as $col) {
@@ -121,7 +154,7 @@ abstract class CrudRepository
 	{
 		$created_at = Carbon::now();
 		$changes = [];
-		foreach ($this->meta->cols() as $colName => $col) {
+		foreach ($this->cols() as $colName => $col) {
 			// If change logging is enabled...
 			if (isset($col['logChanges']) && $col['logChanges'] &&
 				// And an update was posted...

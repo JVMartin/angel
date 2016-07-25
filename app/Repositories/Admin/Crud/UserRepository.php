@@ -14,12 +14,46 @@ class UserRepository extends CrudRepository
 
 	protected function setSingular()
 	{
-		$this->singular = "user";
+		$this->singular = "User";
 	}
 
 	protected function setPlural()
 	{
+		$this->plural = "Users";
+	}
+
+	protected function setHandle()
+	{
 		$this->plural = "users";
+	}
+
+	protected function setIndexOrder()
+	{
+		$this->indexOrder = [
+			'column'    => 'id',
+			'direction' => 'ASC',
+		];
+	}
+
+	protected function setIndexCols()
+	{
+		$this->indexCols = [
+			'id',
+			'type',
+			'email',
+			'first_name',
+			'last_name',
+			'created_at',
+		];
+	}
+
+	protected function setSearchCols()
+	{
+		$this->searchCols = [
+			'first_name',
+			'last_name',
+			'email',
+		];
 	}
 
 	/**

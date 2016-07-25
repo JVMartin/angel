@@ -34,6 +34,8 @@ abstract class CrudController extends Controller
 			);
 		}
 
+		$this->data['repository'] = $this->repository;
+
 		parent::__construct();
 	}
 
@@ -51,7 +53,7 @@ abstract class CrudController extends Controller
 		if (view()->exists('admin.' . $this->repository->getPlural() . '.index')) {
 			return view('admin.' . $this->repository->getPlural() . '.index', $this->data);
 		}
-		return view('admin.generic.index', $this->data);
+		return view('admin.crud.index', $this->data);
 	}
 
 	public function postSearch(Request $request)
@@ -87,7 +89,7 @@ abstract class CrudController extends Controller
 		if (view()->exists('admin.' . $this->repository->getPlural() . '.add-or-edit')) {
 			return view('admin.' . $this->repository->getPlural() . '.add-or-edit', $this->data);
 		}
-		return view('admin.generic.add-or-edit', $this->data);
+		return view('admin.crud.add-or-edit', $this->data);
 	}
 
 	public function postAdd(Request $request)
@@ -106,7 +108,7 @@ abstract class CrudController extends Controller
 		if (view()->exists('admin.' . $this->repository->getPlural() . '.add-or-edit')) {
 			return view('admin.' . $this->repository->getPlural() . '.add-or-edit', $this->data);
 		}
-		return view('admin.generic.add-or-edit', $this->data);
+		return view('admin.crud.add-or-edit', $this->data);
 	}
 
 	public function postEdit(Request $request, $id)
