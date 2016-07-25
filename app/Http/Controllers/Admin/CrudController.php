@@ -22,28 +22,41 @@ abstract class CrudController extends Controller
 	{
 		$this->setRepository();
 
+		if ( ! $this->repository) {
+			throw new InvalidRepositoryException(
+				"You must properly implement setRepository() in " . static::class
+			);
+		}
 		if ( ! $this->repository instanceof CrudRepository) {
-			throw new InvalidRepositoryException;
+			throw new InvalidRepositoryException(
+				"setRepository() in " . static::class . " must set an instance of " .
+				CrudRepository::class
+			);
 		}
 
 		parent::__construct();
 	}
 
+	/**
+	 * Set $this->repository to an instance of CrudRepository.
+	 *
+	 * @return void
+	 */
 	abstract protected function setRepository();
 
 	public function getIndex()
 	{
 		$models = $this->repository->index();
 		$this->data += compact('models');
-		if (view()->exists('admin.' . $this->meta->handle . '.index')) {
-			return view('admin.' . $this->meta->handle . '.index', $this->data);
+		if (view()->exists('admin.' . $this->repository->getPlural() . '.index')) {
+			return view('admin.' . $this->repository->getPlural() . '.index', $this->data);
 		}
 		return view('admin.generic.index', $this->data);
 	}
 
 	public function postSearch(Request $request)
 	{
-		session(['admin.' . $this->meta->handle . '.search' => $request->search]);
+		session(['admin.' . $this->repository->getPlural() . '.search' => $request->search]);
 		return redirect()->back();
 	}
 
@@ -51,8 +64,8 @@ abstract class CrudController extends Controller
 	{
 		$direction = 'ASC';
 
-		$columnKey    = 'admin.' . $this->meta->handle . '.order.column';
-		$directionKey = 'admin.' . $this->meta->handle . '.order.direction';
+		$columnKey    = 'admin.' . $this->repository->getPlural() . '.order.column';
+		$directionKey = 'admin.' . $this->repository->getPlural() . '.order.direction';
 
 		// Flip the direction if they clicked on the same column again.
 		$oldColumn    = session($columnKey);
@@ -71,8 +84,8 @@ abstract class CrudController extends Controller
 	public function getAdd()
 	{
 		$this->data['action'] = 'add';
-		if (view()->exists('admin.' . $this->meta->handle . '.add-or-edit')) {
-			return view('admin.' . $this->meta->handle . '.add-or-edit', $this->data);
+		if (view()->exists('admin.' . $this->repository->getPlural() . '.add-or-edit')) {
+			return view('admin.' . $this->repository->getPlural() . '.add-or-edit', $this->data);
 		}
 		return view('admin.generic.add-or-edit', $this->data);
 	}
@@ -90,8 +103,8 @@ abstract class CrudController extends Controller
 		$model = $this->repository->find($id);
 		$this->data['action'] = 'edit';
 		$this->data += compact('model');
-		if (view()->exists('admin.' . $this->meta->handle . '.add-or-edit')) {
-			return view('admin.' . $this->meta->handle . '.add-or-edit', $this->data);
+		if (view()->exists('admin.' . $this->repository->getPlural() . '.add-or-edit')) {
+			return view('admin.' . $this->repository->getPlural() . '.add-or-edit', $this->data);
 		}
 		return view('admin.generic.add-or-edit', $this->data);
 	}
