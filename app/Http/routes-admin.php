@@ -4,19 +4,14 @@
  * @license MIT https://opensource.org/licenses/MIT
  */
 
-//---------------------
-// Admin Panel
-//---------------------
-
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 	Route::get('/', 'AuthController@dashboardOrSignIn');
 	Route::post('/sign-in', 'AuthController@login');
 
-	//Route::controller('users', 'UserController');
-
-	Route::group(['middleware' => 'admin'], function() {
-		// @TODO:
-		// Should we use middleware here that implements a policy gate...
-		// or perhaps handle this from the AdminController constructor?
+	//---------------------
+	// Crud Controllers
+	//---------------------
+	Route::group(['middleware' => 'admin', 'namespace' => 'Crud'], function() {
+		Route::controller('users', 'UserController');
 	});
 });

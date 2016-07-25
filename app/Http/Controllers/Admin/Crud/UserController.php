@@ -6,7 +6,7 @@
 
 namespace App\Http\Controllers\Admin\Crud;
 
-use App\Repositories\UserRepository;
+use App\Repositories\Admin\Crud\UserRepository;
 use App\Http\Controllers\Admin\CrudController;
 
 class UserController extends CrudController

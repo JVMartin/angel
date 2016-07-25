@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\Crud\UserRepository;
+use App\Repositories\Admin\Crud\UserRepository;
 
 class AdminServiceProvider extends ServiceProvider
 {

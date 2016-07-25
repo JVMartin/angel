@@ -151,11 +151,11 @@ return [
 		/*
 		 * Application Service Providers...
 		 */
+		App\Providers\AdminServiceProvider::class,
 		App\Providers\AppServiceProvider::class,
 		App\Providers\AuthServiceProvider::class,
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
-		App\Providers\AdminServiceProvider::class,
 
 		/*
 		 * Installed packages service providers

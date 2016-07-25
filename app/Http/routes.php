@@ -5,9 +5,9 @@
  */
 
 //---------------------
-// Admin
+// Admin Panel
 //---------------------
-require('routes-admin.php');
+require app_path('Http/routes-admin.php');
 
 //---------------------
 // Front-end

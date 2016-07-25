@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Crud;
+namespace App\Repositories\Admin\Crud;
 
 use App\Models\User;
 use App\Repositories\Admin\CrudRepository;
