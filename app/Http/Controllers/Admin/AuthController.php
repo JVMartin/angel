@@ -34,9 +34,6 @@ class AuthController extends Controller
 	 */
 	public function dashboardOrSignIn()
 	{
-		if ($this->data['errors']->count()) {
-			//dd($this->data);
-		}
 		if ( ! Auth::check()) {
 			return view('admin.pages.sign-in', $this->data);
 		}

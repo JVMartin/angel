@@ -13,6 +13,7 @@ class UserController extends CrudController
 {
 	protected function setRepository()
 	{
-		$this->repository = app()->make('UserRepository');
+		$this->repository = app(UserRepository::class);
+		dd($this->repository);
 	}
 }

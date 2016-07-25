@@ -12,9 +12,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 	Route::get('/', 'AuthController@dashboardOrSignIn');
 	Route::post('/sign-in', 'AuthController@login');
 
-	/*Route::group(['middleware' => 'admin'], function() {
+	//Route::controller('users', 'UserController');
+
+	Route::group(['middleware' => 'admin'], function() {
 		// @TODO:
 		// Should we use middleware here that implements a policy gate...
 		// or perhaps handle this from the AdminController constructor?
-	});*/
+	});
 });
