@@ -21,6 +21,7 @@ class UserRepository extends CrudRepository
 	{
 		$this->plural = "users";
 	}
+
 	/**
 	 * Create a guest user for people who want to try before registering.
 	 * (No email, password, etc.)

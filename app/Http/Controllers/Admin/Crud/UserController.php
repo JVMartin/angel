@@ -7,12 +7,12 @@
 namespace App\Http\Controllers\Admin\Crud;
 
 use App\Repositories\UserRepository;
+use App\Http\Controllers\Admin\CrudController;
 
 class UserController extends CrudController
 {
-	public function __construct(UserRepository $repository)
+	protected function setRepository()
 	{
-		$this->repository = $repository;
-		parent::__construct();
+		$this->repository = app()->make('UserRepository');
 	}
 }
