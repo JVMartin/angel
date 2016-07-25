@@ -33,13 +33,16 @@ abstract class CrudRepository
 		$this->setModel();
 		$this->setSingular();
 		$this->setPlural();
-		$this->setHandle();
 	}
 
 	abstract protected function setModel();
 	abstract protected function setSingular();
 	abstract protected function setPlural();
-	abstract protected function setHandle();
+
+	public function getModel()
+	{
+		return $this->Model;
+	}
 
 	public function getSingular()
 	{

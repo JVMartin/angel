@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 /**
- * The AuthController displays the dashboard for the administrative panel or allows the user
- * to sign in.
+ * The AuthController displays the dashboard for the administrative panel or allows the user to sign
+ * in.
  *
  * @package App\Http\Controllers\Admin
  */
