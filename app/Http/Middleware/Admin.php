@@ -1,9 +1,12 @@
 <?php
+/**
+ * @copyright (c) 2016 Jacob Martin
+ * @license MIT https://opensource.org/licenses/MIT
+ */
 
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class Admin
