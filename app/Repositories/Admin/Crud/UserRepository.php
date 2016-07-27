@@ -64,4 +64,74 @@ class UserRepository extends CrudRepository
 	{
 		return User::create([]);
 	}
+	
+	public function getCols()
+	{
+		return [
+			'id' => [
+				'pretty' => 'ID',
+				'type'   => 'text',
+				'attributes' => [
+					'disabled',
+				],
+			],
+			'type' => [
+				'pretty' => 'Role',
+				'type'   => 'select',
+				'options' => [
+					'user'  => 'User',
+					'admin' => 'Administrator',
+				],
+				'attributes' => [
+					'required',
+				],
+			],
+			'email' => [
+				'pretty' => 'Email',
+				'type'   => 'text',
+				'attributes' => [
+					'required',
+				],
+				'validate' => [
+					'required',
+					'email',
+				],
+			],
+			'first_name' => [
+				'pretty' => 'First Name',
+				'type'   => 'text',
+				'attributes' => [],
+			],
+			'last_name' => [
+				'pretty' => 'Last Name',
+				'type'   => 'text',
+				'attributes' => [],
+			],
+			'nickname' => [
+				'pretty' => 'Nickname',
+				'type'   => 'text',
+				'attributes' => [
+					'required'
+				],
+				'validate' => [
+					'required',
+					'unique:users,nickname',
+				],
+			],
+			'updated_at' => [
+				'pretty'     => 'Updated At',
+				'type'       => 'text',
+				'attributes' => [
+					'disabled',
+				],
+			],
+			'created_at' => [
+				'pretty'     => 'Created At',
+				'type'       => 'text',
+				'attributes' => [
+					'disabled',
+				],
+			],
+		];
+	}
 }

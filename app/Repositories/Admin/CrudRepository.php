@@ -56,6 +56,7 @@ abstract class CrudRepository
 	abstract protected function setIndexOrder();
 	abstract protected function setIndexCols();
 	abstract protected function setSearchCols();
+	abstract public function getCols();
 
 	public function getModel()
 	{
@@ -75,6 +76,11 @@ abstract class CrudRepository
 	public function getHandle()
 	{
 		return $this->handle;
+	}
+
+	public function getIndexCols()
+	{
+		return $this->indexCols;
 	}
 
 	public function getIndexURL()

@@ -11,7 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 /**
  * Represents a user in the system.
  */
-class User extends Authenticatable
+class User extends Authenticatable implements CrudModel
 {
 	/**
 	 * The attributes that are mass assignable.
@@ -39,5 +39,17 @@ class User extends Authenticatable
 	public function isSuperAdmin()
 	{
 		return $this->role === 'superadmin';
+	}
+
+	/**
+	 * The URL where this CRUD model can be edited in the administrative panel.
+	 *
+	 * e.g. 'admin/users/edit/1'
+	 *
+	 * @return string
+	 */
+	public function editURL()
+	{
+		return 'admin/users/edit/' . $this->id;
 	}
 }
