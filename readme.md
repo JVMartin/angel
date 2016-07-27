@@ -13,6 +13,8 @@ Angel uses:
 * [Foundation for Sites 6.2.3](http://foundation.zurb.com/sites/docs/) as the
   admin panel [Sass](http://sass-lang.com/) framework and as the default
   front-end Sass framework (each compiled separately).
+* [Laravel Forms & HTML 5.2](https://laravelcollective.com/docs/5.2/html) for its form building
+  utilities.
 * [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar), an excellent debugging
   tool by barryvdh.
 
