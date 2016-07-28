@@ -11,12 +11,12 @@
 		<div class="row">
 			<div class="columns small-12">
 				<p>
-					<a href="{{ $meta->indexURL() }}">
-						<i class="fi-arrow-left"></i>
+					<a href="{{ $repository->getIndexURL() }}">
+						<i class="fa fa-arrow-left"></i>
 						Back to index
 					</a>
 				</p>
-				<h1>{{ ucfirst($action) . ' ' . $meta->singular }}</h1>
+				<h1>{{ ucfirst($action) . ' ' . $repository->getSingular() }}</h1>
 			</div>
 		</div>
 		@if ($action == 'edit')
@@ -24,10 +24,10 @@
 		@elseif ($action == 'add')
 			{!! Form::open() !!}
 		@endif
-			@include('admin.crud.cols', ['cols' => $meta->cols()])
+			@include('admin.crud.cols', ['cols' => $repository->getCols()])
 			<div class="row">
 				<div class="columns small-12">
-					<button type="submit">
+					<button type="submit" class="button small">
 						Save
 					</button>
 				</div>
@@ -36,8 +36,8 @@
 		<div class="row">
 			<div class="columns small-12">
 				<p>
-					<a href="{{ $meta->indexURL() }}">
-						<i class="fi-arrow-left"></i>
+					<a href="{{ $repository->getIndexURL() }}">
+						<i class="fa fa-arrow-left"></i>
 						Back to index
 					</a>
 				</p>
