@@ -64,7 +64,7 @@ class UserRepository extends CrudRepository
 	{
 		return User::create([]);
 	}
-	
+
 	public function getCols()
 	{
 		return [

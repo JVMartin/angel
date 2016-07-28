@@ -10,13 +10,15 @@ test-driven development and all of the best practices.
 
 Angel uses:
 * [Laravel 5.2](https://laravel.com/docs/5.2) as its foundation.
-* [Foundation for Sites 6.2.3](http://foundation.zurb.com/sites/docs/) as the admin panel
-  [Sass](http://sass-lang.com/) framework and as the default front-end Sass framework (each compiled
-  separately for maximum customizability).
 * [Laravel Forms & HTML 5.2](https://laravelcollective.com/docs/5.2/html) for its form building
   utilities.
 * [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar), an excellent debugging
   tool by barryvdh.
+* [Foundation for Sites 6.2.3](http://foundation.zurb.com/sites/docs/) as the admin panel
+  [Sass](http://sass-lang.com/) framework and as the default front-end Sass framework (each compiled
+  separately for maximum customizability).
+* [FontAwesome 4.6.3](http://fontawesome.io/icons/) for icons.
+
 
 ## Installation
 Simply fork or clone this repository and:

@@ -21,6 +21,7 @@ elixir(function(mix) {
 			includePaths: [
 				'resources/assets/bower/foundation-sites/scss',
 				'resources/assets/bower/motion-ui/src',
+				'resources/assets/bower/font-awesome/scss',
 			]
 		}
 	);
