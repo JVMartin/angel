@@ -20,6 +20,8 @@ abstract class CrudController extends Controller
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->setRepository();
 
 		if ( ! $this->repository) {
@@ -35,8 +37,6 @@ abstract class CrudController extends Controller
 		}
 
 		$this->data['repository'] = $this->repository;
-
-		parent::__construct();
 	}
 
 	/**
