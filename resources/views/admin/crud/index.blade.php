@@ -7,14 +7,18 @@
 @section('content')
 	<section id="crudIndex">
 		<div class="row">
-			<div class="small-12 column">
+			<div class="small-6 column">
 				<h1>
 					{{ $repository->getPlural() }}
-					<a id="createNewButton" href="{{ $repository->getAddURL() }}" class="button small">
-						<i class="fi-plus"></i>
+				</h1>
+			</div>
+			<div class="small-6 column">
+				<p class="text-right">
+					<a href="{{ $repository->getAddURL() }}" class="button large">
+						<i class="fa fa-plus"></i>
 						Add {{ $repository->getSingular() }}
 					</a>
-				</h1>
+				</p>
 			</div>
 		</div>
 		@include('admin.crud.index-search')
@@ -33,9 +37,9 @@
 										{!! $repository->getCols()[$col]['pretty'] !!}
 										@if (session('admin.' . $repository->getHandle() . '.order.column') == $col)
 											@if (session('admin.' . $repository->getHandle() . '.order.direction') == 'ASC')
-												<i class="fi-arrow-up"></i>
+												<i class="fa fa-chevron-up"></i>
 											@else
-												<i class="fi-arrow-down"></i>
+												<i class="fa fa-chevron-down"></i>
 											@endif
 										@endif
 									</a>

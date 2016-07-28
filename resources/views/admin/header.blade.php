@@ -1,8 +1,10 @@
 <div id="adminNav" class="top-bar">
 	<div class="top-bar-left">
 		<ul class="dropdown menu" data-dropdown-menu>
-			<li class="menu-text">
-				Angel Admin
+			<li>
+				<a href="{{ url('/admin') }}">
+					Angel Admin
+				</a>
 			</li>
 			@if (Gate::allows('admin'))
 				{{--
