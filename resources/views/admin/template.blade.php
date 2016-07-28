@@ -6,8 +6,6 @@
 	<link rel="shortcut icon" href="/favicon.ico" />
 
 	@yield('meta')
-	<meta property="og:title" content="@yield('title') | Admin">
-	<meta property="og:url" content="{{ Request::url() }}">
 
 	<title>@yield('title') | Admin</title>
 
