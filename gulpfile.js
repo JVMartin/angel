@@ -19,6 +19,9 @@ elixir(function(mix) {
 		}
 	);
 
+	// Also copy them to the build folder... maybe need to iron this out a bit.
+	mix.copy('resources/assets/bower/font-awesome/fonts', 'public/build/fonts');
+
 	mix.sass(
 		'app/main.scss',
 		'public/css/app.css',

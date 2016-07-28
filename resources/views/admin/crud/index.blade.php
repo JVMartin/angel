@@ -48,7 +48,7 @@
 							<tr>
 								<td>
 									<a href="{{ url($model->editURL()) }}" class="button tiny editButton">
-										<i class="fi-page-edit"></i>
+										<i class="fa fa-edit"></i>
 									</a>
 								</td>
 								@foreach ($repository->getIndexCols() as $col)
