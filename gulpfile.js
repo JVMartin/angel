@@ -1,17 +1,10 @@
 // Please don't notify me!
 process.env.DISABLE_NOTIFIER = true;
-var elixir = require('laravel-elixir');
+var elixir = require('laravel-elixir'),
+	gulp   = require('gulp');
 
-/*
- |--------------------------------------------------------------------------
- | Elixir Asset Management
- |--------------------------------------------------------------------------
- |
- | Elixir provides a clean, fluent API for defining some basic Gulp tasks
- | for your Laravel application. By default, we are compiling the Sass
- | file for our application, as well as publishing vendor resources.
- |
- */
+// Copy FontAwesome fonts into the public fonts folder.
+gulp.src(['resources/assets/bower/font-awesome/fonts/**/*']).pipe(gulp.dest('public/fonts'));
 
 elixir(function(mix) {
 	mix.sass(
