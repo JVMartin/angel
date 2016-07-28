@@ -118,12 +118,12 @@ abstract class CrudRepository
 	{
 		// Grab the current order from the session if it exists.
 		$Model = $this->Model;
-		$order = session('admin.' . $this->plural . '.order');
+		$order = session('admin.' . $this->handle . '.order');
 
 		// If not, put the default in the session.
 		if (empty($order)) {
 			$order = $this->indexOrder;
-			session(['admin.' . $this->plural . '.order' => $order]);
+			session(['admin.' . $this->handle . '.order' => $order]);
 		}
 
 		// Order by it.
@@ -135,7 +135,7 @@ abstract class CrudRepository
 
 	public function searchQuery($query)
 	{
-		$search = session('admin.' . $this->plural . '.search');
+		$search = session('admin.' . $this->handle . '.search');
 		if (empty($search)) return $query;
 
 		$cols  = $this->searchCols;

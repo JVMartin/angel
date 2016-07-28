@@ -24,7 +24,7 @@ class UserRepository extends CrudRepository
 
 	protected function setHandle()
 	{
-		$this->plural = "users";
+		$this->handle = "users";
 	}
 
 	protected function setIndexOrder()
@@ -39,7 +39,7 @@ class UserRepository extends CrudRepository
 	{
 		$this->indexCols = [
 			'id',
-			'type',
+			'role',
 			'email',
 			'first_name',
 			'last_name',
@@ -75,7 +75,7 @@ class UserRepository extends CrudRepository
 					'disabled',
 				],
 			],
-			'type' => [
+			'role' => [
 				'pretty' => 'Role',
 				'type'   => 'select',
 				'options' => [
@@ -107,27 +107,16 @@ class UserRepository extends CrudRepository
 				'type'   => 'text',
 				'attributes' => [],
 			],
-			'nickname' => [
-				'pretty' => 'Nickname',
-				'type'   => 'text',
-				'attributes' => [
-					'required'
-				],
-				'validate' => [
-					'required',
-					'unique:users,nickname',
-				],
-			],
 			'updated_at' => [
-				'pretty'     => 'Updated At',
-				'type'       => 'text',
+				'pretty' => 'Updated At',
+				'type'   => 'text',
 				'attributes' => [
 					'disabled',
 				],
 			],
 			'created_at' => [
-				'pretty'     => 'Created At',
-				'type'       => 'text',
+				'pretty' => 'Created At',
+				'type'   => 'text',
 				'attributes' => [
 					'disabled',
 				],

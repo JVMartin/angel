@@ -50,15 +50,15 @@ abstract class CrudController extends Controller
 	{
 		$models = $this->repository->index();
 		$this->data += compact('models');
-		if (view()->exists('admin.' . $this->repository->getPlural() . '.index')) {
-			return view('admin.' . $this->repository->getPlural() . '.index', $this->data);
+		if (view()->exists('admin.' . $this->repository->getHandle() . '.index')) {
+			return view('admin.' . $this->repository->getHandle() . '.index', $this->data);
 		}
 		return view('admin.crud.index', $this->data);
 	}
 
 	public function postSearch(Request $request)
 	{
-		session(['admin.' . $this->repository->getPlural() . '.search' => $request->search]);
+		session(['admin.' . $this->repository->getHandle() . '.search' => $request->search]);
 		return redirect()->back();
 	}
 
@@ -66,8 +66,8 @@ abstract class CrudController extends Controller
 	{
 		$direction = 'ASC';
 
-		$columnKey    = 'admin.' . $this->repository->getPlural() . '.order.column';
-		$directionKey = 'admin.' . $this->repository->getPlural() . '.order.direction';
+		$columnKey    = 'admin.' . $this->repository->getHandle() . '.order.column';
+		$directionKey = 'admin.' . $this->repository->getHandle() . '.order.direction';
 
 		// Flip the direction if they clicked on the same column again.
 		$oldColumn    = session($columnKey);
@@ -86,8 +86,8 @@ abstract class CrudController extends Controller
 	public function getAdd()
 	{
 		$this->data['action'] = 'add';
-		if (view()->exists('admin.' . $this->repository->getPlural() . '.add-or-edit')) {
-			return view('admin.' . $this->repository->getPlural() . '.add-or-edit', $this->data);
+		if (view()->exists('admin.' . $this->repository->getHandle() . '.add-or-edit')) {
+			return view('admin.' . $this->repository->getHandle() . '.add-or-edit', $this->data);
 		}
 		return view('admin.crud.add-or-edit', $this->data);
 	}
@@ -105,8 +105,8 @@ abstract class CrudController extends Controller
 		$model = $this->repository->find($id);
 		$this->data['action'] = 'edit';
 		$this->data += compact('model');
-		if (view()->exists('admin.' . $this->repository->getPlural() . '.add-or-edit')) {
-			return view('admin.' . $this->repository->getPlural() . '.add-or-edit', $this->data);
+		if (view()->exists('admin.' . $this->repository->getHandle() . '.add-or-edit')) {
+			return view('admin.' . $this->repository->getHandle() . '.add-or-edit', $this->data);
 		}
 		return view('admin.crud.add-or-edit', $this->data);
 	}
