@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-interface CrudModel
+trait CrudModel
 {
 	/**
 	 * The URL where this CRUD model can be edited in the administrative panel.
@@ -11,5 +11,13 @@ interface CrudModel
 	 *
 	 * @return string
 	 */
-	public function editURL();
+	abstract public function editURL();
+
+	/**
+	 * Get the model's change log.
+	 */
+	public function changes()
+	{
+		return $this->morphMany('App\Models\Change', 'loggable');
+	}
 }

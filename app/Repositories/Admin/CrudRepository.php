@@ -4,7 +4,7 @@ namespace App\Repositories\Admin;
 
 use Auth;
 use Carbon;
-use App\Change;
+use App\Models\Change;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 
@@ -196,7 +196,7 @@ abstract class CrudRepository
 	{
 		$created_at = Carbon::now();
 		$changes = [];
-		foreach ($this->cols() as $colName => $col) {
+		foreach ($this->getCols() as $colName => $col) {
 			// If change logging is enabled...
 			if (isset($col['logChanges']) && $col['logChanges'] &&
 				// And an update was posted...

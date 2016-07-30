@@ -11,8 +11,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 /**
  * Represents a user in the system.
  */
-class User extends Authenticatable implements CrudModel
+class User extends Authenticatable
 {
+	use CrudModel;
+
 	/**
 	 * The attributes that are mass assignable.
 	 *

@@ -85,6 +85,7 @@ class UserRepository extends CrudRepository
 				'attributes' => [
 					'required',
 				],
+				'logChanges' => true,
 			],
 			'email' => [
 				'pretty' => 'Email',
@@ -97,16 +98,19 @@ class UserRepository extends CrudRepository
 					'email',
 					'unique:users,email'
 				],
+				'logChanges' => true,
 			],
 			'first_name' => [
 				'pretty' => 'First Name',
 				'type'   => 'text',
 				'attributes' => [],
+				'logChanges' => true,
 			],
 			'last_name' => [
 				'pretty' => 'Last Name',
 				'type'   => 'text',
 				'attributes' => [],
+				'logChanges' => true,
 			],
 			'updated_at' => [
 				'pretty' => 'Updated At',
