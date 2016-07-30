@@ -96,8 +96,9 @@ abstract class CrudController extends Controller
 	{
 		$this->validate($request, $this->repository->getValidationRules(), [], $this->repository->getValidationAttributes());
 		$model = $this->repository->create($request);
+		$this->redirectSuccessMessage($this->repository->getSingular() . ' created.');
 		return redirect()->to($model->editURL())
-			->with('successes', [$this->repository->getSingular() . ' created.']);
+			->with('successes', $this->successes);
 	}
 
 	public function getEdit($id)

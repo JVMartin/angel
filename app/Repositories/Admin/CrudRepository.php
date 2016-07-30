@@ -102,7 +102,7 @@ abstract class CrudRepository
 	public function create(Request $request)
 	{
 		$Model = $this->Model;
-		return $Model::find($request->all());
+		return $Model::create($request->all());
 	}
 
 	public function index()
