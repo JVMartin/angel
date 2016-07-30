@@ -17,36 +17,6 @@
 			{!! diff($change->content, $changes->get($i - 1)->content) !!}
 		@endif
 	@endforeach
-	{{--
-	@foreach ($changes as $i => $change)
-		<div class="row">
-			<div class="small-12 column">
-				<p>
-					<strong>
-						Before {{ $change->created_at }}
-						@if ($changes->count() > $i + 1)
-							(Set by {{ $changes->get($i + 1)->user->fullName() . ', ' . $changes->get($i + 1)->user->email }})
-						@endif
-					</strong>
-				</p>
-				<div>
-					@if (empty($change->content))
-						<i>EMPTY</i>
-					@else
-						@if ($changes->count() > $i + 1)
-							{!! diff($change->content, $changes->get($i+1)->content) !!}
-						@else
-							{{ $change->content }}
-						@endif
-					@endif
-				</div>
-			</div>
-		</div>
-		@if ($i < $changes->count() - 1)
-			<hr />
-		@endif
-	@endforeach
-	--}}
 @if ($changes->isEmpty())
 		<div class="row">
 			<div class="small-12 column">
