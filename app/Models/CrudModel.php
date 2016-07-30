@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+/**
+ * Each model that can be edited via the adminisrative panel must implement CrudModel.
+ */
 trait CrudModel
 {
 	/**

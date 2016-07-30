@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Represents a website page on the front-end of the site.
+ */
 class Page extends Model
 {
 	use CrudModel;
