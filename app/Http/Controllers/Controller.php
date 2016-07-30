@@ -19,24 +19,38 @@ class Controller extends BaseController
 	use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
 
 	/**
-	 * @var array Data to be passed to all views.
+	 * Data to be passed to all views.
+	 *
+	 * @var array
 	 */
 	protected $data = [];
 
 	/**
-	 * @var A MessageBag of success messages to be passed using:
-	 *      ->with('successes', $this->successes)
-	 *      when redirecting.
+	 * A bag of success messages to be flashed to the session when redirecting.
+	 *
+	 * e.g.
+	 * ->with('successes', $this->successes)
+	 *
+	 * @var \Illuminate\Support\MessageBag
+	 *
 	 */
 	protected $successes;
 
 	public function __construct()
 	{
-		$this->successes = new MessageBag();
+		// Incoming messages.
 		$this->data['successes'] = session('successes', new MessageBag());
 		$this->data['errors'] = session('errors', new ViewErrorBag())->getBag('default');
+
+		// Outgoing messages.
+		$this->successes = new MessageBag();
 	}
 
+	/**
+	 * Add a success message to be flashed to the session on a redirect.
+	 *
+	 * @param $message The message to add.
+	 */
 	protected function redirectSuccessMessage($message)
 	{
 		$this->successes->add('messages', $message);

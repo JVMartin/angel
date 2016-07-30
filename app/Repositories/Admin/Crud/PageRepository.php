@@ -6,35 +6,35 @@
 
 namespace App\Repositories\Admin\Crud;
 
-use App\Models\User;
+use App\Models\Page;
 use App\Repositories\Admin\CrudRepository;
 
-class UserRepository extends CrudRepository
+class PageRepository extends CrudRepository
 {
 	protected function setModel()
 	{
-		$this->Model = User::class;
+		$this->Model = Page::class;
 	}
 
 	protected function setSingular()
 	{
-		$this->singular = "User";
+		$this->singular = "Page";
 	}
 
 	protected function setPlural()
 	{
-		$this->plural = "Users";
+		$this->plural = "Pages";
 	}
 
 	protected function setHandle()
 	{
-		$this->handle = "users";
+		$this->handle = "pages";
 	}
 
 	protected function setIndexOrder()
 	{
 		$this->indexOrder = [
-			'column'    => 'id',
+			'column'    => 'title',
 			'direction' => 'ASC',
 		];
 	}
@@ -42,31 +42,19 @@ class UserRepository extends CrudRepository
 	protected function setIndexCols()
 	{
 		$this->indexCols = [
-			'id',
-			'role',
-			'email',
-			'first_name',
-			'last_name',
-			'created_at',
+			'slug',
+			'title',
+			'updated_at',
 		];
 	}
 
 	protected function setSearchCols()
 	{
 		$this->searchCols = [
-			'first_name',
-			'last_name',
-			'email',
+			'title',
+			'slug',
+			'plaintext',
 		];
-	}
-
-	/**
-	 * Create a guest user for people who want to try before registering.
-	 * (No email, password, etc.)
-	 */
-	public function createGuestUser()
-	{
-		return User::create([]);
 	}
 
 	public function getCols()
@@ -79,53 +67,61 @@ class UserRepository extends CrudRepository
 					'disabled',
 				],
 			],
-			'role' => [
-				'pretty' => 'Role',
-				'type'   => 'select',
-				'options' => [
-					'user'  => 'User',
-					'admin' => 'Administrator',
-				],
+			'slug' => [
+				'pretty'   => 'Slug',
+				'type'     => 'text',
 				'attributes' => [
 					'required',
 				],
+				'validate' => [
+					'required',
+					'alpha_dash',
+					'unique:pages,slug',
+				],
 				'logChanges' => true,
 			],
-			'email' => [
-				'pretty' => 'Email',
+			'title' => [
+				'pretty' => 'Title',
 				'type'   => 'text',
 				'attributes' => [
 					'required',
 				],
 				'validate' => [
 					'required',
-					'email',
-					'unique:users,email'
 				],
 				'logChanges' => true,
 			],
-			'first_name' => [
-				'pretty' => 'First Name',
-				'type'   => 'text',
+			'image' => [
+				'pretty'     => 'Image',
+				'type'       => 'image',
 				'attributes' => [],
 				'logChanges' => true,
 			],
-			'last_name' => [
-				'pretty' => 'Last Name',
-				'type'   => 'text',
+			'og_desc' => [
+				'pretty'     => 'OG Description',
+				'type'       => 'text',
+				'attributes' => [],
+				'validate' => [
+					'max:300',
+				],
+				'logChanges' => true,
+			],
+			'html' => [
+				'pretty'     => 'Content',
+				'type'       => 'wysiwyg',
 				'attributes' => [],
 				'logChanges' => true,
 			],
 			'updated_at' => [
-				'pretty' => 'Updated At',
-				'type'   => 'text',
+				'pretty'     => 'Updated At',
+				'type'       => 'text',
 				'attributes' => [
 					'disabled',
 				],
 			],
 			'created_at' => [
-				'pretty' => 'Created At',
-				'type'   => 'text',
+				'pretty'     => 'Created At',
+				'type'       => 'text',
 				'attributes' => [
 					'disabled',
 				],

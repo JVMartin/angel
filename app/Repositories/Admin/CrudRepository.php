@@ -1,4 +1,8 @@
 <?php
+/**
+ * @copyright (c) 2016 Jacob Martin
+ * @license MIT https://opensource.org/licenses/MIT
+ */
 
 namespace App\Repositories\Admin;
 
@@ -15,23 +19,30 @@ use App\Exceptions\Admin\InvalidModelException;
 abstract class CrudRepository
 {
 	/**
-	 * @var The model's fully namespaced class name, e.g. '\App\Models\User'.
+	 * The model's fully namespaced class name, e.g. '\App\Models\User'.
+	 *
+	 * @var string
 	 */
 	protected $Model;
 
 	/**
-	 * @var The singular noun of the model, e.g. 'User'.
+	 * The singular noun of the model, e.g. 'User'.
+	 *
+	 * @var string
 	 */
 	protected $singular;
 
 	/**
-	 * @var The plural noun of the model, e.g. 'Users'.
+	 * The plural noun of the model, e.g. 'Users'.
+	 *
+	 * @var string
 	 */
 	protected $plural;
 
 	/**
-	 * @var The handle of the model, e.g. 'users'.
-	 *      Must be all lowercase letters and dashes.
+	 * The handle of the model, e.g. 'users'.  Must be all lowercase letters and dashes.
+	 *
+	 * @var string
 	 */
 	protected $handle;
 
