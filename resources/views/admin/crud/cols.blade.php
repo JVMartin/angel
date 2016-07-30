@@ -6,6 +6,13 @@
 @foreach ($cols as $colName => $col)
 	<div class="row">
 		<div class="columns small-12">
+			@if (isset($errors))
+				@foreach ($errors->get($colName) as $error)
+					<div class="callout alert">
+						{{ $error }}
+					</div>
+				@endforeach
+			@endif
 			<label>
 				@if ($action == 'edit' && ! empty($col['logChanges']))
 					<a href="{{ url('admin/changes/' . urlencode(get_class($model)) . '/' . $model->id . '/' . $colName) }}" class="fancybox" data-fancybox-type="iframe">

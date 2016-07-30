@@ -95,6 +95,7 @@ class UserRepository extends CrudRepository
 				'validate' => [
 					'required',
 					'email',
+					'unique:users,email'
 				],
 			],
 			'first_name' => [

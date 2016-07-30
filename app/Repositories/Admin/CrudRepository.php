@@ -151,6 +151,42 @@ abstract class CrudRepository
 	}
 
 	/**
+	 * Compile the array of validation rules for usage in the validator.
+	 * $id - The id of the row if updating; null if creating.
+	 */
+	public function getValidationRules($id = null)
+	{
+		$rules = [];
+		foreach ($this->getCols() as $colName => $col) {
+			if (isset($col['validate'])) {
+				// If we are *updating* a model, ensure unique constraint doesn't fail by using
+				// the "except" feature of the validator.
+				if ($id) {
+					foreach ($col['validate'] as &$rule) {
+						if (substr($rule, 0, 6) == 'unique') {
+							$rule .= ',' . $id;
+						}
+					}
+				}
+				$rules[$colName] = implode('|', $col['validate']);
+			}
+		}
+		return $rules;
+	}
+
+	/**
+	 * Compile the array of validation attributes (pretty names) for usage in the validator.
+	 */
+	public function getValidationAttributes()
+	{
+		$attributes = [];
+		foreach ($this->getCols() as $colName => $col) {
+			$attributes[$colName] = $col['pretty'];
+		}
+		return $attributes;
+	}
+
+	/**
 	 * Log changes to a model.
 	 *
 	 * @param Model $model - The model *before* updates have been applied.

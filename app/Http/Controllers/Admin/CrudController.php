@@ -94,10 +94,10 @@ abstract class CrudController extends Controller
 
 	public function postAdd(Request $request)
 	{
-		$this->validate($request, $this->meta->validationRules(), [], $this->meta->validationAttributes());
+		$this->validate($request, $this->repository->getValidationRules(), [], $this->repository->getValidationAttributes());
 		$model = $this->repository->create($request);
 		return redirect()->to($model->editURL())
-			->with('successes', [$this->meta->singular . ' created.']);
+			->with('successes', [$this->repository->getSingular() . ' created.']);
 	}
 
 	public function getEdit($id)
@@ -113,11 +113,11 @@ abstract class CrudController extends Controller
 
 	public function postEdit(Request $request, $id)
 	{
-		$this->validate($request, $this->meta->validationRules($id), [], $this->meta->validationAttributes());
+		$this->validate($request, $this->repository->getValidationRules($id), [], $this->repository->getValidationAttributes());
 		$model = $this->repository->find($id);
 		$this->repository->logChanges($model, $request->all());
 		$model->update($request->all());
-		return redirect()->back()
-			->with('successes', [$this->meta->singular . ' saved.']);
+		$this->redirectSuccessMessage($this->repository->getSingular() . ' saved.');
+		return redirect()->back()->with('successes', $this->successes);
 	}
 }
