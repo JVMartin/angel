@@ -27,6 +27,8 @@
 				{{ $col['pretty'] }}
 				@if ($col['type'] == 'text')
 					{!! Form::text($colName, null, $col['attributes']) !!}
+				@elseif ($col['type'] == 'textarea')
+					{!! Form::textarea($colName, null, $col['attributes']) !!}
 				@elseif ($col['type'] == 'wysiwyg')
 					{!! Form::textarea($colName, null, $col['attributes'] + ['class' => 'ckeditor']) !!}
 				@elseif ($col['type'] == 'select')
