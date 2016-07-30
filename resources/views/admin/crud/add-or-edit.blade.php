@@ -6,24 +6,28 @@
 @section('js')
 <script>
 	$(function() {
-		var $changesModal = $('#changesModal');
+		var $changesModalContent = $('#changesModalContent');
+
 		$('.openChangesButton').click(function() {
 			var url = $(this).data('url');
-			$changesModal.html('<p>Loading...</p>');
+			$changesModalContent.html('<p>Loading...</p>');
 			$.get(url, function(data) {
-				$changesModal.html(data);
+				$changesModalContent.html(data);
 			}).fail(function(xhr, status, error) {
 				console.log(error);
-				$changesModal.html('<p>There was an error contacting the server.</p>');
+				$changesModalContent.html('<p>There was an error contacting the server.</p>');
 			});
 		});
-		$changesModal.on('open.zf.reveal');
 	});
 </script>
 @endsection
 
 @section('content')
 <div class="reveal" id="changesModal" data-reveal>
+	<div id="changesModalContent"></div>
+	<button class="close-button" data-close aria-label="Close modal" type="button">
+		<span aria-hidden="true">&times;</span>
+	</button>
 </div>
 <section id="crudAddOrEdit">
 	<div class="row">

@@ -1,0 +1,65 @@
+#crudChangesLog {
+	.Differences td {
+		font-family: Consolas, monospace;
+	}
+
+	.DifferencesSideBySide .ChangeInsert td.Left {
+		background: #dfd;
+	}
+
+	.DifferencesSideBySide .ChangeInsert td.Right {
+		background: #cfc;
+	}
+
+	.DifferencesSideBySide .ChangeDelete td.Left {
+		background: #f88;
+	}
+
+	.DifferencesSideBySide .ChangeDelete td.Right {
+		background: #faa;
+	}
+
+	.DifferencesSideBySide .ChangeReplace .Left {
+		background: #fe9;
+	}
+
+	.DifferencesSideBySide .ChangeReplace .Right {
+		background: #fd8;
+	}
+
+	.Differences ins, .Differences del {
+		text-decoration: none;
+	}
+
+	.DifferencesSideBySide .ChangeReplace ins, .DifferencesSideBySide .ChangeReplace del {
+		background: #fc0;
+	}
+
+	.Differences .Skipped {
+		background: #f7f7f7;
+	}
+
+	.DifferencesInline .ChangeReplace .Left,
+	.DifferencesInline .ChangeDelete .Left {
+		background: #fdd;
+	}
+
+	.DifferencesInline .ChangeReplace .Right,
+	.DifferencesInline .ChangeInsert .Right {
+		background: #dfd;
+	}
+
+	.DifferencesInline .ChangeReplace ins {
+		background: #9e9;
+	}
+
+	.DifferencesInline .ChangeReplace del {
+		background: #e99;
+	}
+
+	pre {
+		width: 100%;
+		overflow: auto;
+	}
+}
+
