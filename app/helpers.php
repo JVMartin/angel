@@ -10,7 +10,7 @@
 function diff($old, $new) {
 	static $renderer = null;
 	if ($renderer === null) {
-		$renderer = new Diff_Renderer_Html_SideBySide;
+		$renderer = new Diff_Renderer_Html_Inline;
 	}
 
 	$old = explode("\n", $old);
