@@ -2,8 +2,10 @@
 
 namespace App\Repositories\Admin;
 
+use App\Exceptions\Admin\InvalidModelException;
 use Auth;
 use Carbon;
+use ReflectionClass;
 use App\Models\Change;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
@@ -47,8 +49,18 @@ abstract class CrudRepository
 		$this->setIndexOrder();
 		$this->setIndexCols();
 		$this->setSearchCols();
+
+		if ( ! in_array('App\Models\CrudModel', class_uses($this->Model))) {
+			throw new InvalidModelException(
+				'Your model (' . $this->Model . ') must use the trait App\Models\CrudModel.'
+			);
+		}
 	}
 
+	/**
+	 * Set $this->Model to a string containing the fully namespaced model class name.  Note that the
+	 * model must use the trait \App\Models\CrudModel.
+	 */
 	abstract protected function setModel();
 	abstract protected function setSingular();
 	abstract protected function setPlural();
@@ -189,13 +201,14 @@ abstract class CrudRepository
 	/**
 	 * Log changes to a model.
 	 *
-	 * @param Model $model - The model *before* updates have been applied.
-	 * @param array $updates - The array of updates from user input.
+	 * @param Model $model   The model *before* updates have been applied.
+	 * @param array $updates The array of updates from user input.
 	 */
 	public function logChanges(Model $model, array $updates)
 	{
 		$created_at = Carbon::now();
-		$changes = [];
+		$changes    = [];
+
 		foreach ($this->getCols() as $colName => $col) {
 			// If change logging is enabled...
 			if (isset($col['logChanges']) && $col['logChanges'] &&
@@ -213,6 +226,7 @@ abstract class CrudRepository
 				]);
 			}
 		}
+
 		if (count($changes)) {
 			$model->changes()->saveMany($changes);
 		}
