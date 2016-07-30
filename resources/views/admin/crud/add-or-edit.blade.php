@@ -11,12 +11,14 @@
 @endsection
 
 @section('content')
-<div class="reveal" id="changesModal" data-reveal>
-	<div id="changesModalContent"></div>
-	<button class="close-button" data-close aria-label="Close modal" type="button">
-		<span aria-hidden="true">&times;</span>
-	</button>
-</div>
+@if ($action == 'edit')
+	<div class="reveal" id="changesModal" data-reveal>
+		<div id="changesModalContent"></div>
+		<button class="close-button" data-close aria-label="Close modal" type="button">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+@endif
 <section id="crudAddOrEdit">
 	<div class="row">
 		<div class="columns small-12">
