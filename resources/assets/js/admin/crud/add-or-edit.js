@@ -1,6 +1,7 @@
 $(function() {
 	if ($('#crudAddOrEdit').length) {
-		var $changesModalContent = $('#changesModalContent');
+		var $changesModal = $('#changesModal'),
+			$changesModalContent = $('#changesModalContent');
 
 		$('.openChangesButton').click(function(e) {
 			var url = $(this).data('url');
@@ -8,6 +9,7 @@ $(function() {
 			$changesModalContent.html('<p>Loading...</p>');
 			$.get(url, function(data) {
 				$changesModalContent.html(data);
+				$changesModal.trigger('resizeme.zf.trigger');
 			}).fail(function(xhr, status, error) {
 				console.log(error);
 				$changesModalContent.html('<p>There was an error contacting the server.</p>');

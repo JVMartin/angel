@@ -4,6 +4,7 @@
  * @license MIT https://opensource.org/licenses/MIT
  */
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -17,9 +18,9 @@ class AdminCrudTest extends TestCase
 	 */
 	public function testCrudIndexAndEdit()
 	{
-		$admin = factory(App\Models\User::class, 'admin')->create();
+		$admin = factory(User::class, 'admin')->create();
 
-		factory(App\Models\User::class, 'user')->create([
+		factory(User::class, 'user')->create([
 			'first_name' => 'Adam',
 			'last_name'  => 'Jones'
 		]);
@@ -41,6 +42,10 @@ class AdminCrudTest extends TestCase
 			->see('Maynard')
 			->see('Keenan')
 			->click('Back to index')
-			->seePageIs('/admin/users');
+			->seePageIs('/admin/users')
+			->see('Maynard')
+			->see('Keenan')
+			->dontSee('Adam')
+			->dontSee('Jones');
 	}
 }
