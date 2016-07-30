@@ -4,6 +4,7 @@
  * @license MIT https://opensource.org/licenses/MIT
  */
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -30,7 +31,7 @@ class AdminAuthTest extends TestCase
 	 */
 	public function testAdminSignedInAsUser()
 	{
-		$user = factory(App\Models\User::class, 'user')->create();
+		$user = factory(User::class, 'user')->create();
 
 		$this->actingAs($user)
 			->visit('/admin')
@@ -43,7 +44,7 @@ class AdminAuthTest extends TestCase
 	 */
 	public function testAdminSignedInAsAdmin()
 	{
-		$admin = factory(App\Models\User::class, 'admin')->create();
+		$admin = factory(User::class, 'admin')->create();
 
 		$this->actingAs($admin)
 			->visit('/admin')
@@ -55,7 +56,7 @@ class AdminAuthTest extends TestCase
 	 */
 	public function testAdminSignedInAsSuperAdmin()
 	{
-		$superAdmin = factory(App\Models\User::class, 'superadmin')->create();
+		$superAdmin = factory(User::class, 'superadmin')->create();
 
 		$this->actingAs($superAdmin)
 			->visit('/admin')
@@ -70,18 +71,18 @@ class AdminAuthTest extends TestCase
 		$userPass  = str_random(10);
 		$adminPass = str_random(10);
 
-		factory(App\Models\User::class, 'user')->create([
-			'email' => 'user@test',
+		factory(User::class, 'user')->create([
+			'email' => 'user@test.com',
 			'password' => bcrypt($userPass)
 		]);
-		factory(App\Models\User::class, 'admin')->create([
-			'email' => 'admin@test',
+		factory(User::class, 'admin')->create([
+			'email' => 'admin@test.com',
 			'password' => bcrypt($adminPass)
 		]);
 
 		// Users can't get in.
 		$this->visit('/admin')
-			->type('user@test', 'email')
+			->type('user@test.com', 'email')
 			->type($userPass, 'password')
 			->press('Sign In')
 			->seePageIs('/admin')
@@ -89,7 +90,7 @@ class AdminAuthTest extends TestCase
 
 		// But administrators can.
 		$this->visit('/admin')
-			->type('admin@test', 'email')
+			->type('admin@test.com', 'email')
 			->type($adminPass, 'password')
 			->press('Sign In')
 			->seePageIs('/admin')
@@ -101,15 +102,15 @@ class AdminAuthTest extends TestCase
 	 */
 	public function testSignInFormWrongPass()
 	{
-		factory(App\Models\User::class, 'user')->create([
-			'email' => 'user@test'
+		factory(User::class, 'user')->create([
+			'email' => 'user@test.com'
 		]);
-		factory(App\Models\User::class, 'admin')->create([
-			'email' => 'admin@test'
+		factory(User::class, 'admin')->create([
+			'email' => 'admin@test.com'
 		]);
 
 		$this->visit('/admin')
-			->type('user@test', 'email')
+			->type('user@test.com', 'email')
 			->type('abc123', 'password')
 			->press('Sign In')
 			->seePageIs('/admin')
@@ -117,7 +118,7 @@ class AdminAuthTest extends TestCase
 
 		// But administrators can.
 		$this->visit('/admin')
-			->type('admin@test', 'email')
+			->type('admin@test.com', 'email')
 			->type('abc123', 'password')
 			->press('Sign In')
 			->seePageIs('/admin')
