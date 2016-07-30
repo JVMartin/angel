@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,28 +15,15 @@ class Page extends Model
 	 */
 	protected $guarded = ['id'];
 
-	public function URL_en()
-	{
-		return $this->slug;
-	}
-	public function URL_es()
-	{
-		return $this->slug_es;
-	}
-
-	//----------------------------------
-	// Admin required functions.
-	//----------------------------------
+	/**
+	 * The URL where this CRUD model can be edited in the administrative panel.
+	 *
+	 * e.g. 'admin/users/edit/1'
+	 *
+	 * @return string
+	 */
 	public function editURL()
 	{
 		return 'admin/pages/edit/' . $this->id;
-	}
-
-	/**
-	 * Get the lesson's change log.
-	 */
-	public function changes()
-	{
-		return $this->morphMany('App\Change', 'loggable');
 	}
 }
