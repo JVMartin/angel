@@ -4,9 +4,27 @@
 @endsection
 
 @section('js')
+<script>
+	$(function() {
+		var $changesModal = $('#changesModal');
+		$('.openChangesButton').click(function() {
+			var url = $(this).data('url');
+			$changesModal.html('<p>Loading...</p>');
+			$.get(url, function(data) {
+				$changesModal.html(data);
+			}).fail(function(xhr, status, error) {
+				console.log(error);
+				$changesModal.html('<p>There was an error contacting the server.</p>');
+			});
+		});
+		$changesModal.on('open.zf.reveal');
+	});
+</script>
 @endsection
 
 @section('content')
+<div class="reveal" id="changesModal" data-reveal>
+</div>
 <section id="crudAddOrEdit">
 	<div class="row">
 		<div class="columns small-12">

@@ -43,6 +43,11 @@ class User extends Authenticatable
 		return $this->role === 'superadmin';
 	}
 
+	public function fullName()
+	{
+		return $this->first_name . ' ' . $this->last_name;
+	}
+
 	/**
 	 * The URL where this CRUD model can be edited in the administrative panel.
 	 *

@@ -15,8 +15,13 @@
 			@endif
 			<label>
 				@if ($action == 'edit' && ! empty($col['logChanges']))
-					<a href="{{ url('admin/changes/' . urlencode(get_class($model)) . '/' . $model->id . '/' . $colName) }}" class="fancybox" data-fancybox-type="iframe">
-						<i class="fi-clock"></i>
+					<a
+						role="button"
+						data-open="changesModal"
+						class="openChangesButton"
+						data-url="{{ url('admin/changes/' . urlencode(get_class($model)) . '/' . $model->id . '/' . $colName) }}"
+					>
+						<i class="fa fa-clock-o"></i>
 					</a>
 				@endif
 				{{ $col['pretty'] }}

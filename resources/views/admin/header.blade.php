@@ -32,6 +32,7 @@
 			<ul class="menu">
 				<li>
 					<a href="{{ url('/sign-out') }}">
+						<i class="fa fa-sign-out"></i>
 						Sign Out
 					</a>
 				</li>
