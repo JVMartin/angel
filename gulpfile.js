@@ -37,7 +37,7 @@ elixir(function(mix) {
 		[
 			'bower/jquery/dist/jquery.js',
 			'bower/foundation-sites/dist/foundation.js',
-			'js/admin/global.js'
+			'js/admin'
 		],
 		'public/js/admin.js',
 		'resources/assets'
@@ -47,7 +47,7 @@ elixir(function(mix) {
 		[
 			'bower/jquery/dist/jquery.js',
 			'bower/foundation-sites/dist/foundation.js',
-			'js/app/global.js'
+			'js/app'
 		],
 		'public/js/app.js',
 		'resources/assets'
