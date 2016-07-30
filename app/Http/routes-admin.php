@@ -14,6 +14,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 	Route::group(['middleware' => 'admin', 'namespace' => 'Crud'], function() {
 		Route::controller('users', 'UserController');
 
-		Route::get('changes/{Model}/{id}/{column}', 'ChangesController@log');
+		Route::get('changes/{crudRepository}/{id}/{column}', 'ChangesController@log');
 	});
 });

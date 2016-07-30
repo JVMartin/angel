@@ -9,17 +9,18 @@ class ChangesController extends Controller
 	/**
 	 * Display the change log for a model's column.
 	 *
-	 * @param $Model - The full (namespaced) class name of the model.
-	 * @param $id - The ID of the model in question.
-	 * @param $column - The column in question.
+	 * @param $CrudRepository The full (namespaced) class name of the CrudRepository for the model.
+	 * @param $id             The ID of the model in question.
+	 * @param $column         The column in question.
 	 * @return \Illuminate\View\View
 	 */
-	public function log($Model, $id, $column)
+	public function log($crudRepository, $id, $column)
 	{
-		$model = $Model::find($id);
+		$repository = app($crudRepository);
+		$model = $repository->find($id);
 		$changes = $model->changes()->with('user')->where('column', $column)
 			->orderBy('created_at', 'DESC')->get();
 
-		return view('admin.crud.changes-log', compact('model', 'changes', 'column'));
+		return view('admin.crud.changes-log', compact('repository', 'model', 'changes', 'column'));
 	}
 }

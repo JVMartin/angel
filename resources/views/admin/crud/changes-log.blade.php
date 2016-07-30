@@ -1,7 +1,7 @@
 <section id="crudChangesLog">
 	<div class="row">
 		<div class="small-12 column">
-			<h3>Change log for `{{ $column }}`</h3>
+			<h3>Change log for "{{ $repository->getCols()[$column]['pretty'] }}"</h3>
 		</div>
 	</div>
 	<hr />

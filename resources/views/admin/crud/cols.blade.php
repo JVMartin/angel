@@ -19,7 +19,7 @@
 						role="button"
 						data-open="changesModal"
 						class="openChangesButton"
-						data-url="{{ url('admin/changes/' . urlencode(get_class($model)) . '/' . $model->id . '/' . $colName) }}"
+						data-url="{{ url('admin/changes/' . urlencode(get_class($repository)) . '/' . $model->id . '/' . $colName) }}"
 					>
 						<i class="fa fa-clock-o"></i>
 					</a>

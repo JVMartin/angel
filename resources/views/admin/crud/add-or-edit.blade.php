@@ -8,8 +8,9 @@
 	$(function() {
 		var $changesModalContent = $('#changesModalContent');
 
-		$('.openChangesButton').click(function() {
+		$('.openChangesButton').click(function(e) {
 			var url = $(this).data('url');
+			e.preventDefault(); // Don't highlight the text in the input.
 			$changesModalContent.html('<p>Loading...</p>');
 			$.get(url, function(data) {
 				$changesModalContent.html(data);
