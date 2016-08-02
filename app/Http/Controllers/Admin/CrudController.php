@@ -14,12 +14,14 @@ use App\Exceptions\Admin\InvalidRepositoryException;
 abstract class CrudController extends Controller
 {
 	/**
-	 * @var The appropriate CrudRepository; filled using setRepository.
+	 * The appropriate repository for this module which must be set using setRepository().
+	 *
+	 * @var CrudRepository
 	 */
 	protected $repository;
 
 	/**
-	 * Ensure that the subclass sets an appropriate repository.
+	 * Ensure that the subclass sets the appropriate repository.
 	 */
 	public function __construct()
 	{
@@ -27,18 +29,14 @@ abstract class CrudController extends Controller
 
 		$this->setRepository();
 
-		if ( ! $this->repository) {
-			throw new InvalidRepositoryException(
-				"You must properly implement setRepository() in " . static::class
-			);
-		}
-		if ( ! $this->repository instanceof CrudRepository) {
+		if ( ! $this->repository ||  ! $this->repository instanceof CrudRepository) {
 			throw new InvalidRepositoryException(
 				"setRepository() in " . static::class . " must set an instance of " .
 				CrudRepository::class
 			);
 		}
 
+		// Put the repository in the view data as well.
 		$this->data['repository'] = $this->repository;
 	}
 
@@ -119,7 +117,8 @@ abstract class CrudController extends Controller
 	 */
 	public function postAdd(Request $request)
 	{
-		$this->validate($request, $this->repository->getValidationRules(), [], $this->repository->getValidationAttributes());
+		$this->validate($request, $this->repository->getValidationRules(), [],
+				$this->repository->getValidationAttributes());
 		$model = $this->repository->create($request);
 		$this->redirectSuccessMessage($this->repository->getSingular() . ' created.');
 		return redirect()->to($model->editURL())
@@ -148,7 +147,8 @@ abstract class CrudController extends Controller
 	 */
 	public function postEdit(Request $request, $id)
 	{
-		$this->validate($request, $this->repository->getValidationRules($id), [], $this->repository->getValidationAttributes());
+		$this->validate($request, $this->repository->getValidationRules($id), [],
+				$this->repository->getValidationAttributes());
 		$model = $this->repository->find($id);
 		$this->repository->logChanges($model, $request->all());
 		$model->update($request->all());
