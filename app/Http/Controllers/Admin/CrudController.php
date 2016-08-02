@@ -18,6 +18,9 @@ abstract class CrudController extends Controller
 	 */
 	protected $repository;
 
+	/**
+	 * Ensure that the subclass sets an appropriate repository.
+	 */
 	public function __construct()
 	{
 		parent::__construct();
@@ -46,22 +49,35 @@ abstract class CrudController extends Controller
 	 */
 	abstract protected function setRepository();
 
+	/**
+	 * Get an index of all of the items in this module.
+	 *
+	 * Note that you can easily use your own custom view by placing it here:
+	 * resources/views/admin/{handle}/index.blade.php
+	 */
 	public function getIndex()
 	{
 		$models = $this->repository->index();
-		$this->data += compact('models');
+		$this->data['models'] = $models;
 		if (view()->exists('admin.' . $this->repository->getHandle() . '.index')) {
 			return view('admin.' . $this->repository->getHandle() . '.index', $this->data);
 		}
 		return view('admin.crud.index', $this->data);
 	}
 
+	/**
+	 * When the user uses the index search bar.
+	 */
 	public function postSearch(Request $request)
 	{
 		session(['admin.' . $this->repository->getHandle() . '.search' => $request->search]);
 		return redirect()->back();
 	}
 
+	/**
+	 * When the user clicks on a column heading.  Order by that column; toggle between ascending
+	 * and descending order.
+	 */
 	public function getOrderBy($column)
 	{
 		$direction = 'ASC';
@@ -69,7 +85,7 @@ abstract class CrudController extends Controller
 		$columnKey    = 'admin.' . $this->repository->getHandle() . '.order.column';
 		$directionKey = 'admin.' . $this->repository->getHandle() . '.order.direction';
 
-		// Flip the direction if they clicked on the same column again.
+		// Toggle the direction if they clicked on the same column again.
 		$oldColumn    = session($columnKey);
 		$oldDirection = session($directionKey);
 		if ($oldColumn == $column) {
@@ -83,6 +99,12 @@ abstract class CrudController extends Controller
 		return redirect()->back();
 	}
 
+	/**
+	 * Present a form for adding a new item to the database.
+	 *
+	 * Note that you can easily use your own custom view by placing it here:
+	 * resources/views/admin/{handle}/add-or-edit.blade.php
+	 */
 	public function getAdd()
 	{
 		$this->data['action'] = 'add';
@@ -92,6 +114,9 @@ abstract class CrudController extends Controller
 		return view('admin.crud.add-or-edit', $this->data);
 	}
 
+	/**
+	 * Add a new item to the database.
+	 */
 	public function postAdd(Request $request)
 	{
 		$this->validate($request, $this->repository->getValidationRules(), [], $this->repository->getValidationAttributes());
@@ -101,17 +126,26 @@ abstract class CrudController extends Controller
 			->with('successes', $this->successes);
 	}
 
+	/**
+	 * Present a form for editing an existing item in the database.
+	 *
+	 * Note that you can easily use your own custom view by placing it here:
+	 * resources/views/admin/{handle}/add-or-edit.blade.php
+	 */
 	public function getEdit($id)
 	{
 		$model = $this->repository->find($id);
 		$this->data['action'] = 'edit';
-		$this->data += compact('model');
+		$this->data['model']  = $model;
 		if (view()->exists('admin.' . $this->repository->getHandle() . '.add-or-edit')) {
 			return view('admin.' . $this->repository->getHandle() . '.add-or-edit', $this->data);
 		}
 		return view('admin.crud.add-or-edit', $this->data);
 	}
 
+	/**
+	 * Edit an existing item in the database.
+	 */
 	public function postEdit(Request $request, $id)
 	{
 		$this->validate($request, $this->repository->getValidationRules($id), [], $this->repository->getValidationAttributes());
