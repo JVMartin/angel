@@ -51,14 +51,14 @@ abstract class CrudController extends Controller
 	 * Get an index of all of the items in this module.
 	 *
 	 * Note that you can easily use your own custom view by placing it here:
-	 * resources/views/admin/{handle}/index.blade.php
+	 * resources/views/admin/crud/{handle}/index.blade.php
 	 */
 	public function getIndex()
 	{
 		$models = $this->repository->index();
 		$this->data['models'] = $models;
-		if (view()->exists('admin.' . $this->repository->getHandle() . '.index')) {
-			return view('admin.' . $this->repository->getHandle() . '.index', $this->data);
+		if (view()->exists('admin.crud.' . $this->repository->getHandle() . '.index')) {
+			return view('admin.crud.' . $this->repository->getHandle() . '.index', $this->data);
 		}
 		return view('admin.crud.index', $this->data);
 	}
@@ -101,13 +101,13 @@ abstract class CrudController extends Controller
 	 * Present a form for adding a new item to the database.
 	 *
 	 * Note that you can easily use your own custom view by placing it here:
-	 * resources/views/admin/{handle}/add-or-edit.blade.php
+	 * resources/views/admin/crud/{handle}/add-or-edit.blade.php
 	 */
 	public function getAdd()
 	{
 		$this->data['action'] = 'add';
-		if (view()->exists('admin.' . $this->repository->getHandle() . '.add-or-edit')) {
-			return view('admin.' . $this->repository->getHandle() . '.add-or-edit', $this->data);
+		if (view()->exists('admin.crud.' . $this->repository->getHandle() . '.add-or-edit')) {
+			return view('admin.crud.' . $this->repository->getHandle() . '.add-or-edit', $this->data);
 		}
 		return view('admin.crud.add-or-edit', $this->data);
 	}
@@ -129,15 +129,15 @@ abstract class CrudController extends Controller
 	 * Present a form for editing an existing item in the database.
 	 *
 	 * Note that you can easily use your own custom view by placing it here:
-	 * resources/views/admin/{handle}/add-or-edit.blade.php
+	 * resources/views/admin/crud/{handle}/add-or-edit.blade.php
 	 */
 	public function getEdit($id)
 	{
 		$model = $this->repository->find($id);
 		$this->data['action'] = 'edit';
 		$this->data['model']  = $model;
-		if (view()->exists('admin.' . $this->repository->getHandle() . '.add-or-edit')) {
-			return view('admin.' . $this->repository->getHandle() . '.add-or-edit', $this->data);
+		if (view()->exists('admin.crud.' . $this->repository->getHandle() . '.add-or-edit')) {
+			return view('admin.crud.' . $this->repository->getHandle() . '.add-or-edit', $this->data);
 		}
 		return view('admin.crud.add-or-edit', $this->data);
 	}

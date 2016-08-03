@@ -5,6 +5,7 @@
  */
 
 use App\Models\User;
+use App\Models\Page;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
 	public function run()
 	{
 		$this->call(UsersTableSeeder::class);
+		$this->call(PagesTableSeeder::class);
 	}
 }
 
@@ -33,6 +35,21 @@ class UsersTableSeeder extends Seeder
 		User::create([
 			'email' => 'user@test.com',
 			'password' => bcrypt('test')
+		]);
+	}
+}
+
+class PagesTableSeeder extends Seeder
+{
+	public function run()
+	{
+		Page::create([
+			'slug' => 'home',
+			'title' => 'Home Page',
+			'html' => '
+				<h1>Your Home Page</h1>
+				<p>Hello there.</p>
+			',
 		]);
 	}
 }

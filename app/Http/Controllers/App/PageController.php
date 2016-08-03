@@ -6,12 +6,28 @@
 
 namespace App\Http\Controllers\App;
 
+use App\Models\Page;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PageController extends Controller
 {
-	public function home()
+	public function getPage($slug = 'home')
 	{
-		return view('app.pages.home', $this->data);
+		$page = Page::where('slug', $slug)->first();
+
+		if ( ! $page) {
+			throw new NotFoundHttpException;
+		}
+
+		$this->data['page'] = $page;
+
+		// If a blade exists, load that blade.
+		if (view()->exists('app.pages.' . $page->slug)) {
+			return view('app.pages.' . $page->slug, $this->data);
+		}
+
+		// Otherwise, load the default page.
+		return view('app.pages.default', $this->data);
 	}
 }
