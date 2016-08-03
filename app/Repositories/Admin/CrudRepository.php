@@ -211,7 +211,7 @@ abstract class CrudRepository
 	/**
 	 * Log changes to a model.
 	 *
-	 * @param Model $model   The model *before* updates have been applied.
+	 * @param Model $model The model *before* updates have been applied.
 	 * @param array $updates The array of updates from user input.
 	 */
 	public function logChanges(Model $model, array $updates)
@@ -240,5 +240,21 @@ abstract class CrudRepository
 		if (count($changes)) {
 			$model->changes()->saveMany($changes);
 		}
+	}
+
+	/**
+	 * Get the changes for a model and a specific column.
+	 * @param Model $model
+	 * @param string $column
+	 * @return \Illuminate\Database\Eloquent\Collection A collection of Change models.
+	 */
+	public function getChangesForColumn(Model $model, $column)
+	{
+		return $model->
+				changes()->
+				with('user')->
+				where('column', $column)->
+				orderBy('created_at', 'DESC')->
+				get();
 	}
 }

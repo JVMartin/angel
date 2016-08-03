@@ -15,6 +15,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 		Route::controller('users', 'UserController');
 		Route::controller('pages', 'PageController');
 
-		Route::get('changes/{crudRepository}/{id}/{column}', 'ChangesController@log');
+		Route::get('changes/{crudRepository}/{id}/{column}', 'ChangesController@getLog');
 	});
 });
