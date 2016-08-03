@@ -32,7 +32,7 @@
 				@elseif ($col['type'] == 'wysiwyg')
 					{!! Form::textarea($colName, null, $col['attributes'] + ['class' => 'ckeditor']) !!}
 				@elseif ($col['type'] == 'select')
-					{!! Form::select($colName, $col['options'], null, $col['attributes'] + ['class' => 'ckeditor']) !!}
+					{!! Form::select($colName, $col['options'], null, $col['attributes']) !!}
 				@elseif ($col['type'] == 'checkbox')
 					{{-- Don't put in the hidden '0' field if the input is supposed to be disabled. --}}
 					@if ( ! isset($col['attributes']['disabled']))
