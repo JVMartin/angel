@@ -52,5 +52,23 @@ class PagesTableSeeder extends Seeder
 				<p><a href="/admin">Sign into admin panel...</a></p>
 			',
 		]);
+
+		Page::create([
+			'slug' => 'about',
+			'title' => 'About',
+			'html' => '
+				<h1>About Page</h1>
+				<p>Here is some stuff about our company.</p>
+			',
+		]);
+
+		Page::create([
+			'slug' => 'contact-us',
+			'title' => 'Contact Us',
+			'html' => '
+				<h1>Contact Us Page</h1>
+				<p>We hope to hear from you soon!</p>
+			',
+		]);
 	}
 }

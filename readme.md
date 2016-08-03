@@ -26,6 +26,7 @@ Angel uses:
   [Sass](http://sass-lang.com/) framework and as the default front-end Sass framework (each compiled
   separately for maximum customizability).
 * [FontAwesome 4.6.3](http://fontawesome.io/icons/) for icons.
+* [CKEditor 4.5.10](http://ckeditor.com/) as the WYSIWYG editor in the administrative panel.
 * [Travis CI](https://travis-ci.org/) for automated, continuous integration testing.
 
 ## Installation
@@ -36,17 +37,20 @@ bower install         # Install Foundation.
 npm install           # Install Laravel Elixir and Gulp.
 gulp                  # Compile and version all of the CSS and JS.
 ./fix.sh              # Fix the permissions, giving www-data write access to necessary folders.
-cp .env.example .env  # And edit to taste.
+mysql                 # Create a database and user.
+cp .env.example .env  # And edit .env to taste.
+php artisan migrate   # Run the database migrations.
 ```
 
 Serve the `/public` folder from Apache.
 
-For production CSS and JS minification, instead use:
+For production CSS and JS minification, use:
 ```bash
 gulp --production
 ```
 
-Note that files in the following folders are not included in VCS as they are compiled files:
+Note that files in the following folders are not included in VCS as they are compiled and copied
+files:
 ```bash
 /public/css
 /public/js
