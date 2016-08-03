@@ -46,10 +46,30 @@ abstract class CrudRepository
 	 */
 	protected $handle;
 
+	/**
+	 * The column and direction to order the index by.
+	 *
+	 * @var array
+	 */
 	protected $indexOrder;
+
+	/**
+	 * A list of columns to use as column headings in the index.
+	 *
+	 * @var array
+	 */
 	protected $indexCols;
+
+	/**
+	 * A list of columns to be included in search queries from the index.
+	 *
+	 * @var array
+	 */
 	protected $searchCols;
 
+	/**
+	 * Run all the set methods and ensure that an appropriate CRUD model was used.
+	 */
 	public function __construct()
 	{
 		$this->setModel();
@@ -68,8 +88,8 @@ abstract class CrudRepository
 	}
 
 	/**
-	 * Set $this->Model to a string containing the fully namespaced model class name.  Note that the
-	 * model must use the trait \App\Models\CrudModel.
+	 * Implement each of these methods to fill the respective variables according to their
+	 * descriptions above.  See UserRepository and PageRepository for examples.
 	 */
 	abstract protected function setModel();
 	abstract protected function setSingular();
@@ -78,6 +98,12 @@ abstract class CrudRepository
 	abstract protected function setIndexOrder();
 	abstract protected function setIndexCols();
 	abstract protected function setSearchCols();
+
+	/**
+	 * Get an array of columns including metadata / validation rules for each column.
+	 *
+	 * @return array
+	 */
 	abstract public function getCols();
 
 	public function getModel()
@@ -174,7 +200,8 @@ abstract class CrudRepository
 
 	/**
 	 * Compile the array of validation rules for usage in the validator.
-	 * $id - The id of the row if updating; null if creating.
+	 *
+	 * @param int $id The id of the row if updating; null if creating.
 	 */
 	public function getValidationRules($id = null)
 	{
@@ -244,6 +271,7 @@ abstract class CrudRepository
 
 	/**
 	 * Get the changes for a model and a specific column.
+	 *
 	 * @param Model $model
 	 * @param string $column
 	 * @return \Illuminate\Database\Eloquent\Collection A collection of Change models.
