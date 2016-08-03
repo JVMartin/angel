@@ -45,10 +45,11 @@ class PagesTableSeeder extends Seeder
 	{
 		Page::create([
 			'slug' => 'home',
-			'title' => 'Home Page',
+			'title' => 'Angel CMS',
 			'html' => '
-				<h1>Your Home Page</h1>
+				<h1>Angel CMS Default Home Page</h1>
 				<p>Hello there.</p>
+				<p><a href="/admin">Sign into admin panel...</a></p>
 			',
 		]);
 	}

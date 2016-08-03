@@ -10,13 +10,24 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class HomeTest extends TestCase
 {
+	use DatabaseMigrations;
+
+	/**
+	 * Seed the database before each test.
+	 */
+	protected function setUp()
+	{
+		parent::setUp();
+		$this->artisan('db:seed');
+	}
+
 	/**
 	 * Ensure the home page displays.
 	 */
 	public function testHome()
 	{
 		$this->visit('/')
-			->see('You are home');
+			->see('Angel CMS Default Home Page');
 	}
 
 	/**
