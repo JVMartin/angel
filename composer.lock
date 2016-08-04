@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f41bf877982e966456281609a64e133f",
+    "hash": "89e52affff281c579c6afe4b0c49e713",
     "content-hash": "b499e3d4f13f04e4629c1c46af1c28b8",
     "packages": [
         {
@@ -362,26 +362,22 @@
         },
         {
             "name": "jvmartin/laravel5-foundation6-pagination",
-            "version": "v5.2.0",
+            "version": "v5.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JVMartin/laravel5-foundation6-pagination.git",
-                "reference": "47a47102a07decd1aa3b6ee7d4fcf67c9707786e"
+                "reference": "53c1d088ffa2628ab194f5015d894eed89cc71f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JVMartin/laravel5-foundation6-pagination/zipball/47a47102a07decd1aa3b6ee7d4fcf67c9707786e",
-                "reference": "47a47102a07decd1aa3b6ee7d4fcf67c9707786e",
+                "url": "https://api.github.com/repos/JVMartin/laravel5-foundation6-pagination/zipball/53c1d088ffa2628ab194f5015d894eed89cc71f6",
+                "reference": "53c1d088ffa2628ab194f5015d894eed89cc71f6",
                 "shasum": ""
             },
             "require": {
                 "illuminate/contracts": "~5.2",
                 "illuminate/pagination": "~5.2",
                 "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~4.0"
             },
             "type": "library",
             "autoload": {
@@ -405,7 +401,7 @@
                 "laravel5",
                 "pagination"
             ],
-            "time": "2016-08-04 22:31:20"
+            "time": "2016-08-05 00:51:23"
         },
         {
             "name": "laravel/framework",
