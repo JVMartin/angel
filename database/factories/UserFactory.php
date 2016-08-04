@@ -7,8 +7,8 @@
 $factory->defineAs(App\Models\User::class, 'user', function (Faker\Generator $faker) {
 	return [
 		'role' => 'user',
-		'first_name' => $faker->name,
-		'last_name' => $faker->name,
+		'first_name' => $faker->firstName,
+		'last_name' => $faker->lastName,
 		'email' => $faker->safeEmail,
 		'password' => bcrypt(str_random(10)),
 		'remember_token' => str_random(10),

@@ -162,6 +162,7 @@ return [
 		 */
 		Collective\Html\HtmlServiceProvider::class,
 		Barryvdh\Debugbar\ServiceProvider::class,
+		Foundation\FoundationServiceProvider::class
 
 	],
 
@@ -211,6 +212,7 @@ return [
 
 		'Carbon' => Carbon\Carbon::class,
 		'Form' => Collective\Html\FormFacade::class,
+		'Foundation' => Foundation\Facades\Foundation::class,
 		'Html' => Collective\Html\HtmlFacade::class,
 		'Debugbar' => Barryvdh\Debugbar\Facade::class,
 

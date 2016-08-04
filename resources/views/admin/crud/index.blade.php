@@ -22,8 +22,8 @@
 		</div>
 	</div>
 	@include('admin.crud.index-search')
-	<div class="pagination-centered">
-		{{-- {!! $models->render(Foundation::paginate($models)) !!} --}}
+	<div class="pagination text-center">
+		{!! $models->render(Foundation::paginate($models)) !!}
 	</div>
 	<div class="row">
 		<div class="small-12 column">
@@ -66,8 +66,8 @@
 			</table>
 		</div>
 	</div>
-	<div class="pagination-centered">
-		{{-- {!! $models->render(Foundation::paginate($models)) !!} --}}
+	<div class="pagination text-center">
+		{!! $models->render(Foundation::paginate($models)) !!}
 	</div>
 </section>
 @endsection
