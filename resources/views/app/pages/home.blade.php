@@ -9,11 +9,9 @@
 @endsection
 
 @section('content')
-	<section id="pagesDefault">
-		<div class="row">
-			<div class="small-12 column">
-				{!! $page->html !!}
-			</div>
+	<section id="pagesHome">
+		<div class="row column hero">
+			{!! $page->html !!}
 		</div>
 	</section>
 @endsection

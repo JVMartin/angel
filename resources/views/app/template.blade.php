@@ -15,10 +15,10 @@
 	@yield('css')
 </head>
 <body>
-@include('app.header')
-@include('app.messages')
-@yield('content')
-<script src="{{ elixir("js/app.js") }}"></script>
-@yield('js')
+	@include('app.header')
+	@include('app.messages')
+	@yield('content')
+	<script src="{{ elixir("js/app.js") }}"></script>
+	@yield('js')
 </body>
 </html>

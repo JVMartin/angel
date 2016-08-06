@@ -1,0 +1,14 @@
+#pagesHome {
+	.hero {
+		background: url('../../img/clouds.jpg') no-repeat;
+		background-position: top center;
+		background-size: cover;
+		min-height: 500px;
+
+		h1 {
+			text-align: center;
+			margin-top: 190px;
+			color: $white;
+		}
+	}
+}
