@@ -6,7 +6,7 @@
 	<link rel="shortcut icon" href="/favicon.ico" />
 
 	@yield('meta')
-	<meta property="og:title" content="@yield('title') | Admin">
+	<meta property="og:title" content="@yield('title')">
 	<meta property="og:url" content="{{ Request::url() }}">
 
 	<title>@yield('title')</title>
@@ -15,7 +15,7 @@
 	@yield('css')
 </head>
 <body>
-{{-- @include('app.header') --}}
+@include('app.header')
 @include('app.messages')
 @yield('content')
 <script src="{{ elixir("js/app.js") }}"></script>

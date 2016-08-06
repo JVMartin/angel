@@ -14,14 +14,14 @@
 					</a>
 				</li>
 				--}}
-				<li{!! Request::is('admin/users*') ? ' class="active"' : '' !!}>
-					<a href="{{ url('/admin/users') }}">
-						Users
-					</a>
-				</li>
 				<li{!! Request::is('admin/pages*') ? ' class="active"' : '' !!}>
 					<a href="{{ url('/admin/pages') }}">
 						Pages
+					</a>
+				</li>
+				<li{!! Request::is('admin/users*') ? ' class="active"' : '' !!}>
+					<a href="{{ url('/admin/users') }}">
+						Users
 					</a>
 				</li>
 			@endif
