@@ -4,7 +4,9 @@
  * @license MIT https://opensource.org/licenses/MIT
  */
 
-$factory->defineAs(App\Models\User::class, 'user', function (Faker\Generator $faker) {
+use App\Models\User;
+
+$factory->defineAs(User::class, 'user', function (Faker\Generator $faker) {
 	return [
 		'role' => 'user',
 		'first_name' => $faker->firstName,
@@ -15,14 +17,14 @@ $factory->defineAs(App\Models\User::class, 'user', function (Faker\Generator $fa
 	];
 });
 
-$factory->defineAs(App\Models\User::class, 'admin', function (Faker\Generator $faker) use ($factory) {
-	return $factory->raw(App\Models\User::class, [
+$factory->defineAs(User::class, 'admin', function (Faker\Generator $faker) use ($factory) {
+	return $factory->raw(User::class, [
 		'role' => 'admin'
 	], 'user');
 });
 
-$factory->defineAs(App\Models\User::class, 'superadmin', function (Faker\Generator $faker) use ($factory) {
-	return $factory->raw(App\Models\User::class, [
+$factory->defineAs(User::class, 'superadmin', function (Faker\Generator $faker) use ($factory) {
+	return $factory->raw(User::class, [
 		'role' => 'superadmin'
 	], 'user');
 });

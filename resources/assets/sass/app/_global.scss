@@ -1,15 +1,26 @@
 #header {
-	background-color: #cacaca;
+	width:100%;
+	background-color: rgba(234, 234, 234, 0.6);
 
 	.top-bar {
-
+		background: none;
 		.inner {
-			background-color: #cacaca;
 			padding: 10px 4px;
 
-			li {
-				background-color: #cacaca;
+			ul {
+				background: none;
+
+				li a {
+					color: $black;
+
+				}
 			}
 		}
+	}
+}
+
+#messages {
+	.callout {
+		margin: 1rem 0;
 	}
 }

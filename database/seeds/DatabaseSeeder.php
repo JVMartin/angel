@@ -29,11 +29,15 @@ class UsersTableSeeder extends Seeder
 		User::create([
 			'role' => 'admin',
 			'email' => 'admin@test.com',
+			'first_name' => 'Test',
+			'last_name' => 'Admin',
 			'password' => bcrypt('test')
 		]);
 
 		User::create([
 			'email' => 'user@test.com',
+			'first_name' => 'Test',
+			'last_name' => 'User',
 			'password' => bcrypt('test')
 		]);
 
@@ -50,8 +54,6 @@ class PagesTableSeeder extends Seeder
 			'title' => 'Angel CMS',
 			'html' => '
 				<h1>Angel CMS Default Home Page</h1>
-				<p>Hello there.</p>
-				<p><a href="/admin">Sign into admin panel...</a></p>
 			',
 		]);
 

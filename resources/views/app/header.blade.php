@@ -1,19 +1,16 @@
-<section id="header">
+<section id="header" class="sticky" data-sticky data-margin-top="0">
 	<div class="top-bar">
 		<div class="row column inner">
 			<div class="top-bar-left">
 				<ul class="dropdown menu" data-dropdown-menu>
 					<li class="menu-text">Your Company</li>
-					<li>
-						<a href="#">One</a>
-						<ul class="menu vertical">
-							<li><a href="#">One</a></li>
-							<li><a href="#">Two</a></li>
-							<li><a href="#">Three</a></li>
-						</ul>
-					</li>
-					<li><a href="#">Two</a></li>
-					<li><a href="#">Three</a></li>
+					@foreach (App\Models\Page::all() as $page)
+						<li>
+							<a href="/{{ $page->slug }}">
+								{{ $page->title }}
+							</a>
+						</li>
+					@endforeach
 				</ul>
 			</div>
 			<div class="top-bar-right">

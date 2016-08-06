@@ -14,7 +14,7 @@
 	<link href="{{ elixir("css/app.css") }}" rel="stylesheet">
 	@yield('css')
 </head>
-<body>
+<body data-sticky-container>
 	@include('app.header')
 	@include('app.messages')
 	@yield('content')
