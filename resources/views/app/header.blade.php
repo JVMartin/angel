@@ -1,4 +1,4 @@
-<section id="header" class="sticky" data-sticky data-margin-top="0">
+<section id="header">
 	<div class="top-bar">
 		<div class="row column inner">
 			<div class="top-bar-left">
