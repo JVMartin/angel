@@ -41,7 +41,8 @@ class UsersTableSeeder extends Seeder
 			'password' => bcrypt('test')
 		]);
 
-		factory(User::class, 'user')->times(100)->create();
+		factory(User::class, 'user')->times(250)->create();
+		factory(User::class, 'admin')->times(6)->create();
 	}
 }
 
@@ -53,7 +54,14 @@ class PagesTableSeeder extends Seeder
 			'slug' => 'home',
 			'title' => 'Angel CMS',
 			'html' => '
-				<h1>Angel CMS Default Home Page</h1>
+				<h3>Custom Content</h3>
+				<p>
+					The content in this column is customizable.  Sign in to the <a href="/admin">
+					admin panel</a> to customize it!  Here, have some lorem:
+				</p>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</p>
 			',
 		]);
 

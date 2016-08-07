@@ -4,10 +4,19 @@
 		background-position: top center;
 		background-size: cover;
 		min-height: 500px;
+		padding-top: 190px;
+
+		@include breakpoint(medium only) {
+			min-height: 350px;
+			padding-top: 140px;
+		}
+		@include breakpoint(small only) {
+			min-height: 270px;
+			padding-top: 116px;
+		}
 
 		h1 {
 			text-align: center;
-			margin-top: 190px;
 			color: $white;
 			text-shadow: 2px 2px rgba(0, 0, 0, 0.7);
 		}
