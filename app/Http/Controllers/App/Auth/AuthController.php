@@ -79,6 +79,7 @@ class AuthController extends Controller
 	 */
 	public function logout()
 	{
+		session()->flush();
 		Auth::guard($this->getGuard())->logout();
 		$this->redirectSuccessMessage('You have been signed out.');
 		return redirect('/')->with('successes', $this->successes);
