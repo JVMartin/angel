@@ -41,6 +41,6 @@ class AuthController extends Controller
 			$this->viewErrorMessage('You must be signed in as an administrator.');
 			return view('admin.pages.sign-in', $this->data);
 		}
-		return view('admin.pages.dashboard', $this->data);
+		return redirect('admin/pages');
 	}
 }

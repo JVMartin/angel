@@ -1,11 +1,7 @@
 <div id="adminNav" class="top-bar">
 	<div class="top-bar-left">
 		<ul class="dropdown menu" data-dropdown-menu>
-			<li>
-				<a href="{{ url('/admin') }}">
-					Angel Admin
-				</a>
-			</li>
+			<li class="menu-text">Angel Admin</li>
 			@if (Gate::allows('admin'))
 				{{--
 				<li{!! Request::is('admin/blogs*') ? ' class="active"' : '' !!}>
