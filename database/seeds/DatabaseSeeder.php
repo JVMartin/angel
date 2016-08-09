@@ -40,9 +40,6 @@ class UsersTableSeeder extends Seeder
 			'last_name' => 'User',
 			'password' => bcrypt('test')
 		]);
-
-		factory(User::class, 'user')->times(250)->create();
-		factory(User::class, 'admin')->times(6)->create();
 	}
 }
 

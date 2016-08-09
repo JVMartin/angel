@@ -13,7 +13,14 @@ class AdminAuthTest extends TestCase
 {
 	use DatabaseMigrations;
 
-	private $dashboardString = 'Angel Dashboard';
+	private function seeAdminPanel()
+	{
+		return $this->seePageIs('/admin/pages')
+			->see('Pages')
+			->see('Users')
+			->see('Add Page')
+			->see('Sign Out');
+	}
 
 	/**
 	 * Before signing in, the admin panel should not be visible.
@@ -22,8 +29,7 @@ class AdminAuthTest extends TestCase
 	{
 		$this->visit('/admin')
 			->see('Sign In')
-			->dontSee('Sign Out')
-			->dontSee($this->dashboardString);
+			->dontSee('Sign Out');
 	}
 
 	/**
@@ -35,8 +41,7 @@ class AdminAuthTest extends TestCase
 
 		$this->actingAs($user)
 			->visit('/admin')
-			->see('You must be signed in as an administrator.')
-			->dontSee($this->dashboardString);
+			->see('You must be signed in as an administrator.');
 	}
 
 	/**
@@ -48,7 +53,7 @@ class AdminAuthTest extends TestCase
 
 		$this->actingAs($admin)
 			->visit('/admin')
-			->see($this->dashboardString);
+			->seeAdminPanel();
 	}
 
 	/**
@@ -60,7 +65,7 @@ class AdminAuthTest extends TestCase
 
 		$this->actingAs($superAdmin)
 			->visit('/admin')
-			->see($this->dashboardString);
+			->seeAdminPanel();
 	}
 
 	/**
@@ -93,8 +98,7 @@ class AdminAuthTest extends TestCase
 			->type('admin@test.com', 'email')
 			->type($adminPass, 'password')
 			->press('Sign In')
-			->seePageIs('/admin')
-			->see($this->dashboardString);
+			->seeAdminPanel();
 	}
 
 	/**
