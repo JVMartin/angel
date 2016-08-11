@@ -29,6 +29,11 @@ Angel uses:
 * [CKEditor 4.5.10](http://ckeditor.com/) as the WYSIWYG editor in the administrative panel.
 * [Travis CI](https://travis-ci.org/) for automated, continuous integration testing.
 
+## Demo
+[See the YouTube demo here.](https://www.youtube.com/watch?v=Xkq5gYCLzB0&feature=youtu.be)
+
+The demo includes a demonstration of how to create your own custom modules in minutes!
+
 ## Installation
 Fork or clone this repository and:
 ```bash
