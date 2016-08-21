@@ -32,7 +32,6 @@ class Controller extends BaseController
 	 * ->with('successes', $this->successes)
 	 *
 	 * @var \Illuminate\Support\MessageBag
-	 *
 	 */
 	protected $successes;
 
@@ -49,7 +48,7 @@ class Controller extends BaseController
 	/**
 	 * Add a success message to be flashed to the session on a redirect.
 	 *
-	 * @param $message The message to add.
+	 * @param $message string The message to add.
 	 */
 	protected function redirectSuccessMessage($message)
 	{
@@ -59,7 +58,7 @@ class Controller extends BaseController
 	/**
 	 * Add a success message to be displayed at the top of the page.
 	 *
-	 * @param $message The message to add.
+	 * @param $message string The message to add.
 	 */
 	protected function viewSuccessMessage($message)
 	{
@@ -69,7 +68,7 @@ class Controller extends BaseController
 	/**
 	 * Add an error message to be displayed at the top of the page.
 	 *
-	 * @param $message The message to add.
+	 * @param $message string The message to add.
 	 */
 	protected function viewErrorMessage($message)
 	{

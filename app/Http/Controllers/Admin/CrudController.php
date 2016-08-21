@@ -52,6 +52,8 @@ abstract class CrudController extends Controller
 	 *
 	 * Note that you can easily use your own custom view by placing it here:
 	 * resources/views/admin/crud/{handle}/index.blade.php
+	 *
+	 * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
 	 */
 	public function getIndex()
 	{
@@ -65,6 +67,9 @@ abstract class CrudController extends Controller
 
 	/**
 	 * When the user uses the index search bar.
+	 *
+	 * @param $request \Illuminate\Http\Request
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postSearch(Request $request)
 	{
@@ -75,6 +80,9 @@ abstract class CrudController extends Controller
 	/**
 	 * When the user clicks on a column heading.  Order by that column; toggle between ascending
 	 * and descending order.
+	 *
+	 * @param $column string
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function getOrderBy($column)
 	{
@@ -102,6 +110,8 @@ abstract class CrudController extends Controller
 	 *
 	 * Note that you can easily use your own custom view by placing it here:
 	 * resources/views/admin/crud/{handle}/add-or-edit.blade.php
+	 *
+	 * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
 	 */
 	public function getAdd()
 	{
@@ -114,6 +124,9 @@ abstract class CrudController extends Controller
 
 	/**
 	 * Add a new item to the database.
+	 *
+	 * @param $request \Illuminate\Http\Request
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postAdd(Request $request)
 	{
@@ -130,6 +143,9 @@ abstract class CrudController extends Controller
 	 *
 	 * Note that you can easily use your own custom view by placing it here:
 	 * resources/views/admin/crud/{handle}/add-or-edit.blade.php
+	 *
+	 * @param $id string|int
+	 * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
 	 */
 	public function getEdit($id)
 	{
@@ -144,6 +160,10 @@ abstract class CrudController extends Controller
 
 	/**
 	 * Edit an existing item in the database.
+	 *
+	 * @param $request \Illuminate\Http\Request
+	 * @param $id string|int
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postEdit(Request $request, $id)
 	{
