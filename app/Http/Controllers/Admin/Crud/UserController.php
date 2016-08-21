@@ -9,6 +9,11 @@ namespace App\Http\Controllers\Admin\Crud;
 use App\Repositories\Admin\Crud\UserRepository;
 use App\Http\Controllers\Admin\CrudController;
 
+/**
+ * UserController is a crud controller for the users module.
+ *
+ * @package App\Http\Controllers\Admin\Crud
+ */
 class UserController extends CrudController
 {
 	protected function setRepository()

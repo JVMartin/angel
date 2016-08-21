@@ -30,7 +30,8 @@ class AuthController extends Controller
 	 * Display the admin dashboard if the user is signed in as an administrator or allow the user to
 	 * sign in.
 	 *
-	 * @return \Illuminate\View\View
+	 * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory|
+	 *          \Illuminate\Http\RedirectResponse
 	 */
 	public function dashboardOrSignIn()
 	{

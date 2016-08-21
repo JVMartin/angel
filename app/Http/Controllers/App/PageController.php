@@ -10,8 +10,19 @@ use App\Models\Page;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * PageController displays CMS pages to front-end users.
+ *
+ * @package App\Http\Controllers\App
+ */
 class PageController extends Controller
 {
+	/**
+	 * Display a page from the CMS to the user.
+	 *
+	 * @param string $slug
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 	public function getPage($slug = 'home')
 	{
 		$page = Page::where('slug', $slug)->first();

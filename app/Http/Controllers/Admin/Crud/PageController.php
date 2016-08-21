@@ -9,6 +9,11 @@ namespace App\Http\Controllers\Admin\Crud;
 use App\Http\Controllers\Admin\CrudController;
 use App\Repositories\Admin\Crud\PageRepository;
 
+/**
+ * PageController is a crud controller for the pages module.
+ *
+ * @package App\Http\Controllers\Admin\Crud
+ */
 class PageController extends CrudController
 {
 	protected function setRepository()

@@ -11,6 +11,13 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Admin\CrudRepository;
 use App\Exceptions\Admin\InvalidRepositoryException;
 
+/**
+ * CrudController is a base class that leverages a specific CrudRepository (assigned by the
+ * subclass) in order to perform all of the basic functions for a CMS module: displaying an index,
+ * displaying add/edit forms, and handling the addition and modification of items.
+ *
+ * @package App\Http\Controllers\Admin
+ */
 abstract class CrudController extends Controller
 {
 	/**
@@ -21,7 +28,7 @@ abstract class CrudController extends Controller
 	protected $repository;
 
 	/**
-	 * Ensure that the subclass sets the appropriate repository.
+	 * Ensure that the subclass sets the appropriate CrudRepository.
 	 */
 	public function __construct()
 	{
