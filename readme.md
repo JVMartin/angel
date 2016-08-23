@@ -14,7 +14,13 @@ When your client needs a blog and WordPress sucks...
 
 ...Angel is the answer.
 
-Build a CMS module in minutes for *any* customizable content needs simply by defining a migration.
+Build a CMS module in minutes for *any* customizable content needs simply by creating a migration
+for the table and a repository to let the CMS know how to present each column to the user.  For
+instance: if you define a column named `html` with a "pretty name" of "Content" and a type of `wysiwyg`, a
+"what-you-see-is-what-you-get" editor will be used to edit that column in the administrative panel
+like so:
+
+![wysiwyg Screenshot](/public/img/ss-1.png?raw=true)
 
 Angel uses:
 * [Laravel 5.2](https://laravel.com/docs/5.2) as its foundation.
@@ -45,6 +51,7 @@ gulp                  # Compile and version all of the CSS and JS.
 mysql                 # Create a database and user.
 cp .env.example .env  # And edit .env to taste.
 php artisan migrate   # Run the database migrations.
+php artisan db:seed   # Seed the database with the default users.
 ```
 
 Serve the `/public` folder from Apache.
