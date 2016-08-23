@@ -7,18 +7,18 @@ Copyright &copy; 2016 Jacob Martin
 Angel is a simple, developer-friendly CMS for rapidly developing end-user-customizable web
 applications and websites.
 
-When your client needs "Team" pages with editable team members...<br />
-When your client needs "FAQs" pages with editable Q&amp;A's...<br />
+When your client needs a "Team" page with editable team members...<br />
+When your client needs an "FAQs" page with editable questions and answers...<br />
 When your client needs "Products" pages with editable products...<br />
-When your client needs a blog and WordPress sucks...
+When your client needs a blog and *WordPress sucks*...
 
 ...Angel is the answer.
 
-Build a CMS module in minutes for *any* customizable content needs simply by creating a migration
-for the table and a repository to let the CMS know how to present each column to the user.  For
-instance: if you define a column named `html` with a "pretty name" of "Content" and a type of `wysiwyg`, a
-"what-you-see-is-what-you-get" editor will be used to edit that column in the administrative panel
-like so:
+Build a CMS module in minutes for *any* customizable content needs simply by creating a database
+table and defining some variables to let the CMS know how to present each column to the user.  For
+instance: if you define a column named `html` with a "pretty name" of "Content" and a type of
+`wysiwyg`, a "what-you-see-is-what-you-get" editor will be used to edit that column in the
+administrative panel like so:
 
 ![wysiwyg screenshot](/public/img/ss-1.png?raw=true)
 
@@ -27,7 +27,8 @@ exactly what they altered:
 
 ![Change log screenshot](/public/img/ss-2.png?raw=true)
 
-Angel uses:
+The CMS leverages only robust, modern, well-written packages to accomplish its functionality.  Angel
+uses:
 * [Laravel 5.2](https://laravel.com/docs/5.2) as its foundation.
 * [Forms & HTML 5.2](https://laravelcollective.com/docs/5.2/html) by the
   [Laravel Collective](https://laravelcollective.com/) for its form building utilities.
