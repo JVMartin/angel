@@ -20,7 +20,12 @@ instance: if you define a column named `html` with a "pretty name" of "Content" 
 "what-you-see-is-what-you-get" editor will be used to edit that column in the administrative panel
 like so:
 
-![wysiwyg Screenshot](/public/img/ss-1.png?raw=true)
+![wysiwyg screenshot](/public/img/ss-1.png?raw=true)
+
+Each column has its own change log, so you can easily see who made a change, when they made it, and
+exactly what they altered:
+
+![Change log screenshot](/public/img/ss-2.png?raw=true)
 
 Angel uses:
 * [Laravel 5.2](https://laravel.com/docs/5.2) as its foundation.
