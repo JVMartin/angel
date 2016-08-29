@@ -4,14 +4,6 @@
  * @license MIT https://opensource.org/licenses/MIT
  */
 
-//---------------------
-// Admin Panel
-//---------------------
-require app_path('Http/routes-admin.php');
-
-//---------------------
-// Front-end
-//---------------------
 Route::group(['namespace' => 'App'], function() {
 	Route::get('/', 'PageController@getPage');
 
