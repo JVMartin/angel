@@ -1,4 +1,4 @@
-# Angel CMS for Laravel 5
+# Angel CMS for Laravel 5.3
 Copyright &copy; 2016 Jacob Martin
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
@@ -29,8 +29,8 @@ exactly what they altered:
 
 The CMS leverages only robust, modern, well-written packages to accomplish its functionality.  Angel
 uses:
-* [Laravel 5.2](https://laravel.com/docs/5.2) as its foundation.
-* [Forms & HTML 5.2](https://laravelcollective.com/docs/5.2/html) by the
+* [Laravel 5.3](https://laravel.com/docs/5.3) as its foundation.
+* [Forms & HTML 5.3](https://laravelcollective.com/docs/5.3/html) by the
   [Laravel Collective](https://laravelcollective.com/) for its form building utilities.
 * [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar) by
   [barryvdh](https://github.com/barryvdh), an excellent debugging tool.
