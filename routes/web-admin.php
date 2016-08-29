@@ -11,16 +11,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 	//---------------------
 	// Crud Controllers
 	//---------------------
-	function crudController($controller) {
-		return function() use ($controller) {
-			Route::get('/', $controller . '@getIndex');
-			Route::post('search', $controller . '@postSearch');
-			Route::get('order-by', $controller . '@getOrderBy');
-			Route::get('add', $controller . '@getAdd');
-			Route::post('add', $controller . '@postAdd');
-			Route::get('edit', $controller . '@getEdit');
-			Route::post('edit', $controller . '@postEdit');
-		};
+	if (! function_exists('crudController')) {
+		function crudController($controller) {
+			return function() use ($controller) {
+				Route::get('/', $controller . '@getIndex');
+				Route::post('search', $controller . '@postSearch');
+				Route::get('order-by', $controller . '@getOrderBy');
+				Route::get('add', $controller . '@getAdd');
+				Route::post('add', $controller . '@postAdd');
+				Route::get('edit', $controller . '@getEdit');
+				Route::post('edit', $controller . '@postEdit');
+			};
+		}
 	}
 	Route::group(['middleware' => 'admin', 'namespace' => 'Crud'], function() {
 		Route::group(['prefix' => 'users'], crudController('UserController'));
