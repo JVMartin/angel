@@ -67,7 +67,7 @@ For production CSS and JS minification, use:
 gulp --production
 ```
 
-Note that files in the following folders are not included in VCS as they are compiled and copied
+Note that files in the following folders are not included in VCS as they are compiled and/or copied
 files:
 ```bash
 /public/css
