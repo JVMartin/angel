@@ -16,9 +16,9 @@ function allowWrite() {
 	chown $USER:www-data -R $1
 }
 
+sudo chown $USER:$USER -R .
 find . -type f -exec chmod 644 {} +
 find . -type d -exec chmod 755 {} +
-chown $USER:$USER -R .
 
 allowWrite "storage"
 allowWrite "bootstrap/cache"
