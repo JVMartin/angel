@@ -36,12 +36,17 @@ class Controller extends BaseController
 
 	public function __construct()
 	{
-		// Incoming messages.
-		$this->data['successes'] = session('successes', new MessageBag());
-		$this->data['errors'] = session('errors', new ViewErrorBag())->getBag('default');
+		$this->middleware(function ($request, $next) {
+			// Incoming messages.
+			$this->data['successes'] =
+				$request->session()->get('successes', new MessageBag());
+			$this->data['errors'] =
+				$request->session()->get('errors', new ViewErrorBag())->getBag('default');
 
-		// Outgoing messages.
-		$this->successes = new MessageBag();
+			// Outgoing messages.
+			$this->successes = new MessageBag();
+			return $next($request);
+		});
 	}
 
 	/**
