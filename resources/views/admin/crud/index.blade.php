@@ -23,7 +23,7 @@
 		</div>
 		@include('admin.crud.index-search')
 		<div class="pagination text-center">
-			{{ $models->links('pagination::default') }}
+			{{ $models->links('pagination::foundation') }}
 		</div>
 		<div class="row">
 			<div class="small-12 column">
@@ -67,7 +67,7 @@
 			</div>
 		</div>
 		<div class="pagination text-center">
-			{{ $models->links('pagination::default') }}
+			{{ $models->links('pagination::foundation') }}
 		</div>
 	</section>
 @endsection
