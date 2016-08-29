@@ -24,7 +24,7 @@ class LoginController extends Controller
 	/**
 	 * @var string Redirect here after the user signs in.
 	 */
-	protected $redirectPath = '/admin';
+	protected $redirectTo = '/admin';
 
 	/**
 	 * Display the admin dashboard if the user is signed in as an administrator or allow the user to
