@@ -5,8 +5,8 @@
  */
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
-	Route::get('/', 'AuthController@dashboardOrSignIn');
-	Route::post('/sign-in', 'AuthController@login');
+	Route::get('/', 'LoginController@dashboardOrSignIn');
+	Route::post('/sign-in', 'LoginController@login');
 
 	//---------------------
 	// Crud Controllers
