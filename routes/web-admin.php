@@ -11,7 +11,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 	//---------------------
 	// Crud Controllers
 	//---------------------
-	if (! function_exists('crudController')) {
+	if ( ! function_exists('crudController')) {
 		function crudController($controller) {
 			return function() use ($controller) {
 				Route::get('/', $controller . '@getIndex');
