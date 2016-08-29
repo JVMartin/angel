@@ -17,7 +17,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
  *
  * @package App\Http\Controllers\Admin
  */
-class AuthController extends Controller
+class LoginController extends Controller
 {
 	use AuthenticatesUsers;
 
