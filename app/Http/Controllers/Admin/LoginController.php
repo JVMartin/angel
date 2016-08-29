@@ -12,19 +12,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 /**
- * The AuthController displays the dashboard for the administrative panel or allows the user to sign
- * in.
+ * The LoginController displays the dashboard for the administrative panel or allows the user to
+ * sign in.
  *
  * @package App\Http\Controllers\Admin
  */
-class AuthController extends Controller
+class LoginController extends Controller
 {
 	use AuthenticatesUsers;
 
 	/**
 	 * @var string Redirect here after the user signs in.
 	 */
-	protected $redirectPath = '/admin';
+	protected $redirectTo = '/admin';
 
 	/**
 	 * Display the admin dashboard if the user is signed in as an administrator or allow the user to

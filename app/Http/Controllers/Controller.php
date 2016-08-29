@@ -12,11 +12,10 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 
 class Controller extends BaseController
 {
-	use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
+	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
 	/**
 	 * Data to be passed to all views.
@@ -37,12 +36,17 @@ class Controller extends BaseController
 
 	public function __construct()
 	{
-		// Incoming messages.
-		$this->data['successes'] = session('successes', new MessageBag());
-		$this->data['errors'] = session('errors', new ViewErrorBag())->getBag('default');
+		$this->middleware(function ($request, $next) {
+			// Incoming messages.
+			$this->data['successes'] =
+				$request->session()->get('successes', new MessageBag());
+			$this->data['errors'] =
+				$request->session()->get('errors', new ViewErrorBag())->getBag('default');
 
-		// Outgoing messages.
-		$this->successes = new MessageBag();
+			// Outgoing messages.
+			$this->successes = new MessageBag();
+			return $next($request);
+		});
 	}
 
 	/**

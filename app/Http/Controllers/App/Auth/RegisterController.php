@@ -2,27 +2,25 @@
 
 namespace App\Http\Controllers\App\Auth;
 
-use Auth;
+use App\User;
 use Validator;
-use App\Models\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
-class AuthController extends Controller
+class RegisterController extends Controller
 {
 	/*
 	|--------------------------------------------------------------------------
-	| Registration & Login Controller
+	| Register Controller
 	|--------------------------------------------------------------------------
 	|
-	| This controller handles the registration of new users, as well as the
-	| authentication of existing users. By default, this controller uses
-	| a simple trait to add these behaviors. Why don't you explore it?
+	| This controller handles the registration of new users as well as their
+	| validation and creation. By default this controller uses a trait to
+	| provide this functionality without requiring any additional code.
 	|
 	*/
 
-	use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+	use RegistersUsers;
 
 	/**
 	 * Where to redirect users after login / registration.
@@ -32,14 +30,14 @@ class AuthController extends Controller
 	protected $redirectTo = '/';
 
 	/**
-	 * Create a new authentication controller instance.
+	 * Create a new controller instance.
 	 *
 	 * @return void
 	 */
 	public function __construct()
 	{
+		$this->middleware('guest');
 		parent::__construct();
-		$this->middleware($this->guestMiddleware(), ['except' => 'logout']);
 	}
 
 	/**
@@ -70,18 +68,5 @@ class AuthController extends Controller
 			'email' => $data['email'],
 			'password' => bcrypt($data['password']),
 		]);
-	}
-
-	/**
-	 * Log the user out of the application.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function logout()
-	{
-		session()->flush();
-		Auth::guard($this->getGuard())->logout();
-		$this->redirectSuccessMessage('You have been signed out.');
-		return redirect('/')->with('successes', $this->successes);
 	}
 }

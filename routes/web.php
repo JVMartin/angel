@@ -4,19 +4,11 @@
  * @license MIT https://opensource.org/licenses/MIT
  */
 
-//---------------------
-// Admin Panel
-//---------------------
-require app_path('Http/routes-admin.php');
-
-//---------------------
-// Front-end
-//---------------------
 Route::group(['namespace' => 'App'], function() {
 	Route::get('/', 'PageController@getPage');
 
 	Route::group(['namespace' => 'Auth'], function() {
-		Route::get('/sign-out', 'AuthController@logout');
+		Route::get('/sign-out', 'LoginController@logout');
 	});
 
 	// MUST be the last route defined, as it has a base-level, catch-all variable.
