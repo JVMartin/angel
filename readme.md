@@ -49,15 +49,16 @@ The demo includes a demonstration of how to create your own custom modules in mi
 ## Installation
 Fork or clone this repository and:
 ```bash
-composer install      # Install the Laravel framework.
-bower install         # Install Foundation.
-npm install           # Install Laravel Elixir and Gulp.
-gulp                  # Compile and version all of the CSS and JS.
-./fix.sh              # Fix the permissions, giving www-data write access to necessary folders.
-mysql                 # Create a database and user.
-cp .env.example .env  # And edit .env to taste.
-php artisan migrate   # Run the database migrations.
-php artisan db:seed   # Seed the database with the default users.
+composer install         # Install the Laravel framework.
+bower install            # Install Foundation.
+npm install              # Install Laravel Elixir and Gulp.
+gulp                     # Compile and version all of the CSS and JS.
+./fix.sh                 # Fix the permissions, giving www-data write access to necessary folders.
+mysql                    # Create a database and user.
+cp .env.example .env     # And edit .env to taste.
+php artisan key:generate # Generate a key
+php artisan migrate      # Run the database migrations.
+php artisan db:seed      # Seed the database with the default users.
 ```
 
 Serve the `/public` folder from Apache.
