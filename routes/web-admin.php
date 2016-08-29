@@ -16,11 +16,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 			return function() use ($controller) {
 				Route::get('/', $controller . '@getIndex');
 				Route::post('search', $controller . '@postSearch');
-				Route::get('order-by', $controller . '@getOrderBy');
+				Route::get('order-by/{column}', $controller . '@getOrderBy');
 				Route::get('add', $controller . '@getAdd');
 				Route::post('add', $controller . '@postAdd');
-				Route::get('edit', $controller . '@getEdit');
-				Route::post('edit', $controller . '@postEdit');
+				Route::get('edit/{id}', $controller . '@getEdit');
+				Route::post('edit/{id}', $controller . '@postEdit');
 			};
 		}
 	}
