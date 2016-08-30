@@ -47,6 +47,10 @@ uses:
 The demo includes a demonstration of how to create your own custom modules in minutes!
 
 ## Installation
+Requirements:
+- PHP >= 5.6.4
+- MySQL >= 5.6
+
 Fork or clone this repository and:
 ```bash
 composer install         # Install the Laravel framework.
@@ -63,13 +67,13 @@ php artisan db:seed      # Seed the database with the default users.
 
 Serve the `/public` folder from Apache.
 
-For production CSS and JS minification, use:
+For production CSS and JS minification, instead use:
 ```bash
 gulp --production
 ```
 
-Note that files in the following folders are not included in VCS as they are compiled and/or copied
-files:
+Note that files in the following folders are not tracked as they are compiled
+and/or copied files:
 ```bash
 /public/css
 /public/js
