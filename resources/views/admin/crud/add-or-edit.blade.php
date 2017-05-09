@@ -29,7 +29,17 @@
 						Back to index
 					</a>
 				</p>
+			</div>
+			<div class="columns small-6">
 				<h1>{{ ucfirst($action) . ' ' . $repository->getSingular() }}</h1>
+			</div>
+			<div class="columns small-6" style="text-align: right;">
+				@if ($action == 'edit')
+					<form action="/admin/{{$repository->getHandle()}}/delete/{{$model->id}}" method="post" onsubmit="return confirm('Are you sure you want to delete this {{$repository->getSingular()}}?');">
+						{{ csrf_field() }}
+						<button type="submit" class="button alert"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+					</form>
+				@endif
 			</div>
 		</div>
 		@if ($action == 'edit')

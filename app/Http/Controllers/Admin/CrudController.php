@@ -182,4 +182,19 @@ abstract class CrudController extends Controller
 		$this->redirectSuccessMessage($this->repository->getSingular() . ' saved.');
 		return redirect()->back()->with('successes', $this->successes);
 	}
+
+	/**
+	 * Delete an existing item in the database.
+	 *
+	 * @param $request \Illuminate\Http\Request
+	 * @param $id string|int
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function delete(Request $request, $id)
+	{
+		$model = $this->repository->find($id);
+		$model->delete();
+		$this->redirectSuccessMessage($this->repository->getSingular() . ' deleted.');
+		return redirect('/admin/'.$this->repository->getHandle())->with('successes', $this->successes);
+	}
 }
