@@ -56,6 +56,31 @@
 				</div>
 			</div>
 		{!! Form::close() !!}
+	
+		@if($action == 'edit' && $repository->getSingular() == 'User')
+			<div class="row">
+				<div class="columns small-12">
+					{!! Form::model($model, array('class' => 'callout', 'data-abide' => 'true')) !!}
+						<h2>Update Password</h2>
+						<div data-abide-error class="alert callout" style="display: none;">
+						  <p><i class="fi-alert"></i> There are some errors in your form.</p>
+						</div>
+						{{ csrf_field() }}
+						{!! Form::hidden('email', null) !!}
+						<label>
+							Password
+							<input type="password" id="password" name="password" required>
+						</label>
+						<label>
+							Confirm Password
+							<input type="password" name="password_confirmation" required data-equalto="password">
+						</label>
+						<button type="submit" class="button"><i class="fa fa-key" aria-hidden="true"></i> Update Password</button>
+					{!! Form::close() !!}
+				</div>
+			</div>
+		@endif
+
 		<div class="row">
 			<div class="columns small-12">
 				<p>

@@ -104,6 +104,15 @@ class UserRepository extends CrudRepository
 				],
 				'logChanges' => true,
 			],
+			'password' => [
+				'pretty' => 'Password',
+				'type'   => 'password',
+				'attributes' => [],
+				'validate' => [
+					'confirmed'
+				],
+				'logChanges' => false,
+			],
 			'first_name' => [
 				'pretty' => 'First Name',
 				'type'   => 'text',
