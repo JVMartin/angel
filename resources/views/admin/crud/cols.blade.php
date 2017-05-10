@@ -45,8 +45,16 @@
 					{!! Form::text($colName, null, $col['attributes'] + ['class' => 'date']) !!}
 				@elseif ($col['type'] == 'image')
 					{!! Form::text($colName, null, $col['attributes']) !!}
+				@elseif ($col['type'] == 'password' && $action != 'edit')
+					<input type="password" id="password" class="password" name="password" required>
 				@endif
 			</label>
+			@if ($col['type'] == 'password' && $action != 'edit')
+				<label>
+					Confirm Password
+					<input type="password" class="password" name="password_confirmation" required data-equalto="password">
+				</label>
+			@endif
 		</div>
 	</div>
 @endforeach

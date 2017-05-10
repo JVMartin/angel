@@ -20,7 +20,7 @@ class User extends Authenticatable
 	 *
 	 * @var array
 	 */
-	protected $guarded = ['id', 'password'];
+	protected $guarded = ['id', 'password_confirmation'];
 
 	/**
 	 * The attributes that should be hidden for arrays.
@@ -57,4 +57,14 @@ class User extends Authenticatable
 	{
 		return 'admin/users/edit/' . $this->id;
 	}
+
+	/*================================
+	=            Mutators            =
+	================================*/
+	
+	public function setPasswordAttribute($pass){
+		$this->attributes['password'] = bcrypt($pass);
+	}
+	
+	/*=====  End of Mutators  ======*/
 }

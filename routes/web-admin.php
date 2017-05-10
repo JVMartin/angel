@@ -21,6 +21,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 				Route::post('add', $controller . '@postAdd');
 				Route::get('edit/{id}', $controller . '@getEdit');
 				Route::post('edit/{id}', $controller . '@postEdit');
+				Route::post('delete/{id}', $controller . '@delete');
 			};
 		}
 	}
