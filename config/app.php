@@ -149,16 +149,6 @@ return [
 		Illuminate\View\ViewServiceProvider::class,
 
 		/*
-		 * Application Service Providers...
-		 */
-		App\Providers\AppServiceProvider::class,
-		App\Providers\AuthServiceProvider::class,
-		// App\Providers\BroadcastServiceProvider::class,
-		App\Providers\EventServiceProvider::class,
-		App\Providers\HelperServiceProvider::class,
-		App\Providers\RouteServiceProvider::class,
-
-		/*
 		 * Installed packages service providers
 		 */
 		Barryvdh\Debugbar\ServiceProvider::class,
@@ -167,6 +157,19 @@ return [
 		Intervention\Image\ImageServiceProvider::class,
 		Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
 		Vinkla\Hashids\HashidsServiceProvider::class,
+
+		/*
+		 * Application Service Providers...
+		 */
+		App\Providers\AppServiceProvider::class,
+		App\Providers\AuthServiceProvider::class,
+		// App\Providers\BroadcastServiceProvider::class,
+		App\Providers\EventServiceProvider::class,
+		App\Providers\HelperServiceProvider::class,
+
+		// NOTE!
+		// This must be the LAST provider, as it has the catch-all route in it for pages!
+		App\Providers\RouteServiceProvider::class,
 	],
 
 	/*
