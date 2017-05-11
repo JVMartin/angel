@@ -7,6 +7,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Gate;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -27,6 +28,20 @@ class LoginController extends Controller
 	protected $redirectTo = '/admin';
 
 	/**
+	 * Get the needed authorization credentials from the request.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return array
+	 */
+	protected function credentials(Request $request)
+	{
+		return [
+			'email' => strtolower($request->email),
+			'password' => $request->password
+		];
+	}
+
+	/**
 	 * Display the admin dashboard if the user is signed in as an administrator or allow the user to
 	 * sign in.
 	 *
@@ -36,12 +51,12 @@ class LoginController extends Controller
 	public function dashboardOrSignIn()
 	{
 		if ( ! Auth::check()) {
-			return view('admin.pages.sign-in', $this->data);
+			return view('admin.pages.sign-in');
 		}
 		if ( ! Gate::allows('admin')) {
 			$this->viewErrorMessage('You must be signed in as an administrator.');
-			return view('admin.pages.sign-in', $this->data);
+			return view('admin.pages.sign-in');
 		}
-		return redirect('admin/pages');
+		return redirect('admin/blogs');
 	}
 }
