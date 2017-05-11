@@ -21,6 +21,7 @@ find . -type f -exec chmod 644 {} +
 find . -type d -exec chmod 755 {} +
 
 allowWrite "storage"
+allowWrite "public/uploads"
 allowWrite "bootstrap/cache"
 
 chmod +x fix.sh
