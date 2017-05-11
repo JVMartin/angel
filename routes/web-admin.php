@@ -6,6 +6,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 	})->name('admin');
 
 	Route::group(['middleware' => 'admin', 'namespace' => 'Crud'], function() {
+		// Blogs
+		Route::group(['prefix' => 'blogs'], function() {
+			Route::get('/', 'BlogController@getIndex')->name('admin.blogs.index');
+			Route::post('search', 'BlogController@postSearch')->name('admin.blogs.index.search');
+			Route::get('order-by/{column}', 'BlogController@getOrderBy')->name('admin.blogs.index.order-by');
+			Route::get('add', 'BlogController@getAdd')->name('admin.blogs.add');
+			Route::post('add', 'BlogController@postAdd');
+			Route::get('edit/{hashid}', 'BlogController@getEdit')->name('admin.blogs.edit');
+			Route::post('edit/{hashid}', 'BlogController@postEdit');
+			Route::delete('{hashid}', 'BlogController@delete')->name('admin.blogs.delete');
+		});
+
 		// Pages
 		Route::group(['prefix' => 'pages'], function() {
 			Route::get('/', 'PageController@getIndex')->name('admin.pages.index');
