@@ -27,6 +27,6 @@ class Page extends Model
 	 */
 	public function editUrl()
 	{
-		return route('admin.pages.edit.form', $this->id);
+		return route('admin.pages.edit', $this->hash);
 	}
 }
