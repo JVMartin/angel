@@ -1,22 +1,23 @@
 <?php
-/**
- * @copyright (c) 2016 Jacob Martin
- * @license MIT https://opensource.org/licenses/MIT
- */
 
 namespace App\Http\Controllers\App;
 
-use App\Models\Page;
 use App\Http\Controllers\Controller;
+use App\Repositories\Admin\Crud\PageRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * PageController displays CMS pages to front-end users.
- *
- * @package App\Http\Controllers\App
- */
 class PageController extends Controller
 {
+	/**
+	 * @var PageRepository
+	 */
+	protected $pageRepository;
+
+	public function __construct(PageRepository $pageRepository)
+	{
+		$this->pageRepository = $pageRepository;
+	}
+
 	/**
 	 * Display a page from the CMS to the user.
 	 *
@@ -25,20 +26,20 @@ class PageController extends Controller
 	 */
 	public function getPage($slug = 'home')
 	{
-		$page = Page::where('slug', $slug)->first();
+		$page = $this->pageRepository->getBySlug($slug);
 
 		if ( ! $page) {
 			throw new NotFoundHttpException;
 		}
 
-		$this->data['page'] = $page;
+		view()->share('page', $page);
 
 		// If a blade exists, load that blade.
 		if (view()->exists('app.pages.' . $page->slug)) {
-			return view('app.pages.' . $page->slug, $this->data);
+			return view('app.pages.' . $page->slug);
 		}
 
 		// Otherwise, load the default page.
-		return view('app.pages.default', $this->data);
+		return view('app.pages.default');
 	}
 }
