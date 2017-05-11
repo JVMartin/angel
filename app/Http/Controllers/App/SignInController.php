@@ -20,6 +20,6 @@ class SignInController extends Controller
     {
         $this->middleware('guest', ['except' => 'logout']);
 
-        $this->redirectTo = route('offerings.index');
+        $this->redirectTo = route('admin');
     }
 }

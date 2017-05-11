@@ -3,7 +3,7 @@
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 	Route::get('/', function() {
 		return redirect()->route('admin.users.index');
-	});
+	})->name('admin');
 
     Route::group(['middleware' => 'admin', 'namespace' => 'Crud'], function() {
         // Users
