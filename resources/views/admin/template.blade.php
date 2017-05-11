@@ -9,14 +9,14 @@
 
 	<title>@yield('title') | Admin</title>
 
-	<link href="{{ elixir("css/admin.css") }}" rel="stylesheet">
+	<link href="{{ mix("css/admin.css") }}" rel="stylesheet">
 	@yield('css')
 </head>
 <body>
 	@include('admin.header')
 	@include('admin.messages')
 	@yield('content')
-	<script src="{{ elixir("js/admin.js") }}"></script>
+	<script src="{{ mix("js/admin.js") }}"></script>
 	@yield('js')
 </body>
 </html>
