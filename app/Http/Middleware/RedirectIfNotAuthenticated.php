@@ -1,30 +1,29 @@
 <?php
-/**
- * @copyright (c) 2016 Jacob Martin
- * @license MIT https://opensource.org/licenses/MIT
- */
 
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
-class Admin
+class RedirectIfNotAuthenticated
 {
 	/**
 	 * Handle an incoming request.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  \Closure  $next
+	 * @param  string|null  $guard
 	 * @return mixed
 	 */
 	public function handle($request, Closure $next, $guard = null)
 	{
-		if ( ! Gate::allows('admin')) {
+		if (Auth::guard($guard)->guest()) {
 			if ($request->ajax() || $request->wantsJson()) {
 				return response('Unauthorized.', 401);
-			} else {
-				return redirect()->guest('/admin');
+			}
+			else {
+			    errorMessage('You must first sign in.');
+				return redirect()->guest(route('welcome'));
 			}
 		}
 
