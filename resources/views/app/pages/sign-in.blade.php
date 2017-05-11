@@ -1,6 +1,6 @@
 @extends('app.template')
 
-@section('title', 'Welcome to Chrysalis Approved Offerings')
+@section('title', 'Sign In')
 
 @section('content')
 	<section id="pagesSignIn">

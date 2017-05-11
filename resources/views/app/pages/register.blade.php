@@ -5,7 +5,8 @@
 @section('content')
 	<section id="pagesRegister">
 		<div class="row">
-			<div class="column small-12">
+			<div class="column small-12 medium-6">
+				<h4>Sign In</h4>
 				<form method="POST" autocomplete="off">
 					{!! csrf_field() !!}
 
