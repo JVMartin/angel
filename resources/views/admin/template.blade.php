@@ -13,10 +13,15 @@
 	@yield('css')
 </head>
 <body>
-	@include('admin.header')
-	@include('admin.messages')
+	@include('admin._header')
+	@include('admin._messages')
 	@yield('content')
 	<script src="{{ mix("js/admin.js") }}"></script>
 	@yield('js')
+	<script>
+		window.config = {
+			base_url: '{!! url('/') !!}'
+		};
+	</script>
 </body>
 </html>

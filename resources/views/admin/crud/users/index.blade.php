@@ -53,8 +53,8 @@
 						@foreach ($models as $model)
 							<tr>
 								<td>
-									<a href="{{ url($model->editUrl()) }}" class="button tiny editButton">
-										<i class="fa fa-edit"></i>
+									<a href="{{ route('admin.users.show', $model->hash) }}" class="button tiny editButton">
+										<i class="fa fa-eye"></i>
 									</a>
 								</td>
 								@foreach ($repository->getIndexCols() as $col)

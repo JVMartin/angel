@@ -4,13 +4,6 @@
 	{{ ucfirst($action) . ' ' . $repository->getSingular() }}
 @endsection
 
-@section('css')
-@endsection
-
-@section('js')
-	<script src="{{ asset("js/ckeditor/ckeditor.js") }}"></script>
-@endsection
-
 @section('content')
 	@if ($action == 'edit')
 		<div class="reveal" id="changesModal" data-reveal>
@@ -29,15 +22,33 @@
 						Back to index
 					</a>
 				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="column small-6">
 				<h1>{{ ucfirst($action) . ' ' . $repository->getSingular() }}</h1>
+			</div>
+			<div class="column small-6 text-right">
+				@if ($action == 'edit')
+					<form method="POST"
+					      action="{{ route('admin.' . $repository->getHandle() . '.delete', [$model->hash]) }}"
+					      class="deleteForm"
+					      data-confirm="Delete this {{ strtolower($repository->getSingular()) }} forever?  This action cannot be undone!">
+						{!! csrf_field() !!}
+						{!! method_field('DELETE') !!}
+						<button type="submit" class="button small alert">
+							<i class="fa fa-trash"></i> Delete Forever
+						</button>
+					</form>
+				@endif
 			</div>
 		</div>
 		@if ($action == 'edit')
-			{!! Form::model($model) !!}
+			{!! Form::model($model, ['autocomplete' => 'off']) !!}
 		@elseif ($action == 'add')
-			{!! Form::open() !!}
+			{!! Form::open(['autocomplete' => 'off']) !!}
 		@endif
-			@include('admin.crud.cols', ['cols' => $repository->getCols()])
+			@include('admin.crud._cols', ['cols' => $repository->getCols()])
 			<div class="row">
 				<div class="columns small-12">
 					<button type="submit" class="button small">
