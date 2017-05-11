@@ -47,11 +47,6 @@
           @endif
           @php
             $cols = $repository->getCols();
-
-            // Don't include CRD in columns on the left side of the edit page..
-            if ($action == 'edit') {
-              unset($cols['crd']);
-            }
           @endphp
           @include('admin.crud._cols', ['cols' => $cols])
           @if ($action == 'add')
@@ -81,24 +76,6 @@
       </div>
       <div class="column medium-6">
         @if ($action == 'edit')
-          <form action="{{ route('admin.users.edit.crd', $model->hash) }}" method="POST" autocomplete="off">
-            {{ csrf_field() }}
-            <div class="row column">
-              <h3>Update CRD or Registered Agent #</h3>
-              <label class="{{ ($errors->has('crd')) ? 'is-invalid-label' : '' }}">
-                CRD
-                <input type="text" name="crd" placeholder="CRD" value="{{ old('crd', $model->crd) }}" class="{{ ($errors->has('crd')) ? 'is-invalid-input' : '' }}">
-                @foreach ($errors->get('crd') as $error)
-                  <span class="form-error is-visible">
-                    {!! $error !!}
-                  </span>
-                @endforeach
-              </label>
-              <button type="submit" class="button small">
-                Update CRD
-              </button>
-            </div>
-          </form>
           <form action="{{ route('admin.users.edit.password', $model->hash) }}" method="POST" autocomplete="off">
             {{ csrf_field() }}
             <div class="row column">

@@ -9,7 +9,9 @@ use App\Http\RequestValidators\Admin\PasswordUpdateValidator;
 
 class UserController extends Controller
 {
-	use PerformsCrudActions;
+	use PerformsCrudActions {
+		postAdd as public traitPostAdd;
+	}
 
 	/**
 	 * @var UserRepository
@@ -28,6 +30,14 @@ class UserController extends Controller
 	{
 		$this->repository = $repository;
 		$this->passwordUpdateValidator = $passwordUpdateValidator;
+	}
+
+	public function postAdd(Request $request)
+	{
+		// First check the pasword, then validate the other inputs
+		// using the trait.
+		$this->passwordUpdateValidator->validateRequest($request);
+		return $this->traitPostAdd($request);
 	}
 
 	/**
@@ -50,5 +60,25 @@ class UserController extends Controller
 
 		successMessage('The user\'s password has been updated.');
 		return redirect($user->editUrl());
+	}
+
+	/**
+	 * Show the given user.
+	 *
+	 * @param string $hashid
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function getShow($hashid)
+	{
+		$user = $this->repository->getByHashId($hashid);
+		if ( ! $user) {
+			errorMessage('That user does not exist.');
+			return redirect()->route('admin.users.index');
+		}
+
+		return view('admin.crud.users.show', [
+			'repository' => $this->repository,
+			'user' => $user
+		]);
 	}
 }
