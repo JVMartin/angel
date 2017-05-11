@@ -1,47 +1,72 @@
 <?php
-/**
- * @copyright (c) 2016 Jacob Martin
- * @license MIT https://opensource.org/licenses/MIT
- */
 
 namespace App\Repositories\Admin\Crud;
 
 use App\Models\User;
+use Illuminate\Cache\Repository;
+use Illuminate\Database\Eloquent\Model;
 use App\Repositories\Admin\CrudRepository;
 
 class UserRepository extends CrudRepository
 {
-	protected function setModel()
+	public function __construct(Repository $cache)
 	{
-		$this->Model = User::class;
+		parent::__construct($cache, new User);
 	}
 
-	protected function setSingular()
+	/**
+	 * {@inheritdoc}
+	 */
+	public function create(array $attributes = [])
 	{
-		$this->singular = "User";
+		if (array_key_exists('password', $attributes)) {
+			$attributes['password'] = bcrypt($attributes['password']);
+		}
+
+		return parent::create($attributes);
 	}
 
-	protected function setPlural()
+	/**
+	 * @param Model $model
+	 * @param array $attributes
+	 * @return void
+	 */
+	public function update(Model &$model, array $attributes)
 	{
-		$this->plural = "Users";
+		if (array_key_exists('password', $attributes)) {
+			$attributes['password'] = bcrypt($attributes['password']);
+			$attributes['remember_token'] = str_random(60);
+		}
+
+		parent::update($model, $attributes);
 	}
 
-	protected function setHandle()
+	public function getSingular()
 	{
-		$this->handle = "users";
+		return "User";
 	}
 
-	protected function setIndexOrder()
+	public function getPlural()
 	{
-		$this->indexOrder = [
+		return "Users";
+	}
+
+	public function getHandle()
+	{
+		return "users";
+	}
+
+	public function getIndexOrder()
+	{
+		return [
 			'column'    => 'id',
 			'direction' => 'ASC',
 		];
 	}
 
-	protected function setIndexCols()
+	public function getIndexCols()
 	{
-		$this->indexCols = [
+		return [
 			'id',
 			'role',
 			'email',
@@ -51,22 +76,13 @@ class UserRepository extends CrudRepository
 		];
 	}
 
-	protected function setSearchCols()
+	public function getSearchCols()
 	{
-		$this->searchCols = [
+		return [
 			'first_name',
 			'last_name',
 			'email',
 		];
-	}
-
-	/**
-	 * Create a guest user for people who want to try before registering.
-	 * (No email, password, etc.)
-	 */
-	public function createGuestUser()
-	{
-		return User::create([]);
 	}
 
 	public function getCols()

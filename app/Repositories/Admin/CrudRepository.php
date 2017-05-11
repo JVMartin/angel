@@ -1,103 +1,69 @@
 <?php
-/**
- * @copyright (c) 2016 Jacob Martin
- * @license MIT https://opensource.org/licenses/MIT
- */
 
 namespace App\Repositories\Admin;
 
 use Auth;
-use Carbon;
+use Carbon\Carbon;
 use App\Models\Change;
-use Illuminate\Http\Request;
+use Illuminate\Cache\Repository;
+use App\Repositories\ModelRepository;
 use Illuminate\Database\Eloquent\Model;
 use App\Exceptions\Admin\InvalidModelException;
 
-/**
- * CrudController uses a repository for each panel to perform common functions.
- */
-abstract class CrudRepository
+abstract class CrudRepository extends ModelRepository
 {
-	/**
-	 * The model's fully namespaced class name, e.g. '\App\Models\User'.
-	 *
-	 * @var string
-	 */
-	protected $Model;
+	public function __construct(Repository $cache, Model $model)
+	{
+		// Ensure the model is a CrudModel.
+		if ( ! in_array('App\Models\CrudModel', class_uses($model))) {
+			throw new InvalidModelException(
+				'Your model (' . $model . ') must use the trait App\Models\CrudModel.'
+			);
+		}
+		parent::__construct($cache, $model);
+	}
 
 	/**
 	 * The singular noun of the model, e.g. 'User'.
 	 *
-	 * @var string
+	 * @return string
 	 */
-	protected $singular;
+	abstract public function getSingular();
 
 	/**
 	 * The plural noun of the model, e.g. 'Users'.
 	 *
-	 * @var string
+	 * @return string
 	 */
-	protected $plural;
+	abstract public function getPlural();
 
 	/**
 	 * The handle of the model, e.g. 'users'.  Must be all lowercase letters and dashes.
 	 *
-	 * @var string
+	 * @return string
 	 */
-	protected $handle;
+	abstract public function getHandle();
 
 	/**
 	 * The column and direction to order the index by.
 	 *
-	 * @var array
+	 * @return array
 	 */
-	protected $indexOrder;
+	abstract public function getIndexOrder();
 
 	/**
 	 * A list of columns to use as column headings in the index.
 	 *
-	 * @var array
+	 * @return array
 	 */
-	protected $indexCols;
+	abstract public function getIndexCols();
 
 	/**
 	 * A list of columns to be included in search queries from the index.
 	 *
-	 * @var array
+	 * @return array
 	 */
-	protected $searchCols;
-
-	/**
-	 * Run all the set methods and ensure that an appropriate CRUD model was used.
-	 */
-	public function __construct()
-	{
-		$this->setModel();
-		$this->setSingular();
-		$this->setPlural();
-		$this->setHandle();
-		$this->setIndexOrder();
-		$this->setIndexCols();
-		$this->setSearchCols();
-
-		if ( ! in_array('App\Models\CrudModel', class_uses($this->Model))) {
-			throw new InvalidModelException(
-				'Your model (' . $this->Model . ') must use the trait App\Models\CrudModel.'
-			);
-		}
-	}
-
-	/**
-	 * Implement each of these methods to fill the respective variables according to their
-	 * descriptions above.  See UserRepository and PageRepository for examples.
-	 */
-	abstract protected function setModel();
-	abstract protected function setSingular();
-	abstract protected function setPlural();
-	abstract protected function setHandle();
-	abstract protected function setIndexOrder();
-	abstract protected function setIndexCols();
-	abstract protected function setSearchCols();
+	abstract public function getSearchCols();
 
 	/**
 	 * Get an array of columns including metadata / validation rules for each column.
@@ -106,57 +72,34 @@ abstract class CrudRepository
 	 */
 	abstract public function getCols();
 
-	public function getModel()
-	{
-		return $this->Model;
-	}
-
-	public function getSingular()
-	{
-		return $this->singular;
-	}
-
-	public function getPlural()
-	{
-		return $this->plural;
-	}
-
-	public function getHandle()
-	{
-		return $this->handle;
-	}
-
-	public function getIndexCols()
-	{
-		return $this->indexCols;
-	}
-
+	/**
+	 * Get the url for the index of this module.
+	 *
+	 * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+	 */
 	public function getIndexURL()
 	{
-		return url('admin/' . $this->handle);
+		return url('admin/' . $this->getHandle());
 	}
 
+	/**
+	 * Get the url for the add form.
+	 *
+	 * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+	 */
 	public function getAddURL()
 	{
-		return url('admin/' . $this->handle . '/add');
+		return url('admin/' . $this->getHandle() . '/add');
 	}
 
-	public function find($id)
-	{
-		$Model = $this->Model;
-		return $Model::find($id);
-	}
-
-	public function create(Request $request)
-	{
-		$Model = $this->Model;
-		return $Model::create($request->all());
-	}
-
+	/**
+	 * Get a paginated collection of index models.
+	 *
+	 * @return mixed
+	 */
 	public function index()
 	{
-		$query = $this->indexQuery();
-		return $query->paginate();
+		return $this->indexQuery()->paginate();
 	}
 
 	/**
@@ -165,43 +108,46 @@ abstract class CrudRepository
 	public function indexQuery()
 	{
 		// Grab the current order from the session if it exists.
-		$Model = $this->Model;
-		$order = session('admin.' . $this->handle . '.order');
+		$order = session('admin.' . $this->getHandle() . '.order');
 
 		// If not, put the default in the session.
 		if (empty($order)) {
-			$order = $this->indexOrder;
-			session(['admin.' . $this->handle . '.order' => $order]);
+			$order = $this->getIndexOrder();
+			session(['admin.' . $this->getHandle() . '.order' => $order]);
 		}
 
 		// Order by it.
-		$query = $Model::orderBy($order['column'], $order['direction']);
+		$query = $this->model->orderBy($order['column'], $order['direction']);
 
 		// Do searching as well and return the query builder for later pagination.
 		return $this->searchQuery($query);
 	}
 
+	/**
+	 * @param $query
+	 * @return mixed
+	 */
 	public function searchQuery($query)
 	{
-		$search = session('admin.' . $this->handle . '.search');
+		$search = session('admin.' . $this->getHandle() . '.search');
 		if (empty($search)) return $query;
 
-		$cols  = $this->searchCols;
+		$cols  = $this->getSearchCols();
 		$terms = explode(' ', $search);
-		$query->where(function($query) use ($cols, $terms) {
+		return $query->where(function($query) use ($cols, $terms) {
 			foreach ($cols as $col) {
 				foreach ($terms as $term) {
-					$query->orWhere($col, 'LIKE', '%' . $term . '%');
+					$query->orWhere($col, 'ILIKE', '%' . $term . '%');
 				}
 			}
 		});
-		return $query;
 	}
 
 	/**
 	 * Compile the array of validation rules for usage in the validator.
 	 *
 	 * @param int $id The id of the row if updating; null if creating.
+	 * @return array
 	 */
 	public function getValidationRules($id = null)
 	{
@@ -254,11 +200,17 @@ abstract class CrudRepository
 				// And it is, in fact, an update...
 				$model->$colName != $updates[$colName]) {
 
+				// Ensure null content becomes empty string instead, but spare '0'.
+				$content = $model->$colName;
+				if ( ! is_numeric($content)) {
+					$content = empty($content) ? '' : $content;
+				}
+
 				// Add the change to the array.
 				$changes []= new Change([
 					'column'     => $colName,
 					'user_id'    => Auth::user()->id,
-					'content'    => $model->$colName,
+					'content'    => $content,
 					'created_at' => $created_at
 				]);
 			}
@@ -278,11 +230,10 @@ abstract class CrudRepository
 	 */
 	public function getChangesForColumn(Model $model, $column)
 	{
-		return $model->
-				changes()->
-				with('user')->
-				where('column', $column)->
-				orderBy('created_at', 'DESC')->
-				get();
+		return $model->changes()
+			->with('user')
+			->where('column', $column)
+			->orderBy('created_at', 'DESC')
+			->get();
 	}
 }
