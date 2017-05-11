@@ -1,18 +1,11 @@
 <?php
-/**
- * @copyright (c) 2016 Jacob Martin
- * @license MIT https://opensource.org/licenses/MIT
- */
 
-use App\Models\User;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+namespace Tests\BrowserKit\Admin;
 
-class AdminAuthTest extends TestCase
+use Tests\BrowserKitTestCase;
+
+class AdminAuthTest extends BrowserKitTestCase
 {
-	use DatabaseMigrations;
-
 	private function seeAdminPanel()
 	{
 		return $this->seePageIs('/admin/pages')
