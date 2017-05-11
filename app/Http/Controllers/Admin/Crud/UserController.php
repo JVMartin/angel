@@ -1,23 +1,54 @@
 <?php
-/**
- * @copyright (c) 2016 Jacob Martin
- * @license MIT https://opensource.org/licenses/MIT
- */
 
 namespace App\Http\Controllers\Admin\Crud;
 
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Repositories\Admin\Crud\UserRepository;
-use App\Http\Controllers\Admin\CrudController;
+use App\Http\RequestValidators\Admin\PasswordUpdateValidator;
 
-/**
- * UserController is a crud controller for the users module.
- *
- * @package App\Http\Controllers\Admin\Crud
- */
-class UserController extends CrudController
+class UserController extends Controller
 {
-	protected function setRepository()
+	use PerformsCrudActions;
+
+	/**
+	 * @var UserRepository
+	 */
+	protected $repository;
+
+	/**
+	 * @var PasswordUpdateValidator
+	 */
+	protected $passwordUpdateValidator;
+
+	public function __construct(
+		UserRepository $repository,
+		PasswordUpdateValidator $passwordUpdateValidator
+	)
 	{
-		$this->repository = app(UserRepository::class);
+		$this->repository = $repository;
+		$this->passwordUpdateValidator = $passwordUpdateValidator;
+	}
+
+	/**
+	 * @param Request $request
+	 * @param int $id The user's id.
+	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+	 */
+	public function postPassword(Request $request, $id)
+	{
+		$user = $this->repository->getByKey($id);
+		if ( ! $user) {
+			errorMessage('That user does not exist.');
+			return redirect(url('admin/users'));
+		}
+		$this->passwordUpdateValidator->validateRequest($request);
+
+		$this->repository->update($user, [
+			'password' => $request->password
+		]);
+
+		successMessage('The user\'s password has been updated.');
+		return redirect($user->editUrl());
 	}
 }

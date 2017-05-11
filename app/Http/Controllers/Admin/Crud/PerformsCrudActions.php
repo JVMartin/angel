@@ -1,58 +1,21 @@
 <?php
-/**
- * @copyright (c) 2016 Jacob Martin
- * @license MIT https://opensource.org/licenses/MIT
- */
- 
-namespace App\Http\Controllers\Admin;
+
+namespace App\Http\Controllers\Admin\Crud;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Repositories\Admin\CrudRepository;
-use App\Exceptions\Admin\InvalidRepositoryException;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
-/**
- * CrudController is a base class that leverages a specific CrudRepository (assigned by the
- * subclass) in order to perform all of the basic functions for a CMS module: displaying an index,
- * displaying add/edit forms, and handling the addition and modification of items.
- *
- * @package App\Http\Controllers\Admin
- */
-abstract class CrudController extends Controller
+trait PerformsCrudActions
 {
+	use ValidatesRequests;
+
 	/**
-	 * The appropriate repository for this module which must be set using setRepository().
+	 * The appropriate repository for this module.
 	 *
 	 * @var CrudRepository
 	 */
 	protected $repository;
-
-	/**
-	 * Ensure that the subclass sets the appropriate CrudRepository.
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-
-		$this->setRepository();
-
-		if ( ! $this->repository ||  ! $this->repository instanceof CrudRepository) {
-			throw new InvalidRepositoryException(
-				"setRepository() in " . static::class . " must set an instance of " .
-				CrudRepository::class
-			);
-		}
-
-		// Put the repository in the view data as well.
-		$this->data['repository'] = $this->repository;
-	}
-
-	/**
-	 * Set $this->repository to an instance of CrudRepository.
-	 *
-	 * @return void
-	 */
-	abstract protected function setRepository();
 
 	/**
 	 * Get an index of all of the items in this module.
@@ -64,12 +27,12 @@ abstract class CrudController extends Controller
 	 */
 	public function getIndex()
 	{
-		$models = $this->repository->index();
-		$this->data['models'] = $models;
+		view()->share('repository', $this->repository);
+		view()->share('models', $this->repository->index());
 		if (view()->exists('admin.crud.' . $this->repository->getHandle() . '.index')) {
-			return view('admin.crud.' . $this->repository->getHandle() . '.index', $this->data);
+			return view('admin.crud.' . $this->repository->getHandle() . '.index');
 		}
-		return view('admin.crud.index', $this->data);
+		return view('admin.crud.index');
 	}
 
 	/**
@@ -81,7 +44,7 @@ abstract class CrudController extends Controller
 	public function postSearch(Request $request)
 	{
 		session(['admin.' . $this->repository->getHandle() . '.search' => $request->search]);
-		return redirect()->back();
+		return redirect()->route('admin.' . $this->repository->getHandle() . '.index');
 	}
 
 	/**
@@ -109,7 +72,7 @@ abstract class CrudController extends Controller
 		session([$columnKey    => $column]);
 		session([$directionKey => $direction]);
 
-		return redirect()->back();
+		return redirect()->route('admin.' . $this->repository->getHandle() . '.index');
 	}
 
 	/**
@@ -122,11 +85,14 @@ abstract class CrudController extends Controller
 	 */
 	public function getAdd()
 	{
-		$this->data['action'] = 'add';
+		view()->share([
+			'action' => 'add',
+			'repository' => $this->repository
+		]);
 		if (view()->exists('admin.crud.' . $this->repository->getHandle() . '.add-or-edit')) {
-			return view('admin.crud.' . $this->repository->getHandle() . '.add-or-edit', $this->data);
+			return view('admin.crud.' . $this->repository->getHandle() . '.add-or-edit');
 		}
-		return view('admin.crud.add-or-edit', $this->data);
+		return view('admin.crud.add-or-edit');
 	}
 
 	/**
@@ -139,10 +105,9 @@ abstract class CrudController extends Controller
 	{
 		$this->validate($request, $this->repository->getValidationRules(), [],
 				$this->repository->getValidationAttributes());
-		$model = $this->repository->create($request);
-		$this->redirectSuccessMessage($this->repository->getSingular() . ' created.');
-		return redirect()->to($model->editURL())
-			->with('successes', $this->successes);
+		$model = $this->repository->create($request->all());
+		successMessage($this->repository->getSingular() . ' created.');
+		return redirect($model->editUrl());
 	}
 
 	/**
@@ -156,13 +121,16 @@ abstract class CrudController extends Controller
 	 */
 	public function getEdit($id)
 	{
-		$model = $this->repository->find($id);
-		$this->data['action'] = 'edit';
-		$this->data['model']  = $model;
+		$model = $this->repository->getByKey($id);
+		view()->share([
+			'action' => 'edit',
+			'repository' => $this->repository,
+			'model' => $model
+		]);
 		if (view()->exists('admin.crud.' . $this->repository->getHandle() . '.add-or-edit')) {
-			return view('admin.crud.' . $this->repository->getHandle() . '.add-or-edit', $this->data);
+			return view('admin.crud.' . $this->repository->getHandle() . '.add-or-edit');
 		}
-		return view('admin.crud.add-or-edit', $this->data);
+		return view('admin.crud.add-or-edit');
 	}
 
 	/**
@@ -176,10 +144,26 @@ abstract class CrudController extends Controller
 	{
 		$this->validate($request, $this->repository->getValidationRules($id), [],
 				$this->repository->getValidationAttributes());
-		$model = $this->repository->find($id);
+		$model = $this->repository->getByKey($id);
+
 		$this->repository->logChanges($model, $request->all());
-		$model->update($request->all());
-		$this->redirectSuccessMessage($this->repository->getSingular() . ' saved.');
-		return redirect()->back()->with('successes', $this->successes);
+		$this->repository->update($model, $request->all());
+
+		successMessage($this->repository->getSingular() . ' saved.');
+		return redirect($model->editUrl());
+	}
+
+	/**
+	 * Delete an item from the database.
+	 *
+	 * @param int $id
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function postDelete($id)
+	{
+		$model = $this->repository->getByKey($id);
+		$this->repository->delete($model);
+		successMessage($this->repository->getSingular() . ' deleted forever.');
+		return redirect()->route('admin.' . $this->repository->getHandle() . '.index');
 	}
 }

@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Admin\Crud;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Admin\Crud\PageRepository;
+use App\Repositories\Admin\Crud\BlogRepository;
 
-class PageController extends Controller
+class BlogController extends Controller
 {
 	use PerformsCrudActions;
 
 	/**
-	 * @var PageRepository
+	 * @var BlogRepository
 	 */
 	protected $repository;
 
-	public function __construct(PageRepository $repository)
+	public function __construct(BlogRepository $repository)
 	{
 		$this->repository = $repository;
 	}
