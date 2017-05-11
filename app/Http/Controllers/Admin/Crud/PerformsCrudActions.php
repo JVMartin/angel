@@ -104,10 +104,10 @@ trait PerformsCrudActions
 	public function postAdd(Request $request)
 	{
 		$this->validate($request, $this->repository->getValidationRules(), [],
-				$this->repository->getValidationAttributes());
-		$model = $this->repository->create($request->all());
-		successMessage($this->repository->getSingular() . ' created.');
-		return redirect($model->editUrl());
+			$this->repository->getValidationAttributes());
+		$this->repository->create($request->all());
+		successMessage(trans('crud.created', ['type' => $this->repository->getSingular()]));
+		return redirect()->route('admin.' . $this->repository->getHandle() . '.index');
 	}
 
 	/**
@@ -116,12 +116,12 @@ trait PerformsCrudActions
 	 * Note that you can easily use your own custom view by placing it here:
 	 * resources/views/admin/crud/{handle}/add-or-edit.blade.php
 	 *
-	 * @param $id string|int
+	 * @param $hashid string
 	 * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
 	 */
-	public function getEdit($id)
+	public function getEdit($hashid)
 	{
-		$model = $this->repository->getByKey($id);
+		$model = $this->repository->getByHashId($hashid);
 		view()->share([
 			'action' => 'edit',
 			'repository' => $this->repository,
@@ -137,33 +137,34 @@ trait PerformsCrudActions
 	 * Edit an existing item in the database.
 	 *
 	 * @param $request \Illuminate\Http\Request
-	 * @param $id string|int
+	 * @param $hashid string|int
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postEdit(Request $request, $id)
+	public function postEdit(Request $request, $hashid)
 	{
-		$this->validate($request, $this->repository->getValidationRules($id), [],
-				$this->repository->getValidationAttributes());
-		$model = $this->repository->getByKey($id);
+		$model = $this->repository->getByHashId($hashid);
+
+		$this->validate($request, $this->repository->getValidationRules($model->id), [],
+			$this->repository->getValidationAttributes());
 
 		$this->repository->logChanges($model, $request->all());
 		$this->repository->update($model, $request->all());
 
-		successMessage($this->repository->getSingular() . ' saved.');
+		successMessage(trans('crud.updated', ['type' => $this->repository->getSingular()]));
 		return redirect($model->editUrl());
 	}
 
 	/**
 	 * Delete an item from the database.
 	 *
-	 * @param int $id
+	 * @param int $hashid
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postDelete($id)
+	public function delete($hashid)
 	{
-		$model = $this->repository->getByKey($id);
+		$model = $this->repository->getByHashId($hashid);
 		$this->repository->delete($model);
-		successMessage($this->repository->getSingular() . ' deleted forever.');
+		successMessage(trans('crud.deleted', ['type' => $this->repository->getSingular()]));
 		return redirect()->route('admin.' . $this->repository->getHandle() . '.index');
 	}
 }
