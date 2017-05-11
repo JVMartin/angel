@@ -4,19 +4,19 @@
 			<ul class="dropdown menu" data-dropdown-menu>
 				<li class="menu-text">Admin</li>
 				@if (Gate::allows('admin'))
-					<li{!! Request::is('admin/offerings*') ? ' class="active"' : '' !!}>
-						<a href="{{ url('/admin/offerings') }}">
-							Offerings
+					<li{!! Request::is('admin/blogs*') ? ' class="active"' : '' !!}>
+						<a href="{{ url('/admin/blogs') }}">
+							Blogs
+						</a>
+					</li>
+					<li{!! Request::is('admin/pages*') ? ' class="active"' : '' !!}>
+						<a href="{{ url('/admin/pages') }}">
+							Pages
 						</a>
 					</li>
 					<li{!! Request::is('admin/users*') ? ' class="active"' : '' !!}>
 						<a href="{{ url('/admin/users') }}">
 							Users
-						</a>
-					</li>
-					<li{!! Request::is('admin/sign-ins*') ? ' class="active"' : '' !!}>
-						<a href="{{ url('/admin/sign-ins') }}">
-							Sign Ins
 						</a>
 					</li>
 				@endif

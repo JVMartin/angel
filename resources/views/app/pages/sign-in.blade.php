@@ -4,8 +4,8 @@
 
 @section('content')
 	<section id="pagesSignIn">
-		<div class="column small-12 medium-6">
-			<h4>Sign In</h4>
+		<div class="row column small-12 medium-6">
+			<h1>Sign In</h1>
 			<div class="callout">
 				<form method="POST" autocomplete="off">
 					{!! csrf_field() !!}

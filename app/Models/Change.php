@@ -1,8 +1,4 @@
 <?php
-/**
- * @copyright (c) 2016 Jacob Martin
- * @license MIT https://opensource.org/licenses/MIT
- */
 
 namespace App\Models;
 
@@ -16,9 +12,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Change extends Model
 {
-	public $timestamps = false;
-
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array
+	 */
 	protected $guarded = ['id'];
+
+	/**
+	 * Only use CREATED_AT.
+	 */
+	const UPDATED_AT = null;
 
 	/**
 	 * The user who created this change.
@@ -27,7 +31,7 @@ class Change extends Model
 	 */
 	public function user()
 	{
-		return $this->belongsTo('App\Models\User');
+		return $this->belongsTo(User::class);
 	}
 
 	/**

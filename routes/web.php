@@ -4,7 +4,8 @@ Route::group(['namespace' => 'App'], function() {
 	Route::get('register', 'RegisterController@getRegister')->name('register');
 	Route::post('register', 'RegisterController@postRegister');
 
-	Route::post('sign-in', 'SignInController@login')->name('sign-in');
+	Route::get('sign-in', 'SignInController@getSignIn')->name('sign-in');
+	Route::post('sign-in', 'SignInController@login');
 	Route::get('sign-out', 'SignInController@logout');
 
 	// Forgot password routes
