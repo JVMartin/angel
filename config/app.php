@@ -161,8 +161,11 @@ return [
 		 * Installed packages service providers
 		 */
 		Collective\Html\HtmlServiceProvider::class,
-		Barryvdh\Debugbar\ServiceProvider::class
-
+		Barryvdh\Debugbar\ServiceProvider::class,
+		Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
+		Vinkla\Hashids\HashidsServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+		Cartalyst\Tags\TagsServiceProvider::class,
 	],
 
 	/*
