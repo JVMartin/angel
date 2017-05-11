@@ -49,18 +49,6 @@ class User extends Authenticatable
 	}
 
     /**
-     * Can this user see broker-dealer details on offers?
-     *
-     * @return bool
-     */
-	public function canSeeBDDetails()
-    {
-        if ($this->isAdmin()) return true;
-
-        return (strlen($this->crd) > 0);
-    }
-
-    /**
      * The full name of the user.
      *
      * @return string
@@ -78,26 +66,6 @@ class User extends Authenticatable
 	public function editUrl()
 	{
 		return route('admin.users.edit', $this->hash);
-	}
-
-    /**
-     * Logs of the user's sign ins.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-	public function signIns()
-    {
-        return $this->hasMany(SignIn::class);
-    }
-
-    /**
-     * Logged views of offerings.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-	public function views()
-	{
-		return $this->hasMany(OfferingView::class);
 	}
 
     /**
