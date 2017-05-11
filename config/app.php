@@ -160,12 +160,12 @@ return [
 		/*
 		 * Installed packages service providers
 		 */
-		Collective\Html\HtmlServiceProvider::class,
 		Barryvdh\Debugbar\ServiceProvider::class,
+		Cartalyst\Tags\TagsServiceProvider::class,
+		Collective\Html\HtmlServiceProvider::class,
+		Intervention\Image\ImageServiceProvider::class,
 		Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
 		Vinkla\Hashids\HashidsServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
-		Cartalyst\Tags\TagsServiceProvider::class,
 	],
 
 	/*
@@ -212,10 +212,13 @@ return [
 		'Validator' => Illuminate\Support\Facades\Validator::class,
 		'View' => Illuminate\Support\Facades\View::class,
 
+		// Added:
 		'Carbon' => Carbon\Carbon::class,
-		'Form' => Collective\Html\FormFacade::class,
-		'Html' => Collective\Html\HtmlFacade::class,
 		'Debugbar' => Barryvdh\Debugbar\Facade::class,
+		'Form' => Collective\Html\FormFacade::class,
+		'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
+		'Html' => Collective\Html\HtmlFacade::class,
+		'Image' => Intervention\Image\Facades\Image::class,
 
 	],
 
