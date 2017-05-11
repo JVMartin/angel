@@ -1,14 +1,9 @@
-/**
- * @copyright (c) 2016 Jacob Martin
- * @license MIT https://opensource.org/licenses/MIT
- */
-
 @charset "utf-8";
 
 @import "foundation_settings";
-@import "foundation";
-@import "motion-ui";
+@import "node_modules/foundation-sites/scss/foundation";
 @import "foundation_modules";
+@import "node_modules/font-awesome/scss/font-awesome";
 
 @import "global";
 @import "pages/home";
