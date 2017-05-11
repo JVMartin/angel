@@ -15,8 +15,8 @@
 	@yield('css')
 </head>
 <body>
-	@include('app.header')
-	@include('app.messages')
+	@include('app._header')
+	@include('app._messages')
 	@yield('content')
 	<script src="{{ mix("js/app.js") }}"></script>
 	@yield('js')
