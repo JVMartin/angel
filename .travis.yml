@@ -17,8 +17,6 @@ php:
 install:
   - travis_retry npm install -g npm@2
   - travis_retry npm install
-  - travis_retry npm install bower
-  - travis_retry bower install
   - travis_retry composer self-update
   - travis_retry composer install --no-interaction
 
@@ -26,7 +24,7 @@ before_script:
   - mysql -u root -e "CREATE DATABASE angel_test;"
   - cp .env.travis .env
   - php artisan key:generate
-  - gulp
+  - npm run dev
 
 script:
-  - phpunit
+  - ./vendor/bin/phpunit
