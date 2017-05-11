@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use Schema;
 use Illuminate\Console\Command;
 
 class FlushApplication extends Command
@@ -33,12 +32,8 @@ class FlushApplication extends Command
 		$this->call('ide-helper:generate');
 		$this->call('optimize');
 
-		$this->info('Rebuilding database...');
-		if (Schema::hasTable('migrations')) {
-			$this->call('migrate:reset');
-		}
-		$this->call('migrate');
-		$this->call('db:seed');
+		$this->call('db:rebuild');
+		$this->call('testing:rebuild');
 
 		passthru('sudo git clean -fxd ' . public_path());
 		passthru('sudo git clean -fxd ' . storage_path());
