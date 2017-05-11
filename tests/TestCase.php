@@ -1,29 +1,24 @@
 <?php
-/**
- * @copyright (c) 2016 Jacob Martin
- * @license MIT https://opensource.org/licenses/MIT
- */
 
-class TestCase extends Illuminate\Foundation\Testing\TestCase
+namespace Tests;
+
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+
+abstract class TestCase extends BaseTestCase
 {
-	/**
-	 * The base URL to use while testing the application.
-	 *
-	 * @var string
-	 */
-	protected $baseUrl = 'http://localhost';
+    use CreatesApplication;
 
-	/**
-	 * Creates the application.
-	 *
-	 * @return \Illuminate\Foundation\Application
-	 */
-	public function createApplication()
-	{
-		$app = require __DIR__.'/../bootstrap/app.php';
+    /**
+     * Set up our testing environment
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        parent::setUp();
 
-		$app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
-
-		return $app;
-	}
+        // Reset the sqlite testing database
+        // http://www.chrisduell.com/blog/development/speeding-up-unit-tests-in-php/
+        copy(database_path('prepared.sqlite'), database_path('database.sqlite'));
+    }
 }

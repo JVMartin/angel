@@ -14,20 +14,14 @@ class CreatePagesTable extends Migration
 	{
 		Schema::create('pages', function (Blueprint $table) {
 			$table->increments('id');
-			$table->string('slug')->unique();
-			$table->string('title');
-			$table->string('image');
-			$table->string('og_desc', 300);
-			$table->text('html');
-			$table->text('plaintext');
+			$table->string('slug')->unique()->nullable();
+			$table->string('title')->nullable();
+			$table->string('image')->nullable();
+			$table->string('og_desc', 300)->nullable();
+			$table->text('html')->nullable();
+			$table->text('plaintext')->nullable();
 			$table->timestamps();
 		});
-
-		DB::statement('
-			ALTER TABLE `pages` ADD FULLTEXT search(
-				`title`,
-				`plaintext`
-		)');
 	}
 
 	/**
@@ -37,8 +31,6 @@ class CreatePagesTable extends Migration
 	 */
 	public function down()
 	{
-		DB::statement('SET foreign_key_checks = 0');
-		Schema::drop('pages');
-		DB::statement('SET foreign_key_checks = 1');
+		Schema::dropIfExists('pages');
 	}
 }

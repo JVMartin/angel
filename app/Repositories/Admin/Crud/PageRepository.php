@@ -1,56 +1,97 @@
 <?php
-/**
- * @copyright (c) 2016 Jacob Martin
- * @license MIT https://opensource.org/licenses/MIT
- */
 
 namespace App\Repositories\Admin\Crud;
 
 use App\Models\Page;
+use Illuminate\Cache\Repository;
+use Illuminate\Database\Eloquent\Model;
 use App\Repositories\Admin\CrudRepository;
 
 class PageRepository extends CrudRepository
 {
-	protected function setModel()
+	public function __construct(Repository $cache)
 	{
-		$this->Model = Page::class;
+		parent::__construct($cache, new Page);
 	}
 
-	protected function setSingular()
+	/**
+	 * @param string $slug
+	 * @return mixed
+	 */
+	public function getBySlug($slug)
 	{
-		$this->singular = "Page";
+		$key = $this->resourceName . '.slug.' . $slug;
+		$query = $this->model->newQuery();
+
+		return $this->cache->remember($key, 10, function() use ($query, $slug) {
+			return $query->where('slug', $slug)->first();
+		});
 	}
 
-	protected function setPlural()
+	/**
+	 * {@inheritdoc}
+	 */
+	public function create(array $attributes = [])
 	{
-		$this->plural = "Pages";
+		$attributes['slug'] = strtolower($attributes['slug']);
+
+		return parent::create($attributes);
 	}
 
-	protected function setHandle()
+	/**
+	 * {@inheritdoc}
+	 */
+	public function update(Model &$model, array $attributes)
 	{
-		$this->handle = "pages";
+		$attributes['slug'] = strtolower($attributes['slug']);
+
+		parent::update($model, $attributes);
 	}
 
-	protected function setIndexOrder()
+	/**
+	 * @param Model|Page $model
+	 */
+	public function flush(Model $model)
 	{
-		$this->indexOrder = [
+		$this->cache->forget($this->resourceName . '.slug.' . $model->slug);
+		parent::flush($model);
+	}
+
+	public function getSingular()
+	{
+		return "Page";
+	}
+
+	public function getPlural()
+	{
+		return "Pages";
+	}
+
+	public function getHandle()
+	{
+		return "pages";
+	}
+
+	public function getIndexOrder()
+	{
+		return [
 			'column'    => 'title',
 			'direction' => 'ASC',
 		];
 	}
 
-	protected function setIndexCols()
+	public function getIndexCols()
 	{
-		$this->indexCols = [
+		return [
 			'slug',
 			'title',
 			'updated_at',
 		];
 	}
 
-	protected function setSearchCols()
+	public function getSearchCols()
 	{
-		$this->searchCols = [
+		return [
 			'title',
 			'slug',
 			'plaintext',
@@ -102,7 +143,7 @@ class PageRepository extends CrudRepository
 				'type'       => 'text',
 				'attributes' => [],
 				'validate' => [
-					'max:300',
+					'max:160',
 				],
 				'logChanges' => true,
 			],

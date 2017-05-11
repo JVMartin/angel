@@ -14,13 +14,23 @@ trait CrudModel
 	 *
 	 * @return string
 	 */
-	abstract public function editURL();
+	abstract public function editUrl();
 
 	/**
 	 * Get the model's change log.
 	 */
 	public function changes()
 	{
-		return $this->morphMany('App\Models\Change', 'loggable');
+		return $this->morphMany(Change::class, 'loggable');
+	}
+
+    /**
+     * The hash of this object's id.
+     *
+     * @return null|string
+     */
+	public function getHashAttribute()
+	{
+		return encodeHash($this->id);
 	}
 }

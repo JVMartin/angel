@@ -1,8 +1,10 @@
-/.idea
-/vendor
 /node_modules
+/vendor
+/public/mix-manifest.json
 /public/storage
 Homestead.yaml
 Homestead.json
 .env
+_ide_helper.php
 *.swp
+/.idea

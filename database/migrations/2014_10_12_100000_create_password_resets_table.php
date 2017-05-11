@@ -30,8 +30,6 @@ class CreatePasswordResetsTable extends Migration
 	 */
 	public function down()
 	{
-		DB::statement('SET foreign_key_checks = 0');
-		Schema::drop('password_resets');
-		DB::statement('SET foreign_key_checks = 1');
+		Schema::dropIfExists('password_resets');
 	}
 }

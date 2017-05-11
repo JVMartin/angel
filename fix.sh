@@ -17,10 +17,11 @@ function allowWrite() {
 }
 
 sudo chown $USER:$USER -R .
-find . -type f -exec chmod 644 {} +
-find . -type d -exec chmod 755 {} +
+find . -not -path "./node_modules/*" -not -path "./vendor/*" -type f -exec chmod 644 {} +
+find . -not -path "./node_modules/*" -not -path "./vendor/*" -type d -exec chmod 755 {} +
 
 allowWrite "storage"
+allowWrite "public/uploads"
 allowWrite "bootstrap/cache"
 
 chmod +x fix.sh

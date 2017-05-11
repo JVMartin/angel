@@ -14,7 +14,10 @@ class Kernel extends HttpKernel
 	 * @var array
 	 */
 	protected $middleware = [
-		\Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
+        \App\Http\Middleware\TrimStrings::class,
+        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
 	];
 
 	/**
@@ -24,11 +27,14 @@ class Kernel extends HttpKernel
 	 */
 	protected $middlewareGroups = [
 		'web' => [
-			\App\Http\Middleware\EncryptCookies::class,
-			\Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-			\Illuminate\Session\Middleware\StartSession::class,
-			\Illuminate\View\Middleware\ShareErrorsFromSession::class,
-			\App\Http\Middleware\VerifyCsrfToken::class,
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            // \Illuminate\Session\Middleware\AuthenticateSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \App\Http\Middleware\ShareMessagesFromSession::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
 		],
 
 		'api' => [
@@ -44,10 +50,11 @@ class Kernel extends HttpKernel
 	 * @var array
 	 */
 	protected $routeMiddleware = [
-		'admin' => \App\Http\Middleware\Admin::class,
-		'auth' => \App\Http\Middleware\Authenticate::class,
+		'admin' => \App\Http\Middleware\RedirectIfNotAdmin::class,
+		'auth' => \App\Http\Middleware\RedirectIfNotAuthenticated::class,
 		'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-		'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
+		'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+		'can' => \Illuminate\Auth\Middleware\Authorize::class,
 		'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
 		'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 	];

@@ -14,17 +14,19 @@
 			</div>
 			<div class="small-6 column">
 				<p class="text-right">
-					<a href="{{ $repository->getAddURL() }}" class="button large">
+					<a href="{{ $repository->getAddURL() }}" class="button">
 						<i class="fa fa-plus"></i>
 						Add {{ $repository->getSingular() }}
 					</a>
 				</p>
 			</div>
 		</div>
-		@include('admin.crud.index-search')
-		<div class="pagination text-center">
-			{{ $models->links('pagination::foundation') }}
-		</div>
+		@include('admin.crud._index-search')
+		@if ($models->lastPage() > 1)
+			<div class="pagination text-center">
+				{{ $models->links('pagination::foundation') }}
+			</div>
+		@endif
 		<div class="row">
 			<div class="small-12 column">
 				<table>
@@ -51,7 +53,7 @@
 						@foreach ($models as $model)
 							<tr>
 								<td>
-									<a href="{{ url($model->editURL()) }}" class="button tiny editButton">
+									<a href="{{ url($model->editUrl()) }}" class="button tiny editButton">
 										<i class="fa fa-edit"></i>
 									</a>
 								</td>
@@ -66,8 +68,10 @@
 				</table>
 			</div>
 		</div>
-		<div class="pagination text-center">
-			{{ $models->links('pagination::foundation') }}
-		</div>
+		@if ($models->lastPage() > 1)
+			<div class="pagination text-center">
+				{{ $models->links('pagination::foundation') }}
+			</div>
+		@endif
 	</section>
 @endsection

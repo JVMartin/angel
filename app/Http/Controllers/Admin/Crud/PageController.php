@@ -1,23 +1,21 @@
 <?php
-/**
- * @copyright (c) 2016 Jacob Martin
- * @license MIT https://opensource.org/licenses/MIT
- */
 
 namespace App\Http\Controllers\Admin\Crud;
 
-use App\Http\Controllers\Admin\CrudController;
+use App\Http\Controllers\Controller;
 use App\Repositories\Admin\Crud\PageRepository;
 
-/**
- * PageController is a crud controller for the pages module.
- *
- * @package App\Http\Controllers\Admin\Crud
- */
-class PageController extends CrudController
+class PageController extends Controller
 {
-	protected function setRepository()
+	use PerformsCrudActions;
+
+	/**
+	 * @var PageRepository
+	 */
+	protected $repository;
+
+	public function __construct(PageRepository $repository)
 	{
-		$this->repository = app(PageRepository::class);
+		$this->repository = $repository;
 	}
 }

@@ -46,9 +46,9 @@ return [
 
 	'connections' => [
 
-		'sqlite' => [
+		'testing' => [
 			'driver' => 'sqlite',
-			'database' => env('DB_DATABASE', database_path('database.sqlite')),
+			'database' => database_path('database.sqlite'),
 			'prefix' => '',
 		],
 
@@ -64,20 +64,6 @@ return [
 			'prefix' => '',
 			'strict' => false,
 			'engine' => null,
-		],
-
-		'testing' => [
-			'driver' => 'mysql',
-			'host' => env('DB_TEST_HOST', 'localhost'),
-			'port' => env('DB_TEST_PORT', '3306'),
-			'database' => env('DB_TEST_DATABASE', 'angel_test'),
-			'username' => env('DB_TEST_USERNAME', 'homestead'),
-			'password' => env('DB_TEST_PASSWORD', 'secret'),
-			'charset' => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix' => '',
-			'strict' => false,
-			'engine' => 'InnoDB',
 		],
 
 		'pgsql' => [

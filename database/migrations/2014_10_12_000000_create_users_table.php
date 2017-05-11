@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
 			$table->string('email')->unique();
 			$table->string('first_name');
 			$table->string('last_name');
-			$table->string('password');
+			$table->string('password')->nullable();
 			$table->rememberToken();
 			$table->timestamps();
 		});
@@ -35,8 +35,6 @@ class CreateUsersTable extends Migration
 	 */
 	public function down()
 	{
-		DB::statement('SET foreign_key_checks = 0');
-		Schema::drop('users');
-		DB::statement('SET foreign_key_checks = 1');
+		Schema::dropIfExists('users');
 	}
 }

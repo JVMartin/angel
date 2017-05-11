@@ -13,7 +13,13 @@ class Kernel extends ConsoleKernel
 	 * @var array
 	 */
 	protected $commands = [
-		// Commands\Inspire::class,
+		// Used in development:
+		\App\Console\Commands\FlushApplication::class,
+		\App\Console\Commands\RebuildDatabase::class,
+		\App\Console\Commands\RebuildTestingDatabase::class,
+
+		// Used in production:
+		//\App\Console\Commands\DeleteUnverifiedUsers::class,
 	];
 
 	/**
@@ -26,5 +32,15 @@ class Kernel extends ConsoleKernel
 	{
 		// $schedule->command('inspire')
 		//          ->hourly();
+	}
+
+	/**
+	 * Register the Closure based commands for the application.
+	 *
+	 * @return void
+	 */
+	protected function commands()
+	{
+		require base_path('routes/console.php');
 	}
 }

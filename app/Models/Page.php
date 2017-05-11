@@ -25,8 +25,8 @@ class Page extends Model
 	 *
 	 * @return string
 	 */
-	public function editURL()
+	public function editUrl()
 	{
-		return 'admin/pages/edit/' . $this->id;
+		return route('admin.pages.edit', $this->hash);
 	}
 }
