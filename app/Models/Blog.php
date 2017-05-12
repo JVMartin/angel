@@ -49,6 +49,6 @@ class Blog extends Model implements TaggableInterface
 	 */
 	public function editUrl()
 	{
-		return route('admin.blogs.edit.form', $this->id);
+		return route('admin.blogs.edit', $this->hash);
 	}
 }
