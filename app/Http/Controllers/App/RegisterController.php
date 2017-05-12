@@ -7,65 +7,61 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
 use App\Repositories\Admin\Crud\UserRepository;
+use App\Http\RequestValidators\Admin\PasswordUpdateValidator;
 
 class RegisterController extends Controller
 {
-    /**
-     * @var UserRepository
-     */
-    protected $userRepository;
+	/**
+	 * @var UserRepository
+	 */
+	protected $userRepository;
 
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->middleware('guest');
+	/**
+	 * @var PasswordUpdateValidator
+	 */
+	protected $passwordUpdateValidator;
 
-        $this->userRepository = $userRepository;
-    }
+	public function __construct(
+		UserRepository $userRepository,
+		PasswordUpdateValidator $passwordUpdateValidator
+	)
+	{
+		$this->middleware('guest');
 
-    /**
-     * Show the user a registration form.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function getRegister($foreignReferrer = false)
-    {
-        return view('app.pages.register', compact('foreignReferrer'));
-    }
+		$this->userRepository = $userRepository;
+		$this->passwordUpdateValidator = $passwordUpdateValidator;
+	}
 
-    public function postRegister(Request $request, $foreignReferrer = false)
-    {
-        $rules = [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'firm' => 'required',
-            'phone' => 'required|min:6',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-        ];
+	/**
+	 * Show the user a registration form.
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function getRegister($foreignReferrer = false)
+	{
+		return view('app.pages.register', compact('foreignReferrer'));
+	}
 
-        if ( ! $foreignReferrer) {
-            $rules['crd'] = 'required';
-        }
+	public function postRegister(Request $request, $foreignReferrer = false)
+	{
+		$rules = [
+			'first_name' => 'required',
+			'last_name' => 'required',
+			'email' => 'required|email|unique:users',
+		];
 
-        $this->validate($request, $rules);
+		$this->validate($request, $rules);
+		$this->passwordUpdateValidator->validateRequest($request);
 
-        $input = $request->only(array_keys($rules));
-        if ( ! $foreignReferrer) {
-            $input['crd'] = $request->crd;
-        }
+		$input = $request->only(['first_name', 'last_name', 'email', 'password']);
 
-        $user = $this->userRepository->create($input);
-        Auth::guard()->login($user);
+		$user = $this->userRepository->create($input);
+		Auth::guard()->login($user);
 
-        event(new Registered($user));
+		event(new Registered($user));
 
-        if ($foreignReferrer) {
-            successMessage(trans('register.success.bd-fr'));
-        }
-        else {
-            successMessage(trans('register.success.bd'));
-        }
+		successMessage(trans('auth.registration.success'));
 
-        return redirect()->route('offerings.index');
-    }
+		return redirect('/');
+	}
 }
