@@ -21,7 +21,7 @@ class RedirectIfNotAdmin
 				return response('Unauthorized.', 401);
 			}
 			else {
-			    errorMessage('You must first sign in as an administrator.');
+				errorMessage('You must first sign in as an administrator.');
 				return redirect()->guest(route('sign-in'));
 			}
 		}

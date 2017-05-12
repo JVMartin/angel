@@ -8,7 +8,7 @@
  */
 function encodeHash($id)
 {
-    return Hashids::encode($id);
+	return Hashids::encode($id);
 }
 
 /**
@@ -19,11 +19,11 @@ function encodeHash($id)
  */
 function decodeHash($hash)
 {
-    $decoded = Hashids::decode($hash);
+	$decoded = Hashids::decode($hash);
 
-    if (is_array($decoded) && count($decoded)) {
+	if (is_array($decoded) && count($decoded)) {
 		return $decoded[0];
-    }
+	}
 
-    return null;
+	return null;
 }

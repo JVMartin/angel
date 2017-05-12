@@ -22,7 +22,7 @@ class RedirectIfNotAuthenticated
 				return response('Unauthorized.', 401);
 			}
 			else {
-			    errorMessage('You must first sign in.');
+				errorMessage('You must first sign in.');
 				return redirect()->guest(route('welcome'));
 			}
 		}

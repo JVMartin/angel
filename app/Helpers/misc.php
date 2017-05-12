@@ -8,13 +8,13 @@
  * @return string
  */
 function currency($dollars, $symbol = true) {
-    $dollars = (int) $dollars;
-    $currency = '';
-    if ($symbol) {
-        $currency .= 'US&#36;';
-    }
-    $currency .= number_format($dollars / 100, 2, '.', ',');
-    return $currency;
+	$dollars = (int) $dollars;
+	$currency = '';
+	if ($symbol) {
+		$currency .= 'US&#36;';
+	}
+	$currency .= number_format($dollars / 100, 2, '.', ',');
+	return $currency;
 }
 
 /**

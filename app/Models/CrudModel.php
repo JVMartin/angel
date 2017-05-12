@@ -24,11 +24,11 @@ trait CrudModel
 		return $this->morphMany(Change::class, 'loggable');
 	}
 
-    /**
-     * The hash of this object's id.
-     *
-     * @return null|string
-     */
+	/**
+	 * The hash of this object's id.
+	 *
+	 * @return null|string
+	 */
 	public function getHashAttribute()
 	{
 		return encodeHash($this->id);

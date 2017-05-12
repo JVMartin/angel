@@ -8,41 +8,41 @@ use Illuminate\Contracts\View\Factory as ViewFactory;
 
 class ShareMessagesFromSession
 {
-    /**
-     * The view factory implementation.
-     *
-     * @var \Illuminate\Contracts\View\Factory
-     */
-    protected $view;
+	/**
+	 * The view factory implementation.
+	 *
+	 * @var \Illuminate\Contracts\View\Factory
+	 */
+	protected $view;
 
-    /**
-     * Create a new error binder instance.
-     *
-     * @param  \Illuminate\Contracts\View\Factory  $view
-     * @return self
-     */
-    public function __construct(ViewFactory $view)
-    {
-        $this->view = $view;
-    }
+	/**
+	 * Create a new error binder instance.
+	 *
+	 * @param  \Illuminate\Contracts\View\Factory  $view
+	 * @return self
+	 */
+	public function __construct(ViewFactory $view)
+	{
+		$this->view = $view;
+	}
 
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public function handle($request, Closure $next)
-    {
-        // Note that form validation errors are shared with the session by:
-        // \Illuminate\View\Middleware\ShareErrorsFromSession
+	/**
+	 * Handle an incoming request.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \Closure  $next
+	 * @return mixed
+	 */
+	public function handle($request, Closure $next)
+	{
+		// Note that form validation errors are shared with the session by:
+		// \Illuminate\View\Middleware\ShareErrorsFromSession
 
-        // Let us share all other messages with the session in the same manner.
-        $this->view->share(
-            'successes', $request->session()->get('successes') ?: new MessageBag
-        );
+		// Let us share all other messages with the session in the same manner.
+		$this->view->share(
+			'successes', $request->session()->get('successes') ?: new MessageBag
+		);
 
-        return $next($request);
-    }
+		return $next($request);
+	}
 }

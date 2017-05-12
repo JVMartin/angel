@@ -10,26 +10,26 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class RegistrationNotification extends Mailable implements ShouldQueue
 {
-    use Queueable, SerializesModels;
+	use Queueable, SerializesModels;
 
-    /**
-     * @var User
-     */
-    public $user;
+	/**
+	 * @var User
+	 */
+	public $user;
 
-    public function __construct($user)
-    {
-        $this->user = $user;
-    }
+	public function __construct($user)
+	{
+		$this->user = $user;
+	}
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
-    {
-        return $this->view('emails.admin.registration-notification')
-            ->subject('New User Registration');
-    }
+	/**
+	 * Build the message.
+	 *
+	 * @return $this
+	 */
+	public function build()
+	{
+		return $this->view('emails.admin.registration-notification')
+			->subject('New User Registration');
+	}
 }

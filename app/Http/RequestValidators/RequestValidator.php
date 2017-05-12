@@ -6,5 +6,5 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 abstract class RequestValidator
 {
-    use ValidatesRequests;
+	use ValidatesRequests;
 }
