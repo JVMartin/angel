@@ -18,7 +18,7 @@
     "lodash": "^4.17.4",
     "selectize": "^0.12.4",
     "tinymce": "^4.5.5",
-    "tinymce-codemirror": "https://git@github.com/christiaan/tinymce-codemirror.git",
+    "tinymce-codemirror": "https://github.com/christiaan/tinymce-codemirror/archive/master.tar.gz",
     "vue": "^2.2.4"
   }
 }

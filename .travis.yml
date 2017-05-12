@@ -1,20 +1,19 @@
 language: php
 
 php:
-  - 5.6
   - 7.1
 
 install:
-  - travis_retry npm install -g npm@2
-  - travis_retry npm install
-  - travis_retry composer self-update
-  - travis_retry composer install --no-interaction
+  - nvm install stable
+  - nvm use stable
 
 before_script:
-  - cp .env.travis .env
-  - php artisan key:generate
+  - composer self-update
+  - composer install --no-interaction
   - npm install
   - npm run dev
+  - cp .env.travis .env
+  - php artisan key:generate
   - php artisan testing:rebuild
 
 script:
