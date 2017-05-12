@@ -2,6 +2,7 @@
 
 namespace Tests\BrowserKit\Admin;
 
+use App\Models\User;
 use Tests\BrowserKitTestCase;
 
 class AdminAuthTest extends BrowserKitTestCase

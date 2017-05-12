@@ -1,24 +1,20 @@
 <section id="messages">
-	@if (isset($errors))
-		@foreach ($errors->get('messages') as $error)
-			<div class="row">
-				<div class="columns small-12">
-					<div class="callout alert">
-						{{ $error }}
-					</div>
+	@foreach ($errors->getBag('default')->get('messages') as $message)
+		<div class="row">
+			<div class="columns small-12">
+				<div class="callout alert">
+					{{ $message }}
 				</div>
 			</div>
-		@endforeach
-	@endif
-	@if (isset($successes))
-		@foreach ($successes->get('messages') as $success)
-			<div class="row">
-				<div class="columns small-12">
-					<div class="callout success">
-						{{ $success }}
-					</div>
+		</div>
+	@endforeach
+	@foreach ($successes->get('messages') as $message)
+		<div class="row">
+			<div class="columns small-12">
+				<div class="callout success">
+					{{ $message }}
 				</div>
 			</div>
-		@endforeach
-	@endif
+		</div>
+	@endforeach
 </section>
