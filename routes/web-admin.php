@@ -1,6 +1,9 @@
 <?php
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+
+	// The "/admin" route - redirect to whichever admin module you want the admins to land on
+	// by default.
 	Route::get('/', function() {
 		return redirect()->route('admin.users.index');
 	})->name('admin');
