@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Auth;
 use Closure;
 use Illuminate\Support\Facades\Gate;
 
@@ -22,7 +23,12 @@ class RedirectIfNotAdmin
 			}
 			else {
 				errorMessage('You must first sign in as an administrator.');
-				return redirect()->guest(route('sign-in'));
+				if (Auth::guest()) {
+					return redirect()->guest(route('sign-in'));
+				}
+				else {
+					return redirect('/');
+				}
 			}
 		}
 
