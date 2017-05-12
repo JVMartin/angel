@@ -42,15 +42,15 @@ class UserController extends Controller
 
 	/**
 	 * @param Request $request
-	 * @param int $id The user's id.
+	 * @param int $hashid The user's id.
 	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
 	 */
-	public function postPassword(Request $request, $id)
+	public function postPassword(Request $request, $hashid)
 	{
-		$user = $this->repository->getByKey($id);
+		$user = $this->repository->getByHashId($hashid);
 		if ( ! $user) {
 			errorMessage('That user does not exist.');
-			return redirect(url('admin/users'));
+			return redirect()->route('admin.users.index');
 		}
 		$this->passwordUpdateValidator->validateRequest($request);
 
