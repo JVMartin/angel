@@ -1,1 +1,3 @@
+import './bootstrap';
+
 $(document).foundation();
