@@ -63,34 +63,29 @@ class AdminAuthTest extends BrowserKitTestCase
 	}
 
 	/**
-	 * Test the usage of the sign-in form.
+	 * Test the usage of the sign-in form as a user.
 	 */
-	public function testSignInForm()
+	public function testSignInUsersCantGetIn()
 	{
-		$userPass  = str_random(10);
-		$adminPass = str_random(10);
-
-		factory(User::class, 'user')->create([
-			'email' => 'user@test.com',
-			'password' => bcrypt($userPass)
-		]);
-		factory(User::class, 'admin')->create([
-			'email' => 'admin@test.com',
-			'password' => bcrypt($adminPass)
-		]);
-
 		// Users can't get in.
 		$this->visit('/admin')
+			->seePageIs('/sign-in')
 			->type('user@test.com', 'email')
-			->type($userPass, 'password')
+			->type('test', 'password')
 			->press('Sign In')
-			->seePageIs('/admin')
+			->seePageIs('/')
 			->see(trans('auth.admin'));
+	}
 
-		// But administrators can.
+	/**
+	 * Test the usage of the sign-in form as an admin.
+	 */
+	public function testSignInFormAdminsCanGetIn()
+	{
 		$this->visit('/admin')
+			->seePageIs('/sign-in')
 			->type('admin@test.com', 'email')
-			->type($adminPass, 'password')
+			->type('test', 'password')
 			->press('Sign In')
 			->seeAdminPanel();
 	}
@@ -100,26 +95,12 @@ class AdminAuthTest extends BrowserKitTestCase
 	 */
 	public function testSignInFormWrongPass()
 	{
-		factory(User::class, 'user')->create([
-			'email' => 'user@test.com'
-		]);
-		factory(User::class, 'admin')->create([
-			'email' => 'admin@test.com'
-		]);
-
 		$this->visit('/admin')
-			->type('user@test.com', 'email')
-			->type('abc123', 'password')
-			->press('Sign In')
-			->seePageIs('/admin')
-			->see('These credentials do not match our records.');
-
-		// But administrators can.
-		$this->visit('/admin')
+			->seePageIs('/sign-in')
 			->type('admin@test.com', 'email')
 			->type('abc123', 'password')
 			->press('Sign In')
-			->seePageIs('/admin')
+			->seePageIs('/sign-in')
 			->see('These credentials do not match our records.');
 	}
 }

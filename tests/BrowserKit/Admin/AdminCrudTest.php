@@ -2,6 +2,7 @@
 
 namespace Tests\BrowserKit\Admin;
 
+use App\Models\User;
 use Tests\BrowserKitTestCase;
 
 class AdminCrudTest extends BrowserKitTestCase
@@ -11,34 +12,28 @@ class AdminCrudTest extends BrowserKitTestCase
 	 */
 	public function testCrudIndexAndEdit()
 	{
-		$admin = factory(User::class, 'admin')->create();
-
-		factory(User::class, 'user')->create([
-			'first_name' => 'Adam',
-			'last_name'  => 'Jones'
-		]);
+		$admin = User::where('email', 'admin@test.com')->first();
+		$user = User::where('email', 'user@test.com')->first();
 
 		$this->actingAs($admin)
-			->visit('/admin/users')
-			->see('Adam')
-			->see('Jones');
+			->visit(route('admin.users.index'))
+			->see($user->first_name)
+			->see($user->last_name);
 
 		$this->actingAs($admin)
-			->visit('/admin/users/edit/2')
-			->see('Adam')
-			->see('Jones')
+			->visit(route('admin.users.edit', $user->hash))
+			->see($user->first_name)
+			->see($user->last_name)
 			->type('Maynard', 'first_name')
 			->type('Keenan', 'last_name')
 			->press('Save')
-			->seePageIs('/admin/users/edit/2')
-			->see('User saved.')
+			->seePageIs(route('admin.users.edit', $user->hash))
+			->see(trans('crud.updated', ['type' => 'user']))
 			->see('Maynard')
 			->see('Keenan')
 			->click('Back to index')
-			->seePageIs('/admin/users')
+			->seePageIs(route('admin.users.index'))
 			->see('Maynard')
-			->see('Keenan')
-			->dontSee('Adam')
-			->dontSee('Jones');
+			->see('Keenan');
 	}
 }
