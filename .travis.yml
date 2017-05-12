@@ -13,6 +13,7 @@ install:
 before_script:
   - cp .env.travis .env
   - php artisan key:generate
+  - npm install
   - npm run dev
   - php artisan testing:rebuild
 
