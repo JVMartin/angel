@@ -9,10 +9,10 @@ class AdminAuthTest extends BrowserKitTestCase
 {
 	private function seeAdminPanel()
 	{
-		return $this->seePageIs('/admin/pages')
-			->see('Pages')
+		return $this->seePageIs('/admin/blogs')
+			->see('Blogs')
 			->see('Users')
-			->see('Add Page')
+			->see('Add Blog')
 			->see('Sign Out');
 	}
 
