@@ -22,7 +22,7 @@ class RedirectIfNotAdmin
 				return response('Unauthorized.', 401);
 			}
 			else {
-				errorMessage('You must first sign in as an administrator.');
+				errorMessage(trans('auth.admin'));
 				if (Auth::guest()) {
 					return redirect()->guest(route('sign-in'));
 				}

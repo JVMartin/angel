@@ -35,7 +35,7 @@ class AdminAuthTest extends BrowserKitTestCase
 
 		$this->actingAs($user)
 			->visit('/admin')
-			->see('You must be signed in as an administrator.');
+			->see(trans('auth.admin'));
 	}
 
 	/**
@@ -85,7 +85,7 @@ class AdminAuthTest extends BrowserKitTestCase
 			->type($userPass, 'password')
 			->press('Sign In')
 			->seePageIs('/admin')
-			->see('You must be signed in as an administrator.');
+			->see(trans('auth.admin'));
 
 		// But administrators can.
 		$this->visit('/admin')
